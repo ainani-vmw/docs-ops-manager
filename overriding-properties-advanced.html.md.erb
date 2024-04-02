@@ -33,7 +33,7 @@ or the <%= vars.ops_manager %> API, use the UI or API to change the property.
 You can also use the <%= vars.ops_manager %> API to view the BOSH Director manifest,
 view the list of overrides for the BOSH Director and runtime configs,
 and delete the overrides.
-For more information, see [Advanced Manifest configuration](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/overriding-properties-advanced.html)
+For more information, see [Advanced Manifest configuration](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/overriding-properties-advanced.html)
 in the <%= vars.ops_manager %> API documentation.
 
 ## <a id='properties'></a> Overridable properties
@@ -103,14 +103,14 @@ The table below lists these properties:
 To override properties in the BOSH Director manifest:
 
 1. Set <%= vars.ops_manager %> to Advanced Mode by following the procedure in
-[VMware Tanzu Support documentation](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/overriding-properties-advanced.html?hWord=N4IghgNiBcIIIBEBqcByBhAoggBAWQHkFMcBLAOxwIAcBnfMcsAcwFMAnEAXyA).
+[VMware Tanzu Support documentation](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/overriding-properties-advanced.html?hWord=N4IghgNiBcIIIBEBqcByBhAoggBAWQHkFMcBLAOxwIAcBnfMcsAcwFMAnEAXyA).
 
   <p> <%= vars.company_name %> recommends that only skilled operators use Advanced Mode in <%= vars.ops_manager %>.
         If you use Advanced Mode incorrectly, you can deactivate or destroy your deployment. <%= vars.ops_manager %> does not validate the properties that you change using Advanced Mode.
         For example, if you enter a string where an integer is required, you do not receive an error.</p>
 
 1. Use the `/api/v0/staged/director/overrides` endpoint. For more information, see
-[Provide a new list of overrides for the BOSH Director](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/overriding-properties-advanced.html)
+[Provide a new list of overrides for the BOSH Director](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/overriding-properties-advanced.html)
 in the <%= vars.ops_manager %> API documentation.
 
 1. After you completed your changes, deactivate Advanced Mode by following the procedure in
@@ -123,7 +123,7 @@ To override properties in the tile manifest:
 1. Set to Advanced Mode by following the procedure in
 [VMware Tanzu Support documentation](https://docs.vmware.com/en/VMware-Tanzu/index.html).
 For more information about Advanced Mode,
-see [Advanced Mode](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-opsmanager-advanced-features.html)
+see [Advanced Mode](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/install-opsmanager-advanced-features.html)
 in the <%= vars.ops_manager %> API documentation.
 
   <p> <%= vars.company_name %> recommends that only skilled operators use Advanced Mode in .
@@ -131,10 +131,10 @@ in the <%= vars.ops_manager %> API documentation.
         and it does not validate the properties that you change using Advanced Mode.
         For example, if you enter a string where an integer is required, you do not receive an error.</p>
 
-1. Use the `/api/v0/staged/products` endpoint to get and record the product GUID from the output of the command. For more information, see [All staged products](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-ops-man-api.html) in the Tanzu Operations Manager API documentation.
+1. Use the `/api/v0/staged/products` endpoint to get and record the product GUID from the output of the command. For more information, see [All staged products](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/install-ops-man-api.html) in the Tanzu Operations Manager API documentation.
 
 1. Use the `/api/v0/staged/products/PRODUCT-GUID/overrides` endpoint. Where `PRODUCT-GUID` is the GUID you recorded earlier in this procedure.
-For more information, see [Provide a new list of overrides for the BOSH Director](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/overriding-properties-advanced.html)
+For more information, see [Provide a new list of overrides for the BOSH Director](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/overriding-properties-advanced.html)
 in the Tanzu Operations Manager API documentation.
 
 1. After you have completed your changes, deactivate Advanced Mode by following the procedure in
@@ -149,7 +149,7 @@ To override properties in the runtime configs:
 [How to enable Advanced Mode in the Tanzu Operations Manager](https://community.pivotal.io/s/article/How-to-Enable-Advanced-Mode-in-the-Ops-Manager?language=en_US)
 in the Knowledge Base.
 For more information about Advanced Mode,
-see [Advanced Mode](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/overriding-properties-advanced.html)
+see [Advanced Mode](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/overriding-properties-advanced.html)
 in the <%= vars.ops_manager %> API documentation.
 
   <p> <%= vars.company_name %> recommends that only skilled operators use Advanced Mode in .
@@ -161,7 +161,7 @@ in the <%= vars.ops_manager %> API documentation.
   * [BOSH DNS job spec](https://github.com/cloudfoundry/bosh-dns-release/blob/master/jobs/bosh-dns/spec) in GitHub.
 This file shows the properties and defaults for the `bosh_dns` add-on in the `ops_manager_dns_runtime`.
   * [Provide a new list of runtime config overrides for the BOSH
-Director](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/overriding-properties-advanced.html)
+Director](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/overriding-properties-advanced.html)
 in the <%= vars.ops_manager %> API documentation.
 
 1. After you complete your changes, deactivate Advanced Mode.
