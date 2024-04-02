@@ -3,7 +3,7 @@ title: Resetting manually-set certificates in BOSH CredHub
 owner: Security
 ---
 
-This topic describes how you can identify and update certificates that were set manually: certificates that an operator added directly to BOSH CredHub through the CredHub CLI instead of using a CredHub-generated certificate. For example, an operator might have provided an existing certificate to BOSH CredHub as described in the [VMware SQL with MySQL for Tanzu Application Service documentation](https://docs.vmware.com/en/VMware-SQL-with-MySQL-for-Tanzu-Application-Service/4.0/mysql-for-tas/prepare-tls.html).
+This topic describes how you can identify and update certificates that were set manually: certificates that an operator added directly to BOSH CredHub through the CredHub CLI instead of using a CredHub-generated certificate. For example, an operator might have provided an existing certificate to BOSH CredHub as described in the [VMware SQL with MySQL for Tanzu Application Service documentation](https://docs.vmware.com/en/VMware-SQL-with-MySQL-for-Tanzu-Application-Service/3.0/mysql-for-tas/prepare-tls.html).
 
 To ensure that <%= vars.ops_manager_first %> does not rotate manually-set certificates alongside CredHub-generated certificates, you must ensure that the `generated` field of all manually set certificates is set to `false` in CredHub.
 

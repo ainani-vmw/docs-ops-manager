@@ -271,37 +271,37 @@ To rotate the Services TLS CA and its leaf certificates:
         ```
         maestro regenerate ca --name "/services/tls_ca" --force
         ```
-    1. For deployments that use MySQL for VMware Tanzu, follow [these instructions](https://docs.vmware.com/en/VMware-SQL-with-MySQL-for-Tanzu-Application-Service/4.0/mysql-for-tas/prepare-tls.html#add-ca-cert) to add the new Services TLS CA to the **Trusted Certificates** of the **BOSH Director**.
+    1. For deployments that use MySQL for VMware Tanzu, follow [these instructions](https://docs.vmware.com/en/VMware-SQL-with-MySQL-for-Tanzu-Application-Service/3.0/mysql-for-tas/prepare-tls.html#add-ca-cert) to add the new Services TLS CA to the **Trusted Certificates** of the **BOSH Director**.
 
 1. Redeploy:
     1. Return to the <%= vars.ops_manager %> Installation Dashboard.
     1. On the **Review Pending Changes** page, enable the **Select All Products** check box.
     1. For each service tile, enable the **Upgrade all service instances** errand.
 
-         <p> The name of the <strong>Upgrade all service instances</strong> errand might be slightly different between services.</p>
+        The name of the **Upgrade all service instances** errand might be slightly different between services.
 
-    1. Click **Apply Changes**.
+    2. Click **Apply Changes**.
 
-1. Rebind and restage the following apps:
+2. Rebind and restage the following apps:
 
     * For Tanzu GemFire for VMs apps, rebind and restage the apps.
     * For deployments that use MySQL for VMware Tanzu, rebind and restage all non-Java MySQL apps that rely on `VCAP_SERVICES` for TLS.
 
     <p> The bg-restage plug-in enables zero-downtime blue-green restaging without access to the app source code. For more information, see <a href="https://github.com/orange-cloudfoundry/cf-plugin-bg-restage">bg-restage</a> on GitHub.</p>
 
-1. Mark the signing version of the Services TLS CA as transitional by running:
+3. Mark the signing version of the Services TLS CA as transitional by running:
 
     ```
     maestro update-transitional signing --name "/services/tls_ca"
     ```
 
-1. Regenerate all service instance certificates signed by the Services TLS CA by running:
+4. Regenerate all service instance certificates signed by the Services TLS CA by running:
 
     ```
     maestro regenerate leaf --signed-by "/services/tls_ca"
     ```
 
-1. Redeploy:
+5. Redeploy:
 
     1. Return to the <%= vars.ops_manager %> Installation Dashboard.
     2. On the **Review Pending Changes** page, enable the **Select All Products** check box.
@@ -311,17 +311,17 @@ To rotate the Services TLS CA and its leaf certificates:
 
     4. Click **Apply Changes**.
 
-1. Rebind and restage the following apps:
+6. Rebind and restage the following apps:
     * For Tanzu GemFire for VMs apps, rebind and restage the apps.
     * For deployments that use MySQL for VMware Tanzu, rebind and restage all non Java MySQL apps that rely on `VCAP_SERVICES` for TLS.
 
-1. Remove the transitional flag from the Services TLS CA. This removes the old, inactive version of the Services TLS CA on the next deployment. Run:
+7. Remove the transitional flag from the Services TLS CA. This removes the old, inactive version of the Services TLS CA on the next deployment. Run:
 
     ```
     maestro update-transitional remove --name "/services/tls_ca"
     ```
 
-1. Redeploy:
+8. Redeploy:
 
     1. Return to the <%= vars.ops_manager %> Installation Dashboard.
     2. On the **Review Pending Changes** page, enable the **Select All Products** check box.
@@ -331,7 +331,7 @@ To rotate the Services TLS CA and its leaf certificates:
 
     4. Click **Apply Changes**.
 
-1. Rebind and restage the following apps:
+9. Rebind and restage the following apps:
     * For Tanzu GemFire for VMs apps, rebind and restage the apps.
     * For deployments that use MySQL for VMware Tanzu, rebind and restage all non Java MySQL apps that rely on `VCAP_SERVICES` for TLS.
 
