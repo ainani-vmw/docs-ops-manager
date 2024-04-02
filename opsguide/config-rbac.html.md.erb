@@ -106,11 +106,11 @@ Follow the procedure in [Enable RBAC with internal authentication](#enable-inter
 ## <a id='create-users'></a> Create user accounts in <%= vars.ops_manager %>
 
 To assign RBAC roles to operators, you must first create user accounts for them. For more information about creating user accounts in <%= vars.ops_manager %> with the User Account and Authentication (UAA) module,
-see [Creating and managing <%= vars.ops_manager %> user accounts](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/opsguide-config-rbac.html).
+see [Creating and managing <%= vars.ops_manager %> user accounts](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/opsguide-config-rbac.html).
 
 In addition to user accounts, you can create a client account to add to <%= vars.ops_manager %>. Client accounts manage automation tasks, such as upgrade scripts, log management, and other behaviors that might be negatively impacted if managed by a user account. You can add a client account either before initial deployment or to an existing deployment.
 
-For more information about client accounts, see [Creating and managing <%= vars.ops_manager %> user and client accounts](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-opsman-users.html).
+For more information about client accounts, see [Creating and managing <%= vars.ops_manager %> user and client accounts](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/install-opsman-users.html).
 
 
 ## <a id='manage-roles'></a> Manage RBAC roles in <%= vars.ops_manager %>
@@ -120,7 +120,7 @@ You can assign the roles defined in [Roles in <%= vars.ops_manager %>](#about) t
 ### <a id='write-internal'></a> Manage roles with internal authentication
 
 If you configured <%= vars.ops_manager %> to use internal authentication, you can configure roles using the UAA Command Line Interface (UAAC). For more information,
-see [Creating and managing users with the UAA CLI (UAAC)](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-ops-man-api.html).
+see [Creating and managing users with the UAA CLI (UAAC)](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/install-ops-man-api.html).
 
 To use the UAAC to configure roles:
 
