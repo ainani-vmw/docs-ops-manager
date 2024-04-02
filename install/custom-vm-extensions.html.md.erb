@@ -5,7 +5,7 @@ owner: Ops Manager
 
 You can use the <%= vars.ops_manager_first %> API to manage VM extensions, which allow you to specify IaaS-specific configurations for your VMs such as associated security groups and load balancers. Using the <%= vars.ops_manager %> API, you can create custom VM extensions, give them names, and associate those names with BOSH jobs.
 
-The **Resource Config** pane in a product tile lets you configure some IaaS-specific load balancing and security properties, and creates VM extensions to support them.  For examples from the <%= vars.ops_manager_first %> product, see [Configuring Load Balancing for <%= vars.ops_manager %>](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/3.0/tas-for-vms/configure-lb.html).
+The **Resource Config** pane in a product tile lets you configure some IaaS-specific load balancing and security properties, and creates VM extensions to support them.  For examples from the <%= vars.ops_manager_first %> product, see [Configuring Load Balancing for <%= vars.ops_manager %>](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/4.0/tas-for-vms/configure-lb.html).
 
 <p class="note caution">
 <span class="note__title">Caution</span>
@@ -93,10 +93,10 @@ curl "https://example.com/api/v0/staged/products/product-type1-guid/jobs/example
         }'
 </pre>
 
-<p> You must apply changes in order for the new custom VM extension to take effect.</p>
+You must apply changes for the new custom VM extension to take effect.
 
 For more information about this command,
-see [Configuring resources for a job](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-ops-man-api.html) in the <%= vars.ops_manager %> API docs.
+see [Configuring resources for a job](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/install-ops-man-api.html) in the <%= vars.ops_manager %> API docs.
 
 ## <a id='deployed-vm-extensions'></a> See deployed VM extensions
 
@@ -134,4 +134,4 @@ See the following example output:
 </pre>
 
 For more information about this command,
-see [Creating a new VM extension](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-ops-man-api.html) in the <%= vars.ops_manager %> API documentation.
+see [Creating a new VM extension](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/install-ops-man-api.html) in the <%= vars.ops_manager %> API documentation.
