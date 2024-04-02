@@ -361,13 +361,15 @@ Before you begin this procedure, ensure that you have followed all of the steps 
 
 3. Click **Save**.
 
-    If you are deploying <%= vars.k8s_runtime_first %> with a <%= vars.k8s_runtime_abbr %>  workload load balancer,
-    you must tag each AWS subnet with your <%= vars.k8s_runtime_abbr %> Kubernetes cluster unique identifier before you create the load balancer.
+<p class="note important">
+<span class="note__title">Important</span>
+If you are deploying <%= vars.k8s_runtime_first %> with a <%= vars.k8s_runtime_abbr %>  workload load balancer,
+you must tag each AWS subnet with your <%= vars.k8s_runtime_abbr %> Kubernetes cluster unique identifier before you create the load balancer.
 
-    For more information about tagging subnets with a <%= vars.k8s_runtime_abbr %> cluster unique identifier,
-    see <a href="https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/1.16/tkgi/GUID-deploy-workloads.html#aws">AWS Prerequisites</a>.
+For more information about tagging subnets with a <%= vars.k8s_runtime_abbr %> cluster unique identifier,
+see <a href="https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/1.16/tkgi/GUID-deploy-workloads.html#aws">AWS Prerequisites</a>.</p>
 
-    <%= vars.expand_network_azs %>
+<%= vars.expand_network_azs %>
 
 ## <a id='assign-azs'></a> Step 6: Assign AZs and Networks page
 
@@ -405,9 +407,9 @@ click **Automatic** from the drop-down menu to allocate the recommended resource
 
     For the BOSH Director job, click a VM type with at least 8&nbsp;GB memory.
 
-    If you set a field to <strong>Automatic</strong> and the recommended resource allocation changes in a future version, <%= vars.ops_manager %> automatically uses the new recommended allocation.
+    If you set a field to **Automatic** and the recommended resource allocation changes in a future version, <%= vars.ops_manager %> automatically uses the new recommended allocation.<br>
 
-    If you install <%= vars.windows_runtime_first %>, provision your <strong>Main Compilation Job</strong>
+    If you install <%= vars.windows_runtime_first %>, provision your **Main Compilation Job**
     with at least 100&nbsp;GB of disk space.
 
 1. (Optional) To configure an Application Load Balancer (ALB) for your BOSH Director, click the icon next to the **BOSH Director** job name to see more fields.
@@ -415,7 +417,7 @@ Enter your AWS target group name in the **Load Balancers** field for the **BOSH 
 
     To create an ALB and target group, follow the procedures in [Getting Started with Application Load Balancers](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/application-load-balancer-getting-started.html) in the AWS documentation. Then go to **Target Groups** in the **EC2 Dashboard** menu to find your target group **Name**.
 
-    To configure an ALB, you must have the following AWS IAM permissions.</p>
+    To configure an ALB, you must have the following AWS IAM permissions.
       <pre class="terminal">
       "elasticloadbalancing:DescribeLoadBalancers",
       "elasticloadbalancing:DeregisterInstancesFromLoadBalancer",
