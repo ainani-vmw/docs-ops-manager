@@ -29,11 +29,10 @@ Provider?](https://www.cloudfoundry.org/certified-platforms-how-to/) on the Clou
 <p class="note caution">
 <span class="note__title">Caution</span>
 This release has been removed from VMware Tanzu Network because it included an issue in the
-BOSH Director that causes the Healthwatch and RabbitMQ tiles to fail to deploy with errors like "undefined method `shellescape'"
+BOSH Director that causes the Healthwatch and RabbitMQ tiles to fail to deploy with errors like "undefined method `shellescape'".
 <br>
-This release includes a new version of System Metrics, which will cause all VMs to redeploy.
+This release includes a new version of System Metrics, which causes all VMs to redeploy.
 </p>
-
 
 - **[Bug Fix]** AZs and networks can be assigned to previously installed tiles without entering Advanced Mode if the tile is adding Jobs for the first time
 - **[Bug Fix]** The Director properties API no longer returns a `short_lived_nats_bootstrap_credentials_enabled` property. This feature is only available on Ops Manager 3.0 and above.
