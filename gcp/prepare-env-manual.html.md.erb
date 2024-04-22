@@ -49,21 +49,21 @@ When deploying <%= vars.ops_manager %> on GCP, <%= vars.company_name %> recommen
 
     * **Service account name**: Enter a name. For example, `bosh`.
     * **Role**: Use the drop-down menu, select the following roles:
-            * **Service Accounts**, then **Service Account User**
-            * **Service Accounts**, then **Service Account Token Creator**
-            * **Compute Engine**, then **Compute Instance Admin (v1)**
-            * **Compute Engine**, then **Compute Network Admin**
-            * **Compute Engine**, then **Compute Storage Admin**
-            * **Storage**, then **Storage Admin**
+      * **Service Accounts**, then **Service Account User**
+      * **Service Accounts**, then **Service Account Token Creator**
+      * **Compute Engine**, then **Compute Instance Admin (v1)**
+      * **Compute Engine**, then **Compute Network Admin**
+      * **Compute Engine**, then **Compute Storage Admin**
+      * **Storage**, then **Storage Admin**
 
-            You must scroll down in the pop-up windows to select all required roles.
+          You must scroll down in the pop-up windows to select all required roles.
 
-            The <strong>Service Account User</strong> role is required only if you plan to use <strong>The <%= vars.ops_manager %> VM Service Account</strong> to deploy <%= vars.ops_manager %>. For more information about <strong>The <%= vars.ops_manager %> VM Service Account</strong>, see <a href="config-manual.html#gcp-config">Step 2: Google Cloud Platform Config</a> in <em>Configuring BOSH Director on GCP</em>.
+          The **Service Account User** role is required only if you plan to use **The <%= vars.ops_manager %> VM Service Account** to deploy <%= vars.ops_manager %>. For more information about **The <%= vars.ops_manager %> VM Service Account**, see <a href="config-manual.html#gcp-config">Step 2: Google Cloud Platform Config</a> in Configuring BOSH Director on GCP.
 
     * **Service account ID**: The text box automatically generates a unique ID based on the username.
     * **Furnish a new private key**: Select this check box and JSON as the **Key type**.
 
-1. Click **Create**. Your browser automatically downloads a JSON file with a private key for this account. Save this file in a secure location.
+2. Click **Create**. Your browser automatically downloads a JSON file with a private key for this account. Save this file in a secure location.
 
 <p> You can use this service account to configure file storage for <%= vars.app_runtime_abbr %>.
 For more information, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Application-Service/<%= vars.dot_major_tas_version %>/tas-for-vms/pas-file-storage.html#gcp">GCP</a> in <em>Configuring File Storage for <%= vars.app_runtime_abbr %></em>.</p>
