@@ -11,7 +11,7 @@ This procedure includes three redeployments. The first deployment regenerates th
 
 ## <a id='rotated-certificates'></a> Certificates rotated by the procedure
 
-This procedure rotates all certificates listed on the Certificates page within <%= vars.ops_manager %>, except those with specialized rotation procedures.
+This procedure rotates all certificates listed on the Certificates page in <%= vars.ops_manager %>, except those with specialized rotation procedures.
 
 Certificates that match the following characteristics will be rotated:
 
@@ -19,7 +19,7 @@ Certificates that match the following characteristics will be rotated:
 * Non-configurable leaf certificates
 * Configurable leaf certificates stored in <%= vars.ops_manager %>
 
-Some certificates require a different procedure to rotate. For example, the Services TLS CA, <code>/services/tls_ca</code>,
+Some certificates require a different procedure to rotate. For example, the Services TLS CA, `/services/tls_ca`,
 cannot be rotated using this procedure. For more information, see [Certificates with specialized procedures](#specialized-procedures).
 
 The <%= vars.ops_manager %> API also excludes from rotation the CAs for certain versions of the VMware Tanzu SQL [MySQL for VMs], Redis for VMware Tanzu, VMware Tanzu RabbitMQ, and VMware Tanzu GemFire tiles and IPsec for VMware Tanzu. For information about rotating these CAs, see the documentation for those products.
@@ -30,22 +30,23 @@ The <%= vars.ops_manager %> API also excludes from rotation the CAs for certain 
 
 ## <a id='procedure'></a> Procedure
 
->**Important**
->You must complete these steps in the exact order specified. Otherwise, you can damage your deployment.
+<p class="note important">
+<span class="note__title">Important</span>
+You must complete these steps in the exact order specified. Otherwise, you can damage your deployment.</p>
 
 <%= partial 'minimum-duration' %>
 
 To rotate CAs, configurable leaf certificates, and non-configurable leaf certificates:
 
-1. Regenerate CAs. This step regenerates CAs for all CAs visible to the <%= vars.ops_manager %> API. For more information, see [Regenerate CAs](#add-new-ca) below.
+1. Regenerate CAs. This step regenerates CAs for all CAs visible to the <%= vars.ops_manager %> API. For more information, see [Regenerate CAs](#add-new-ca).
 
-1. Activate the new CAs. This step activates the new CAs regenerated in the previous step. For more information, see [Activate the CAs](#activate-new-ca) below.
+2. Activate the new CAs. This step activates the new CAs regenerated in the previous step. For more information, see [Activate the CAs](#activate-new-ca).
 
-1. Regenerate configurable leaf certificates. This step regenerates configurable certs to use the new CAs. For more information, see [Regenerate configurable Leaf Certificates](#rotate-config-after-new-root).
+3. Regenerate configurable leaf certificates. This step regenerates configurable certs to use the new CAs. For more information, see [Regenerate configurable Leaf Certificates](#rotate-config-after-new-root).
 
-1. Regenerate non-configurable leaf certificates. This step regenerates non-configurable certs to use the new CAs. For more information, see [Regenerate non-configurable Leaf Certificates](#regenerate-from-new-root).
+4. Regenerate non-configurable leaf certificates. This step regenerates non-configurable certs to use the new CAs. For more information, see [Regenerate non-configurable Leaf Certificates](#regenerate-from-new-root).
 
-1. Delete the old CAs. This step deletes the old unused CAs, leaving only the regenerated new CAs. For more information, see [Delete the old CAs](#delete).
+5. Delete the old CAs. This step deletes the old unused CAs, leaving only the regenerated new CAs. For more information, see [Delete the old CAs](#delete).
 
 ### <a id='add-new-ca'></a> Step 1: Regenerate CAs
 
@@ -56,7 +57,7 @@ Optionally, you can provide your own custom CA for the <%= vars.ops_manager %> r
 To regenerate CAs:
 
 1. If you have not already done so, follow the procedure in [Using <%= vars.ops_manager %> API](../../install/ops-man-api.html) to target and authenticate with the <%= vars.ops_manager %> UAA server. Record your <%= vars.ops_manager %> access token, and use it for `UAA-ACCESS-TOKEN` in the following steps.
-  <p> When you record your <%= vars.ops_manager %> access token, remove any newline characters such as <code>\n</code>.</p>
+  When you record your <%= vars.ops_manager %> access token, remove any newline characters such as <code>\n</code>.
 
 1. Use <%= vars.ops_manager %> to generate a new CA, or add your own custom CA:
 
@@ -202,15 +203,15 @@ To regenerate CAs:
 1. Return to <%= vars.ops_manager %> Installation Dashboard.
 
 1. If you have service tiles installed, for each service tile:
-    <p> The names of the <strong>Upgrade all service instances</strong> and <strong>Recreate all service instances</strong> errands might be slightly different between services.</p>
+    The names of the **Upgrade all service instances** and **Recreate all service instances** errands might be slightly different between services.
     1. Click the tile.
-    1. Click the **Errands** tab.
-    1. Enable the **Upgrade all service instances** errand. Running this errand is necessary to push certificate updates to each service instance.
-    1. If the service tile has the **Recreate all service instances** errand, enable the **Recreate all service instances** errand. Running this errand pushes BOSH Agent certificate updates to service instances. <%= partial 'skip_recreate_step' %>
+    2. Click the **Errands** tab.
+    3. Enable the **Upgrade all service instances** errand. Running this errand is necessary to push certificate updates to each service instance.
+    4. If the service tile has the **Recreate all service instances** errand, enable the **Recreate all service instances** errand. Running this errand pushes BOSH Agent certificate updates to service instances. <%= partial 'skip_recreate_step' %>
 
-1. Click **Review Pending Changes**.
-1. Click **Apply Changes**.
-1. If you have service tiles installed and the service tile does not have the **Recreate all service instances** errand, manually push BOSH Agent certificate updates to each service instance. For each service instance, run:
+2. Click **Review Pending Changes**.
+3. Click **Apply Changes**.
+4. If you have service tiles installed and the service tile does not have the **Recreate all service instances** errand, manually push BOSH Agent certificate updates to each service instance. For each service instance, run:
 
     ```
     bosh -d SERVICE-INSTANCE-DEPLOYMENT recreate
@@ -320,17 +321,17 @@ To regenerate the non-configurable leaf certificates:
 
 1. If you have service tiles installed, for each service tile:
 
-    <p> The names of the <strong>Upgrade all service instances</strong> and <strong>Recreate all service instances</strong> errands might be slightly different between services.</p>
+    The names of the **Upgrade all service instances** and **Recreate all service instances** errands might be slightly different between services.
 
     1. Click the tile.
-    1. Click the **Errands** tab.
-    1. Enable the **Upgrade all service instances** errand. Running this errand is necessary to push certificate updates to each service instance.
-    1. If the service tile has the **Recreate all service instances** errand: <%= partial 'skip_recreate_step' %>
+    2. Click the **Errands** tab.
+    3. Enable the **Upgrade all service instances** errand. Running this errand is necessary to push certificate updates to each service instance.
+    4. If the service tile has the **Recreate all service instances** errand: <%= partial 'skip_recreate_step' %>
       * Enable the **Recreate all service instances** errand. Running this errand pushes BOSH Agent certificate updates to service instances.
 
-1. Click **Review Pending Changes**.
-1. Click **Apply Changes**
-1. If you have service tiles installed and the service tile does not have the **Recreate all service instances** errand: <%= partial 'skip_recreate_step' %>
+2. Click **Review Pending Changes**.
+3. Click **Apply Changes**
+4. If you have service tiles installed and the service tile does not have the **Recreate all service instances** errand: <%= partial 'skip_recreate_step' %>
   * Manually push BOSH Agent certificate updates to each service instance.
 
   For each service instance, run:
@@ -346,7 +347,7 @@ continue to the next section, [Delete the old CAs](#delete).
 
 ### <a id='delete'></a> Step 5: Delete the old CAs
 
-After activating new CAs and regenerating leaf certificates from the new CAs, you must delete the old CAs. Deleting the old CAs ensures that each leaf certificate is only associated with the new CA that signs it, and that the old CAs are no longer trusted.
+After activating new CAs and regenerating leaf certificates from the new CAs, you must delete the old CAs. Deleting the old CAs ensures that each leaf certificate is associated only with the new CA that signs it, and that the old CAs are no longer trusted.
 
 To delete the old CAs:
 
