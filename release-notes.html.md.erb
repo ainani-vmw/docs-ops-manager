@@ -993,6 +993,14 @@ box on the Review Pending Changes page.
 
 For more information, see [Automatic rotation of BOSH DNS certificates](security/pcf-infrastructure/automatic-rotation-bosh-dns.html).
 
+### <a id='certificate-rotation-status'></a> Certificates page displays rotation status for each certificate
+
+In <%= vars.ops_manager %> 3.0.28+LTS-T, the **Certificates** page has been redesigned to include the certificate rotation status for each certificate. This information indicates the next action necessary to rotate each certificate. It also links to a new page that lists the deployments associated with a certificate and a propagation status that indicates whether the certificate needs to be deployed.
+
+In addition, leaf certificates are now nested under the CA certificate that signs them. This makes it easier to tell at a glance what a rotation procedure will affect.
+
+For more information, see the [Certificates page](pcf-interface.html) section of the _Using the Tanzu Operations Manager interface_ page.
+
 ## <a id='breaking-changes'></a> Breaking changes in <%= vars.ops_manager %> <%= vars.v_major_version %>
 
 <%= vars.ops_manager %> <%= vars.v_major_version %> includes the following breaking changes:
