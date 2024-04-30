@@ -130,22 +130,22 @@ in the <%= vars.ops_manager %> API documentation.
 
 1. Use the `/api/v0/staged/products/PRODUCT-GUID/overrides` endpoint. Where `PRODUCT-GUID` is the GUID you recorded earlier in this procedure.
 
-1. After you have completed your changes, deactivate Advanced Mode by following the procedure in
-[How to Enable Advanced Mode in the Ops Manager](https://community.pivotal.io/s/article/How-to-Enable-Advanced-Mode-in-the-Ops-Manager?language=en_US)
-in the Knowledge Base.
+2. After you complete your changes, deactivate Advanced Mode by following the procedure in
+[Custom VM Extensions](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-custom-vm-extensions.html).
 
 ## <a id='runtime-config-overrides'></a> Override runtime config properties
 
 To override properties in the runtime configs:
 
 1. Set to Advanced Mode by following the procedure in
-[VMware Tanzu Support documentation](https://community.pivotal.io/s/article/How-to-Enable-Advanced-Mode-in-the-Ops-Manager?language=en_US).
+[How to Enable Advanced Mode in Tanzu Operations Manager](./kb-articles/enable-advanced-mode.html).
 
     <%= vars.company_name %> recommends that only skilled operators use Advanced Mode in .
     If you use Advanced Mode incorrectly, you can deactivate or destroy your deployment. It does not validate the properties that you change using Advanced Mode.
     For example, if you enter a string where an integer is required, you do not receive an error.
 
 1. Use the `/api/v0/staged/director/runtime_configs/overrides` endpoint. For more information, see:
+
   * [BOSH DNS job spec](https://github.com/cloudfoundry/bosh-dns-release/blob/master/jobs/bosh-dns/spec) in GitHub.
 This file shows the properties and defaults for the `bosh_dns` add-on in the `ops_manager_dns_runtime`.
   * [Provide a new list of runtime config overrides for the BOSH
