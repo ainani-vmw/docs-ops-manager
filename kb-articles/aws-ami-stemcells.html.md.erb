@@ -1,0 +1,48 @@
+---
+title: AWS AMIs Stemcells deprecate after 2 years, ERROR Stemcell does not contain an AMI
+owner: Ops Manager
+---
+
+<!---article/AWS-AMIs-Stemcells-deprecate-after-2-years?language=en_US
+--->
+
+AWS automatically deprecates public AMIs 2 years after they are published, including the AMIs for vars.ops_manager and stemcells. These vars.ops_manager AMIs do not appear in AMI searches, but can still be launched using the aws CLI or Platform Automation. Deploying a deprecated light stemcell using AWS CPI v100 or below will result in an error.
+
+```console
+Task 10 | 23:24:16 | Update stemcell: Uploading stemcell bosh-aws-xen-hvm-ubuntu-xenial-go_agent/621.125 to the cloud (cpi: 543ec2c1aa4f72578fa3) (00:00:02)
+                  L Error: CPI error ‘Bosh::Clouds::CloudError’ with message ‘Stemcell does not contain an AMI in region us-west-1’ in ‘create_stemcell’ CPI method (CPI request ID: ‘cpi-457127’)
+```
+
+## Potential Workarounds
+
+Some potential workarounds to deprecated stemcell AMIs error are:
+
+* Upgrade to a newer Ops Manager.
+
+* Upload a new, non-deprecated stemcell and assign it to all tiles.
+
+* Edit the stemcell on disk to point to correct AMI.
+
+To edit the stemcell to point to the correct AMI:
+
+1. Edit the `light-bosh-stemcell-621.211-aws-xen-hvm-ubuntu-xenial-go_agent.tgz` file located at `/var/tempest/stemcells`.
+1. Untar the file and edit the stemcell.MF file.
+2. Obtain `amd-id` for Operations Manager either from the **AWS AMI** tab or using the command; for example:
+
+    ```
+    aws ec2 copy-image --source-region <region> --source-image-id <ami-id> --region <region> --name "Ops_Manager_v2.10.33"
+    ```
+
+1. Replace the `region` and `ami-id` in the `stemcell.MF` file with the copied `ami-ID` and rezip the 4 files to the `light-bosh-stemcell-621.211-aws-xen-hvm-ubuntu-xenial-go_agent.tgz file`.
+
+    ```
+    dev_tools_file_list.txt image packages.txt stemcell.MF
+    ```
+
+1. The new `.tgz` file will reference your `ami-id` and deploy the Bosh Director VM.
+
+    ```
+    tar -czvf light-bosh-stemcell-621.211-aws-xen-hvm-ubuntu-xenial-go_agent.tgz *
+    ```
+
+See the Tanzu stemcell [documentation](https://docs.vmware.com/en/Stemcells-for-VMware-Tanzu/services/release-notes/stemcells.html#xenial-stemcells-2) for release dates of different stemcell versions.
