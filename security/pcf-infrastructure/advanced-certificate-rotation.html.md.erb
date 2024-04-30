@@ -261,7 +261,7 @@ For a multi-site or WAN setup, you must perform the **Apply Changes** steps acro
 
 * Your services are configured for high availability to minimize potential app impact during CA rotation. Rotating the Services TLS CA requires an upgrade all on-demand service instances, which can cause service downtime.
 
-* You must know whether your deployment contains non-Java MySQL apps that rely on `VCAP_SERVICES` for TLS. You must rebind and restage these apps during the procedure, which can require additional time and coordination for the rotation. You do not need to rebind and restage MySQL apps that use `jdbcURL` or consume CA certificates from `/etc/ssl/certs/ca-certificate.crt`. For more information about determining which apps are affected, see [Rotating /services/tls_ca certificate using CredHub transitional certificate rotation feature](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/security-pcf-infrastructure-advanced-certificate-rotation.html) in the Knowledge Base.
+* You must know whether your deployment contains non-Java MySQL apps that rely on `VCAP_SERVICES` for TLS. You must rebind and restage these apps during the procedure, which can require additional time and coordination for the rotation. You do not need to rebind and restage MySQL apps that use `jdbcURL` or consume CA certificates from `/etc/ssl/certs/ca-certificate.crt`. For more information about determining which apps are affected, see [Rotating /services/tls_ca certificate using CredHub transitional certificate rotation feature](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/security-pcf-infrastructure-advanced-certificate-rotation.html).
 
 To rotate the Services TLS CA and its leaf certificates:
 
@@ -269,7 +269,7 @@ To rotate the Services TLS CA and its leaf certificates:
     <p> If you have any service tiles that are not compatible with CredHub Maestro, follow their rotation procedure. Do not follow this procedure. If you do, you might experience extended downtime or data loss.</p>
 
 1. Regenerate the Services TLS CA and mark the latest version of the CA as transitional. This creates a new version of the Services TLS CA and indicates that the latest version is inactive, so that all leaf certificates trust the new CA.
-    1. On the Services TLS CA, see if your Services TLS CA was CredHub-set. 
+    1. On the Services TLS CA, see if your Services TLS CA was CredHub-set.
     Run:
 
         ```

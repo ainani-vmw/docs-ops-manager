@@ -106,9 +106,9 @@ template_variables:
   # ---end-bosh-version-difference-variables---
   bosh_cli_link: For more information about using this tool, see [Advanced Troubleshooting with the BOSH CLI](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html).
   bosh_credhub_setup: The BOSH Director and VMware Tanzu Application Service for VMs (TAS for VMs) tiles deploy CredHub instances as part of the installation process. For more information, see [Installing Ops Manager](../installing/).
-  blobstore_kb: For more information about the blobstore, see [How to use Elastic Runtime BLOB Storage Data](https://community.pivotal.io/s/article/How-to-use-Elastic-Runtime-BLOB-Storage-Data) in the Knowledge Base.
+  blobstore_kb: For more information about the blobstore, see [How to use Elastic Runtime BLOB Storage Data](https://community.pivotal.io/s/article/How-to-use-Elastic-Runtime-BLOB-Storage-Data).
   cc_logging_default:
-  cfdot_kb: When logged into a VM hosting an app, you can use tools like the Cloud Foundry Diego Operator Toolkit (CFDOT) to run app status diagnostics. For more information, see [How to use Cloud Foundry Diego Operator Toolkit (CFDOT)](https://community.pivotal.io/s/article/how-to-use-cloud-foundry-cf-diego-operator-toolkit-cfdot) in the Knowledge Base.
+  cfdot_kb: When logged into a VM hosting an app, you can use tools like the Cloud Foundry Diego Operator Toolkit (CFDOT) to run app status diagnostics. For more information, see [How to use Cloud Foundry Diego Operator Toolkit (CFDOT)](https://community.pivotal.io/s/article/how-to-use-cloud-foundry-cf-diego-operator-toolkit-cfdot).
   cipher_suites: You can override the default cipher suites in the **TLS cipher suites** field and **TLS versions** dropdown in the **Networking** pane of the TAS for VMs tile. For more information about using custom SSL ciphers, see [Gorouter Only](#pass-through) or [Load Balancer and Gorouter](#lb-and-router).
   cli_download: the Tools page of your Apps Manager instance
   cli_v6: <a href="https://docs.vmware.com/en/VMware-Tanzu-Application-Service/5.0/tas-for-vms/getting-started.html">Getting Started with cf CLI</a>
