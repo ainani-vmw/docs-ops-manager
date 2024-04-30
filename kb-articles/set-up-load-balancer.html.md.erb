@@ -1,0 +1,34 @@
+---
+title: How to Set up a Load Balancer in Front of Operations Manager Director
+owner: Ops Manager
+---
+
+<!---article/How-to-Set-Up-a-Load-Balancer-in-Front-of-Ops-Manager-Director?language=en_US
+--->
+
+In some environments, you want access to the BOSH Director to go through a load balancer or reverse proxy. This allows you to expand access to the BOSH Director to resources that may not be on the same network or able to access the Director's network.
+
+The following instructions show how to setup a load balancer or reverse proxy in front of your Ops Manager Director.
+
+1. Create the load balancer or reverse proxy. This may be done through your Information as a Service (IaaS) platform, like with an Amazon Web Services (AWS) Elastic Load Balancer (ELB), or it may be done manually, provisioning an external load balancer/reverse proxies like Nginx, Apache HTTPD or an F5.
+Your load balancer or reverse proxy should use the following settings for its health check:
+
+    * Target protocol: TCP; port: 8443
+    * Timeout: 2 seconds
+    * Interval: 5 seconds
+    * Unhealthy threshold: 5
+    * Healthy threshold: 2
+
+1. Locate the Domain Name Server (DNS) name or IP address of the load balancer/reverse proxy. We recommend using a DNS name because this provides an additional layer of flexibility. If you use an IP address, you should use an IP address that will not change.
+
+1. Go into the Operations Manager User Interface (UI), click the Director tile and select the Director Config screen. Paste the DNS name for the load balancer/reverse proxy into the **Director Hostname** text box.
+
+1. If you are using AWS and an elastic load balancer, click the **Resource Config** screen. Enter the name of the ELB (not the DNS name but the actual name of the ELB in the AWS console).
+
+1. Configure the rest of Operations Manager as you normally would.
+
+1. Click **Apply Changes**.
+
+<p class="note">
+<span class="note__title">Note</span>
+It is recommended that you use a DNS name instead of an IP address when configuring the load balancer / reverse proxy in step two above. With a DNS name, you have an additional layer of flexibility that makes it easier and faster in the event that you need to change the IP address of your load balancer or reverse proxy.</p>
