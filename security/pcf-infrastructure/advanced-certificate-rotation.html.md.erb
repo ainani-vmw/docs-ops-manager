@@ -252,7 +252,7 @@ For a multi-site or WAN setup, you must perform the **Apply Changes** steps acro
 
 * Your services are configured for high availability to minimize potential app impact during CA rotation. Rotating the Services TLS CA requires an upgrade all on-demand service instances, which can cause service downtime.
 
-* Knowledge whether your deployment contains non-Java MySQL apps that rely on `VCAP_SERVICES` for TLS. You must rebind and restage these apps during the procedure, which can require additional time and coordination for the rotation. You do not need to rebind and restage MySQL apps that use `jdbcURL` or consume CA certificates from `/etc/ssl/certs/ca-certificate.crt`. For more information about determining which apps are affected, see [Rotating /services/tls_ca certificate using CredHub transitional certificate rotation feature](https://community.pivotal.io/s/article/Rotating-services-tls-ca-certificate-using-credhub-transitional-certificate-rotation-feature?language=en_US) in the Knowledge Base.
+* You must know whether your deployment contains non-Java MySQL apps that rely on `VCAP_SERVICES` for TLS. You must rebind and restage these apps during the procedure, which can require additional time and coordination for the rotation. You do not need to rebind and restage MySQL apps that use `jdbcURL` or consume CA certificates from `/etc/ssl/certs/ca-certificate.crt`. For more information about determining which apps are affected, see [Rotating /services/tls_ca certificate using CredHub transitional certificate rotation feature](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/security-pcf-infrastructure-advanced-certificate-rotation.html).
 
 To rotate the Services TLS CA and its leaf certificates:
 
