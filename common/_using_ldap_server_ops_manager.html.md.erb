@@ -5,30 +5,30 @@ To configure <%= vars.ops_manager %> to log in by default using an LDAP server f
     * `ldaps://`: This specifies that the LDAP server uses SSL for an encrypted connection and requires that the LDAP server holds a trusted certificate or that you import a trusted certificate to the JVM truststore.
 
 1. For **LDAP Username** and **LDAP Password**, enter the LDAP Distinguished Name (DN) and the password for binding to the LDAP Server. Example DN: `cn=administrator,ou=Users,dc=example,dc=com`
-    <p> <%= vars.company_name %> recommends that you provide LDAP credentials that grant read-only permissions on the LDAP Search Base and the LDAP Group Search Base. In addition to this, if the bind user belongs to a different search base, you must use the full DN.</p>
-    <p> <%= vars.company_name %> recommends against reusing LDAP service accounts across environments. LDAP service accounts are not subject to manual lockouts. For example, lockouts that result from users using the same account. Also, LDAP service accounts are not subject to automated deletions, since disruption to these service accounts could prevent user logins.
-    </p>
+    %= vars.company_name %> recommends that you provide LDAP credentials that grant read-only permissions on the LDAP Search Base and the LDAP Group Search Base. In addition to this, if the bind user belongs to a different search base, you must use the full DN.
+
+    <%= vars.company_name %> recommends against reusing LDAP service accounts across environments. LDAP service accounts are not subject to manual lockouts. For example, lockouts that result from users using the same account. Also, LDAP service accounts are not subject to automated deletions, since disruption to these service accounts could prevent user logins.
 
 1. For **User Search Base**, enter the location in the LDAP directory tree from which any LDAP User search begins. The typical LDAP Search Base matches your domain name. For example, a domain named "cloud.example.com" typically uses the following LDAP User Search Base: `ou=Users,dc=example,dc=com`
 
 1. For **User Search Filter**, enter a string that defines LDAP User search criteria. These search criteria allow LDAP to perform more effective and efficient searches. For example, the standard LDAP search filter `cn=Smith` returns all objects with a common name equal to `Smith`.
-<br><br>
-In the LDAP search filter string that you use to configure your runtime, use `{0}` instead of the username. For example, use `cn={0}` to return all LDAP objects with the same common name as the username.
-<br><br>
-In addition to `cn`, other attributes commonly searched for and returned are `mail`, `uid` and, in the case of Active Directory, `sAMAccountName`.
-    <p> For instructions for testing and troubleshooting your LDAP search filters,
-    see <a href="https://community.pivotal.io/s/article/Configuring-LDAP-Integration-with-Pivotal-Cloud-Foundry">Configuring LDAP Integration</a>.
-    </p>
+    <br><br>
+    In the LDAP search filter string that you use to configure your runtime, use `{0}` instead of the username. For example, use `cn={0}` to return all LDAP objects with the same common name as the username.
+    <br><br>
+    In addition to `cn`, other attributes commonly searched for and returned are `mail`, `uid` and, in the case of Active Directory, `sAMAccountName`.
 
-1. For **Group Search Base**, enter the location in the LDAP directory tree from which the LDAP Group search begins. For example, a domain named "cloud.example.com" typically uses the following LDAP Group Search Base: `ou=Groups,dc=example,dc=com`
+    For instructions for testing and troubleshooting your LDAP search filters,
+    see <a href="../kb-articles/config-ldap.html">Configuring LDAP Integration</a>.
 
-1. For **Group Search Filter**, enter a string that defines LDAP Group search criteria. The standard value is `member={0}`.
+2. For **Group Search Base**, enter the location in the LDAP directory tree from which the LDAP Group search begins. For example, a domain named `cloud.example.com` typically uses the following LDAP Group Search Base: `ou=Groups,dc=example,dc=com`
 
-1. For **Email Attribute**, enter the attribute name in your LDAP directory that corresponds to the email address in each user record. For example, `mail`.
+3. For **Group Search Filter**, enter a string that defines LDAP Group search criteria. The standard value is `member={0}`.
 
-1. For **LDAP RBAC Admin Group Name**, enter the DN of the LDAP group you want to have admin permissions in <%= vars.ops_manager %>.
+4. For **Email Attribute**, enter the attribute name in your LDAP directory that corresponds to the email address in each user record. For example, `mail`.
 
-1. From the drop-down menu, select how the UAA handles LDAP server referrals out to other external user stores.
+5. For **LDAP RBAC Admin Group Name**, enter the DN of the LDAP group you want to have admin permissions in <%= vars.ops_manager %>.
+
+6. From the drop-down menu, select how the UAA handles LDAP server referrals out to other external user stores.
 The UAA can:
     * **Automatically follow any referrals**.
     * **Ignore referrals and return partial result**.
@@ -36,12 +36,12 @@ The UAA can:
 
 1. For **Server SSL Cert**, paste in the root certificate from your CA certificate or your self-signed certificate.
 
-1. Enter a **Decryption passphrase** and the **Decryption passphrase confirmation**. This passphrase encrypts the <%= vars.ops_manager %> datastore, and is not recoverable.
+2. Enter a **Decryption passphrase** and the **Decryption passphrase confirmation**. This passphrase encrypts the <%= vars.ops_manager %> datastore, and is not recoverable.
 
-1. If you are using an **HTTP proxy** or **HTTPS proxy**, follow the instructions in [Configuring Proxy Settings for the BOSH CPI](/docs-ops-manager/install/pcf-director-proxy-settings.html).
+3. If you are using an **HTTP proxy** or **HTTPS proxy**, follow the instructions in [Configuring Proxy Settings for the BOSH CPI](/docs-ops-manager/install/pcf-director-proxy-settings.html).
 
-1. Read the **End User License Agreement**, and select the check box to accept the terms.
+4. Read the **End User License Agreement**, and select the check box to accept the terms.
 
-1. Click **Provision an admin client in the BOSH UAA**. You can use this to enable BOSH automation with scripts and tooling. For more information, see [Provision Admin Client](/docs-ops-manager/install/opsmanager-create-bosh-client.html#saml) in _Creating UAA Clients for BOSH Director_.
+5. Click **Provision an admin client in the BOSH UAA**. You can use this to enable BOSH automation with scripts and tooling. For more information, see [Provision Admin Client](/docs-ops-manager/install/opsmanager-create-bosh-client.html#saml) in _Creating UAA Clients for BOSH Director_.
 
-1. Click **Setup Authentication**.
+6. Click **Setup Authentication**.
