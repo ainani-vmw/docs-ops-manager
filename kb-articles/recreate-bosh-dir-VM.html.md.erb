@@ -1,0 +1,125 @@
+---
+title: How to recreate BOSH Director VM when the Stemcell is deleted
+owner: Ops Manager
+---
+
+<!---article/How-to-recreate-BOSH-Director-VM-when-the-Stemcell-is-deleted-from-vSphere?language=en_US
+--->
+
+This topic describes how to recover a BOSH Director VM that is deleted during the **Apply Changes** step and cannot be recreated because either the BOSH Director's Stemcell or Stemcell snapshot is missing.
+
+<p class="note caution">
+<span class="note__title">Caution</span>
+This procedure is applicable only when the BOSH Director's Stemcell is missing.</p>
+
+## Error messages
+
+You see one of the following messages while **Apply Changes** is in progress:
+
+* The following error message is outputted when the Stemcell is missing:
+
+    ```
+    Starting registry... Finished (00:00:00)
+    Uploading stemcell 'bosh-vsphere-esxi-ubuntu-trusty-go_agent/3541.25'... Skipped [Stemcell already uploaded] (00:00:00)
+
+    Started deploying
+    Waiting for the agent on VM 'vm-d2642c91-555c-4b8b-967d-3245839e33eb'... Finished (00:00:00)
+    Stopping jobs on instance 'unknown/0'... Finished (00:00:01)
+    Unmounting disk 'disk-8580dea0-45a9-4115-950a-292637cef5aa'... Finished (00:00:06)
+    Deleting VM 'vm-d2642c91-555c-4b8b-967d-3245839e33eb'... Finished (00:00:11)
+    Creating VM for instance 'bosh/0' from stemcell 'sc-ee0cdd5f-95f2-42ea-9487-8c22abd8ee6e'... Failed (00:00:03)
+    Failed deploying (00:00:28)
+
+    Stopping registry... Finished (00:00:00)
+    Cleaning up rendered CPI jobs... Finished (00:00:00)
+
+    Deploying:
+    Creating instance 'bosh/0':
+        Creating VM:
+        Creating vm with stemcell cid 'sc-ee0cdd5f-95f2-42ea-9487-8c22abd8ee6e':
+            CPI 'create_vm' method responded with error: CmdError{"type":"Unknown","message":"Could not find VM for stemcell 'sc-ee0cdd5f-95f2-42ea-9487-8c22abd8ee6e'","ok_to_retry":false
+    ```
+
+* The following error message is outputted when the Stemcell is present but its snapshot is missing:
+
+    ```
+    Started deploying
+    Waiting for the agent on VM 'vm-d234f764-752c-4ccd-9335-8128a3fd7953'... Finished (00:00:00)
+    Stopping jobs on instance 'unknown/0'... Finished (00:00:01)
+    Unmounting disk 'disk-178321d3-8b47-485e-a09c-1f29560be58e'... Finished (00:00:14)
+    Deleting VM 'vm-d234f764-752c-4ccd-9335-8128a3fd7953'... Finished (00:00:13)
+    Creating VM for instance 'bosh/0' from stemcell 'sc-b9c62db5-c741-4bd1-8fce-71e57571b03d'... Failed (00:04:30)
+    Failed deploying (00:05:05)
+
+    Stopping registry... Finished (00:00:00)
+    Cleaning up rendered CPI jobs... Finished (00:00:00)
+
+    Deploying:
+    Creating instance 'bosh/0':
+        Creating VM:
+        Creating vm with stemcell cid 'sc-b9c62db5-c741-4bd1-8fce-71e57571b03d':
+            CPI 'create_vm' method responded with error: CmdError{"type":"Unknown","message":"The object[s] '\u003c[Vim.VirtualMachine] vm-86812\u003e' should have the following properties: [\"snapshot\"]\n, but they were missing these: #\u003cSet: {\"snapshot\"}\u003e\n.","ok_to_retry":false}
+
+    Exit code 1
+    ```
+
+## Cause
+
+In both scenarios, BOSH Director (bosh/0) VM creation fails. When a Director's Stemcell is deleted from the vSphere or the snapshot of a Director's Stemcell is deleted, attempting to **Apply Changes** when BOSH Director recreation is needed results in an error occurring.
+
+While deploying a new Director, Operations Manager runs `bosh create-env`, which does the following:
+
+1. Stops the agent on the Director VM
+2. Stops the Director VM
+3. Unmount disk from the Director VM
+4. Deletes the Director VM
+5. Tries to recreate the Director VM from the stemcell associated with it
+
+It fails on the last step because the Stemcell is not present anymore or the Stemcell is corrupted due to the missing snapshot.
+
+Another reason for failure is that BOSH does not try to re-upload the Stemcell because, from the BOSH perspective, the Stemcell is already uploaded, so it skips this step.
+
+```
+Starting registry... Finished (00:00:00)
+Uploading stemcell 'bosh-vsphere-esxi-ubuntu-trusty-go_agent/3541.25'... Skipped [Stemcell already uploaded] (00:00:00)
+```
+
+## Resolution
+
+1. SSH to Operations Manager and switch to the root user:
+
+    ```
+    ssh ubuntu@opsmgr.pivotal.io
+    ubuntu@bosh-stemcell:~$ sudo su - 
+    [sudo] password for ubuntu:
+    ```
+
+1. Take a backup of `bosh-state.json`:
+
+    ```
+    cd /var/tempest/workspaces/default/deployments
+    cp bosh-state.json bosh-state.json.bkp
+    ```
+
+1. Modify the original bosh-state.json by removing current_stemcell_id's value. After modification it should look like:
+
+    ```
+    "current_stemcell_id": " "
+    ```
+
+1. Remove the Stemcells section completely from bosh-state.json:
+
+    Sample stemcells section that needs to be removed:
+
+    ```
+    "stemcells": [
+            {
+                "id": "61c852ce-351f-4ac0-61b2-588e43b82818",
+                "name": "bosh-vsphere-esxi-ubuntu-trusty-go_agent",
+                "version": "3541.25",
+                "cid": "sc-45be03e5-5816-4536-b6fa-0286eeecd01c"
+            }
+        ],
+    ```
+
+Running **Apply Changes** should now succeed without error.
