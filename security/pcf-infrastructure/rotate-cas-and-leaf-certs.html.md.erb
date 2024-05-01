@@ -425,14 +425,22 @@ the rotation procedure is complete.
 
 Some certificates are not rotated when using the standard rotation procedure.
 The following table lists certificates that use a separate, specialized rotation procedure and provides
-links to documentation and Knowledge Base articles to help you rotate these certificates.
+links to documentation and help for rotating these certificates.
 
 | Certificate | Tile | Procedure |
 |-------------|------|-----------|
 | `/services/tls_ca` | _n/a_ | [Rotate the Services TLS CA and Its Leaf Certificates](advanced-certificate-rotation.html#services-rotation.html) |
-| `/telemetry-ca-cert` | Telemetry v1.2.1 and earlier | [How to rotate the telemetry-ca-cert in Operations Manager](https://community.pivotal.io/s/article/How-to-rotate-the-telemetry-ca-cert) |
-| `/services/tls_leaf` | <%= vars.app_runtime_abbr %> v2.10.0 – v2.10.13 | [Rotate /services/tls_leaf manually](https://community.pivotal.io/s/article/Rotate-services-tls-leaf-manually) |
+| `/telemetry-ca-cert` | Telemetry v1.2.1 and earlier | Telemetry v1.21 and earlier are out of Support. If you are still running this version and need help, contact [Tanzu Support](https://tanzu.vmware.com/support) |
+| `/services/tls_leaf` | <%= vars.app_runtime_abbr %> v2.10.0 – v2.10.13 | Contact [Tanzu Support](https://tanzu.vmware.com/support) |
 
+<!--- 
+Problem rotating /telemetry-ca-cert in Telemetry 1.2.1 is obsolete -- these old versions are no longer supported. 
+Old kb article: https://community.pivotal.io/s/article/How-to-rotate-the-telemetry-ca-cert?language=en_US
+Replaced ref to this article with "call Support."
+
+Bug in rotating /services/tls_leaf is described in old kb article: https://community.pivotal.io/s/article/Rotate-services-tls-leaf-manually?language=en_US
+Article is very hard to interpret, plus TAS 2.11 and 2.13 are about to go EOGS, so I opted to send customers to Support if they run into this.
+--->
 
 ## <a id='troubleshooting'></a> Troubleshooting
 
