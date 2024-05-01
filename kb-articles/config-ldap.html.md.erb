@@ -1,0 +1,96 @@
+---
+title: AWS AMIs Stemcells deprecate after 2 years, ERROR Stemcell does not contain an AMI
+owner: Ops Manager
+---
+
+<!---article/Configuring-LDAP-Integration-with-Pivotal-Cloud-Foundry?language=en_US
+--->
+
+When using Tanzu Application Service (TAS for VMs), it is possible to integrate it with your LDAP system. Because all LDAP systems are different, it takes some configuration for TAS for VMs to properly integrate with your LDAP system.
+
+This topic walks through the configuration, provides some additional details about the information needed, and provide you with some tools for validating the configuration before deploying TAS for VMs.
+
+
+## Configuration Fields
+
+The LDAP configuration screen in Operations Manager will prompt you for the information that is needed to integrate with your LDAP system. In general, you'll need to enter:
+
+* the connection URL
+* credentials for the search account
+* a user search base
+* a user search filter
+* a group search base
+* a group search filter
+* the name of the attribute that stores the user's email address
+
+For secure LDAP connections, you may also need to enter the public key used by your server, but this is only required if your LDAP server is using an SSL certificate that is not signed by a well-known certificate authority (as when you're using a self-signed certificate).
+
+### LDAP Authentication Process
+
+When the UAA Server attempts to authenticate a user using LDAP, it goes through the following process:
+
+1. Connect to the LDAP Server, using the provided URL and the provided LDAP Credentials.
+
+1. If connecting via secure LDAP, the certificate on your LDAP server will be validated. It must match the server name specified in the URL and it must be signed by a well-known certificate authority to pass this check.  If you specify an LDAP Server SSL Cert in your configuration then the certificate you specified will be trusted. This means that if your server is using the listed certificate it will validate OK even if it's not signed by a well-known certificate authority (please note that the server name in your URL still needs to match what's listed on the certificate).
+
+1. Execute an LDAP Search starting from the search base using the provided LDAP user search filter. This looks for the username provided by the user at login and attempts to find it on your LDAP server.
+
+1. If step #3 succeeds, UAA will then attempts to bind to the LDAP server as the user that it found. If this succeeds then the user is authenticated.
+
+1. When the user is first authenticated, UAA will create a shadow user in the UAA database, based on the username and email address (loaded from the email attribute in LDAP). The shadow user will have an origin of `LDAP` so that it does not conflict if a user with that name already exists (manually created users have an origin of "UAA").
+
+It is also worth noting that UAA will search its internal database for users before it consults the LDAP server. This means if a user exists in the UAA database and the entered password matches, then the authentication stops and LDAP is not consulted.
+
+
+## LDAP Group Mappings
+
+After a user is authenticated, UAA will attempt to look up roles for a user.  This is done based on the group search base and group search filter that are specified.  UAA will use these like it does the user search base and filter, but to locate LDAP groups associated with the authenticated user.
+
+If any groups are found, UAA will then attempt to map the LDAP groups to UAA scopes.  If it succeeds, the user will be additionally granted that scope.  If it fails, the user will simply have the standard scopes.
+
+
+## LDAP User Search Filters
+
+The LDAP user search filter is a critical part of the search process outlined above. It instructs UAA how to find the user on your LDAP server. It also defines the format of the username that your users will enter when they login TAS for VMs. For example, if the user will need to enter an email address or just a username. We suggested that you configure the user search filter so that users authenticate with their email address (see Impact / Risks for an explanation of this), however, this is not a requirement.
+
+
+## Testing LDAP Search Filters
+
+While the TAS for VMs LDAP screen will validate the LDAP URL and credentials that you specify, it will not validate the LDAP search filters, user or group, that you specify. This can make it a little tricky to configure, if you're not sure the exact value to use for the search filters.
+
+The following instructions can be used to test potential LDAP user and group search filters without doing a full installation.
+
+1. Log in to the Operations Manager VM.
+1. Run the command `sudo apt-get install ldap-utils`.  This installs the `ldapsearch` utility.  This command only needs to be run once.
+1. Run:
+
+    ```
+    ldapsearch -H "<ldap-url>" -D "<search-user>" -W -b "<search-base>" '<filter>'`
+    ```
+    
+    Where the information in `<..>` is replaced with the corresponding information you entered on the TAS for VMs LDAP configuration screen.
+
+    Example:
+
+    ```
+    LDAP user search filter = 'mail={0}'
+
+        ldapsearch -H "ldap://my-server:389" -D "cn=user,ou=users,dc=example,dc=com" -W -b "ou=users,dc=example,dc=com" 'mail=user@your-company.com'
+    ```
+
+    Example:
+
+    ```
+    LDAP group search filter = 'member={0}'
+        ldapsearch -H "ldap://my-server:389" -D "cn=user,ou=users,dc=example,dc=com" -W -b "ou=groups,dc=example,dc=com" 'member=uid=some.user,ou=users,dc=example,dc=com'
+    ```
+
+<p class="note">
+<span class="note__title">Note</span>
+For the user filter, use the test username directly and not <code>{0}</code>. The <code>{0}</code> is where UAA will substitute the entered username. For the group filter, use the full DN of your test user and not <code>{0}</code>. The <code>{0}</code> is where UAA will substitute the full DN of the user that was authenticated. You must do that manually here because the <code>ldapsearch</code> utility does not perform this substitution.</p>
+
+When the command in step #3 is executed, you'll be prompted for the password of the LDAP search user. This is the password you entered on the TAS for VMs LDAP configuration screen. After authenticating, the ldapsearch command will execute the search filter that you listed starting from the search base and running recursively down the tree.  
+
+If the search filter works, you should see this command return the corresponding LDAP records.  If it does not return any records then the search filter has not matched the user or groups and needs to be adjusted.  
+
+If multiple records are returned for the user search this is also bad, as that will cause authentication to fail.  The user search filter must return one and only one record.  Multiple records are OK for the group search filter.
