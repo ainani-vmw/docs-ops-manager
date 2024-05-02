@@ -1,0 +1,125 @@
+---
+title: Checking and Rotating Operations Manager SAML Certificate before it expires
+owner: Ops Manager
+---
+
+<!---article/how-to-check-and-rotate-ops-manager-saml-certificate-before-it-expires?language=en_US
+--->
+
+The Tanzu Operations Manager SAML certificate is not rotatable and is only good for 2 years. If the certificate expires, operators cannot log in to Operations Manager until the certificate is rotated.
+
+See also the [video demonstration](https://www.youtube.com/watch?v=Zu7xch1OLhs).
+
+This topic applies to users who have SAML IDP authentication enabled. It also describes how to check if your SAML Certificate is about to expire and how to rotate the SAML Certificate.
+
+For those who don't enable SAML authentication, they may still see a warning message in Operations Manager complaining about an expiring SAML SP certificate, and even though it doesn't affect Operations Manager functionality, users can still use the steps below generate a new SAML SP certificate to get rid of that warning.
+
+## Scenario
+
+The Operations Manager and the BOSH Director SAML Certificate is expired or is about to expire, preventing operators from logging into Operations Manager. Operations Manager provides an API that allows the operators to rotate all non-configurable certificates in the system, except for its own SAML certificate.
+
+<p class="note">
+<span class="note__title">Note</span>
+<code>product_guid</code> value of <code>p-bosh-xx</code> refers to the Director Tile in Operations Manager.</p>
+
+```
+{
+"valid_until": "2019-06-14T09:26:19Z",
+"configurable": false,
+"property_reference": ".properties.saml_service_provider_cert",
+"property_type": "rsa_cert_credentials",
+"product_guid": "p-bosh-xxxxxxxxxxxxxxxxxxx",
+"location": "ops_manager",
+"variable_path": null,
+"issuer": "/C=US/O=Pivotal",
+"valid_from": "2017-06-14T09:26:19Z"
+},
+```
+
+<p class="note">
+<span class="note__title">Note</span>
+If using Internal Authentication, Operators can complete any upgrade tasks first without having to worry about the certificate being expired.</p>
+
+## Rotating the SAML Certificate
+
+Follow the steps below:
+
+1. Check to see when the Operations Manager SAML Certificate will expire. You can obtain the SAML certification from the web interface or from the CLI.
+
+    1. From the web interface, download the Operations Manager SAML Provider Certificate. Use the link `https://<(opsmanger.domain)>uaa/saml/metadata`, to download the file: `saml-sp.xml`.
+
+        <p class="note">
+        <span class="note__title">Note</span>
+        Change <code><(opsmanger.domain)></code> to the domain being used in your environment.</p>
+
+        The certificate string will be in the `<ds:X509Certificate>` xml tag. You can format this string using a web tool such as `https://www.samltool.com/format_x509cert.php`.
+
+    2. From the CLI, open the file `/home/tempest-web/ramdisk/uaa/config/login.yml`, and find the variable `login.serviceProviderCertificate`.
+
+2. Copy the certificate to a file named `opsman.saml.cert`.
+
+    ```
+    -----BEGIN CERTIFICATE-----
+    ...
+    -----END CERTIFICATE-----
+    ```
+
+1. Check the expiration date of the certificate using the following command:
+
+    ```
+    openssl x509 -in opsman.saml.cert -noout -startdate -enddate
+    notBefore=Oct  2 02:55:33 2018 GMT
+    notAfter=Oct  2 02:55:33 2020 GMT
+    ```
+
+2. Regenerate the Operations Manager SAML Certificate.
+
+    1. SSH into the Operations Manager VM. and then sudo to root:
+
+        ```
+        sudo su -
+        ```
+
+    1. Connect to the Ruby IRB using the following command. Note that you must replace `TEMPEST_INFRASTRUCTURE` with the actual infrastructure you are using (vsphere, aws, azure, gcp, openstack). This example uses vSphere:
+
+        ```
+        cd /home/tempest-web/tempest/web; RAILS_ENV='production' TEMPEST_INFRASTRUCTURE='vsphere' TEMPEST_WEB_DIR='/home/tempest-web' DATA_ROOT='/var/tempest' LOG_DIR='/var/log/opsmanager' SECRET_KEY_BASE="1234" su tempest-web --command 'bundle exec rails console'
+        ```
+
+    1. Setup the Operations Manager decryption passphrase:
+
+        ```
+        EncryptionKey.instance.passphrase = '<om passphrase>'
+        ```
+
+    1. Get an instance of `Uaa::UaaConfig`:
+        
+        * For Operations Manager v3.0.18 or later and v2.10.64 or later: `uaa_config = Uaa::UaaConfig.singleton`
+        * For other Operations Manager versions: `uaa_config = Uaa::UaaConfig.instance`
+
+    1. Force generation of a new SAML SP certificate andsave the output. You might need to share this newly generated certificate with your IDP:
+
+        ```
+        uaa_config.generate_saml_service_provider_cert(force:true)
+        ```
+
+    1. Write the certificate into DB and commit the change:
+        
+        ```
+        aa_config.send('saml_service_provider_cert')
+        uaa_config.save!
+        ```
+
+        <p class="note caution">
+        <span class="note__title">Caution</span>
+        Before proceeding, collaborate with your IDP regarding the timing of implementing the new SAML certificate. Failure to do so might result in all SSO users being locked out of the platform.</p>
+
+    1. Exit the IRB and restart the Operations Manager web server:
+
+        ```
+        service tempest-web restart
+        ```
+
+    1. Upon the next **Apply Changes**, Operations Manager updates the BOSH Director with the new SAML Certificate.
+
+Now the SAML SP certificate has been updated. You can continue to work with your IDP to update the SP certificate (if you are using SAML) or login into Operations Manager and confirm that SAML SP certificate expiration message has disappeared (if you are using internal authentication).
