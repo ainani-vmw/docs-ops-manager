@@ -1,5 +1,5 @@
 ---
-title: How to Set up a Load Balancer in Front of Operations Manager Director
+title: Setting up a Load Balancer in front of Tanzu Operations Manager 
 owner: Ops Manager
 ---
 
@@ -21,13 +21,13 @@ Your load balancer or reverse proxy should use the following settings for its he
 
 1. Locate the Domain Name Server (DNS) name or IP address of the load balancer/reverse proxy. We recommend using a DNS name because this provides an additional layer of flexibility. If you use an IP address, you should use an IP address that will not change.
 
-1. Go into the Operations Manager User Interface (UI), click the Director tile and select the Director Config screen. Paste the DNS name for the load balancer/reverse proxy into the **Director Hostname** text box.
+2. Go into the Operations Manager User Interface (UI), click the Director tile and select the Director Config screen. Paste the DNS name for the load balancer/reverse proxy into the **Director Hostname** text box.
 
-1. If you are using AWS and an elastic load balancer, click the **Resource Config** screen. Enter the name of the ELB (not the DNS name but the actual name of the ELB in the AWS console).
+3. If you are using AWS and an elastic load balancer, click the **Resource Config** screen. Enter the name of the ELB (not the DNS name but the actual name of the ELB in the AWS console).
 
-1. Configure the rest of Operations Manager as you normally would.
+4. Configure the rest of Operations Manager as you normally would.
 
-1. Click **Apply Changes**.
+5. Click **Apply Changes**.
 
 <p class="note">
 <span class="note__title">Note</span>
