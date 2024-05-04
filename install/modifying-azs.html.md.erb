@@ -17,7 +17,7 @@ The detailed procedure for updating AZs in existing deployments is outlined in [
 - Removal of in-use AZs.
 - Changes to AZs used by singleton jobs
 
-If the Tile you want to migrate is not listed in the KB, it is mandatory to understand how BOSH Director handles changes in regards to AZs: [BOSH Documentation](https://bosh.io/docs/....) to avoid complications in your migration deployments.
+If the Tile you want to migrate is not listed in the KB, it is mandatory to understand how BOSH Director handles changes in regards to AZs: [BOSH Documentation](https://bosh.io/docs/) to avoid complications in your migration deployments.
 
 Migrating AZs is an advanced procedure and understanding how BOSH handles addition, removal and updates to AZs is necessary because it has implications on persistent disks attached to VMs deployed by BOSH. **_Make sure to have read and understood the impact of updating AZs before starting the operation_**.
 
@@ -32,4 +32,4 @@ The rough outline of steps to update the AZ Config of existing installations con
 - Check that the Ops Manager UI reflects your desired changes
 - Deactivate Advanced Mode
 - Follow Tile specific instructions (refer to [KB](https://community.pivotal.io/s/article/How-to-add-or-modify-my-availability-zones-without-the-need-to-reinstall-Tanzu-Application-Services?language=en_US)) or Bosh AZ migration docs to identify best approach.
-- Apply Changes
+- Apply Changes.
