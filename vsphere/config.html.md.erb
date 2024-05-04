@@ -69,7 +69,7 @@ Before you begin this procedure, you must complete all steps in [Deploying <%= v
 
       If you intend to deploy <%= vars.k8s_runtime_abbr %> using Flannel as the CNI, select this option to configure the BOSH Director. Do not choose <strong>NSX-T Networking</strong>. When you configure the <%= vars.k8s_runtime_abbr %> tile later on, you configure Flannel as the container network interface (CNI).<br><br>If you intend to deploy <%= vars.k8s_runtime_abbr %> with NSX-T, see the <a href="https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/1.16/tkgi/GUID-vsphere-nsxt-index.html"><%= vars.k8s_runtime_abbr %> documentation</a>.
 
-      When deploying on VMC (vSphere on AWS), you must select <strong>Standard vCenter Networking</strong>. <strong>NSX-T Networking</strong> does not work with VMC.
+      When deploying on VMC (vSphere on AWS), you must select **Standard vCenter Networking**. **NSX-T Networking** does not work with VMC.
 
     * **NSX-T Networking:** Select this option to allow NSX-T network virtualization for non-<%= vars.k8s_runtime_abbr %> products such as <%= vars.app_runtime_abbr %>. This virtualization allows you to configure component load balancing and security in the **Resource Config** pane of the BOSH Director tile.
     For more information, see [Step 10: Resource Config pane](#resource-config).<br><br>Configure NSX networking by entering the following information:
@@ -93,16 +93,14 @@ Before you begin this procedure, you must complete all steps in [Deploying <%= v
 
         * **Use NSX-T Policy API Migration Mode**: This is a special mode to migrate an existing deployment from earlier NSX-T Manager API objects such as NS Groups to the newer NSX-T Policy API objects such as Groups, and must only be used with NSX-T migration scripts. Leave unchecked if unsure.
 
-1. Configure the following folder names:
+2. Configure the following folder names. After initial deployment, you cannot edit folder names.
     * **VM Folder**: The vSphere datacenter folder where <%= vars.ops_manager %> places VMs. Enter `[YOUR-DEPLOYMENT]_vms` where `YOUR-DEPLOYMENT` corresponds to a descriptive name for your deployment. For example, `my_pcf_vms`.
     * **Template Folder**: The vSphere datacenter folder where <%= vars.ops_manager %> places templates. Enter `[YOUR-DEPLOYMENT]_templates`. For example, `my_pcf_templates`.
     * **Disk path Folder**: The vSphere datastore folder where <%= vars.ops_manager %> creates attached disk images. You must not nest this folder. Enter `[YOUR-DEPLOYMENT]_disk`. For example, `my_pcf_disk`.
 
-    <p> After initial deployment, you cannot edit folder names.</p>
+3. Click **Save**.
 
-1. Click **Save**.
-
-1. (Optional) Click **Add vCenter Config** toward the top of the form to configure additional vCenters. Once you click **Save**, your multiple vCenter Configs are listed in the **vCenter Configs** pane. For more information about multiple vCenter configs, see [Managing multiple data centers](../install/multiple-datacenters.html).
+4. (Optional) Click **Add vCenter Config** toward the top of the form to configure additional vCenters. After you click **Save**, your multiple vCenter Configs are listed in the **vCenter Configs** pane. For more information about multiple vCenter configs, see [Managing multiple data centers](../install/multiple-datacenters.html).
 
 ## <a id='dir-config'></a> Step 3: Director Config pane
 
@@ -398,9 +396,9 @@ see <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmwa
 
 3. If the **Persistent Disk Type** field displays the value **None**, the job does not require persistent disk space.
 
-    <p> For the BOSH Director job, select a VM type with at least 8&nbsp;GB memory.</p>
-    <p> If you set a field to <strong>Automatic</strong> and the recommended resource allocation changes in a future version, <%= vars.ops_manager %> automatically uses the updated recommended allocation.</p>
-    <p> If you install <%= vars.windows_runtime_first %>, provision your <strong>Main Compilation Job</strong> with at least 100&nbsp;GB of disk space.</p>
+    For the BOSH Director job, select a VM type with at least 8&nbsp;GB memory.
+    If you set a field to **Automatic** and the recommended resource allocation changes in a future version, <%= vars.ops_manager %> automatically uses the updated recommended allocation.
+    If you install <%= vars.windows_runtime_first %>, provision your **Main Compilation Job** with at least 100&nbsp;GB of disk space.
 
 4. (Optional) If you configured NSX-T networking in the **vCenter Config** pane, and you want to configure security and load balancing for the BOSH Director job:
   1. Click the menu expansion icon next to the **BOSH Director** job name. The **NSX-T Configuration** configuration fields appear.

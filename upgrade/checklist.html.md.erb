@@ -7,14 +7,14 @@ This checklist contains important preparation steps that you must follow before 
 
 <%= vars.company_name %> recommends upgrading directly to <%= vars.ops_manager %> <%= vars.v_major_version %> from <%= vars.ops_manager %> v2.5 through v2.9. To upgrade directly to <%= vars.ops_manager %> <%= vars.v_major_version %> from <%= vars.ops_manager %> v2.5 through v2.9, see [Jump Upgrade from <%= vars.ops_manager %> v2.5 Through v2.9](../install/upgrading-pcf.html#jump-upgrade) in _Upgrading <%= vars.ops_manager %>_.
 
-<p> Although you can skip minor versions when upgrading <%= vars.ops_manager %>, do not skip minor versions
+Although you can skip minor versions when upgrading <%= vars.ops_manager %>, do not skip minor versions
 when upgrading <%= vars.app_runtime_abbr %>. Skipping minor versions when upgrading <%= vars.app_runtime_abbr %> might result in
-	additional breaking changes. To avoid this, upgrade <%= vars.app_runtime_abbr %> to the minor version that
-	directly follows your current version of <%= vars.app_runtime_abbr %>.
-	For more information, see <a href="../install/upgrading-pcf.html#upgrade-tas">Upgrade <%= vars.app_runtime_abbr %></a> in <em>Upgrading <%= vars.ops_manager %></em>.</p>
+additional breaking changes. To avoid this, upgrade <%= vars.app_runtime_abbr %> to the minor version that
+directly follows your current version of <%= vars.app_runtime_abbr %>.
+For more information, see <a href="../install/upgrading-pcf.html#upgrade-tas">Upgrade <%= vars.app_runtime_abbr %></a> in <em>Upgrading <%= vars.ops_manager %></em>.
 
-<p> Any certificate rotation must be completed before upgrading <%= vars.ops_manager %>. Failure to complete the
-CA rotation results in the inability to <strong>Apply Changes</strong> due to safety violations.</p>
+Any certificate rotation must be completed before upgrading <%= vars.ops_manager %>. Failure to complete the
+CA rotation results in the inability to <strong>Apply Changes</strong> due to safety violations.
 
 ## <a id='back-up-your-pcf-deployment'></a> Back up your <%= vars.ops_manager %> deployment
 
@@ -234,10 +234,10 @@ For more information about the configurations to evaluate, see [Configure file s
 
 In addition to file storage IOPS, consider additional existing deployment factors that can impact overall upgrade duration and performance:
 
-| **Factor** | **Impact** |
-| ---------- | ---------- |
-| **Network latency** | Network latency can contribute to how long it takes to move app instance data to new containers. |
-| **Number of ASGs** | A large number of App Security Groups (ASGs) in your deployment can contribute to an increase in app instance container startup time. For more information, see [App Security Groups](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/<%= vars.dot_major_tas_version %>/tas-for-vms/asg.html) in the <%= vars.app_runtime_abbr %> documentation. |
+| **Factor**              | **Impact** |
+| ------------------------| ---------- |
+| **Network latency**     | Network latency can contribute to how long it takes to move app instance data to new containers. |
+| **Number of ASGs**      | A large number of App Security Groups (ASGs) in your deployment can contribute to an increase in app instance container startup time. For more information, see [App Security Groups](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/<%= vars.dot_major_tas_version %>/tas-for-vms/asg.html) in the <%= vars.app_runtime_abbr %> documentation. |
 | **Number of app instances and app growth** | A large increase in the number of app instances and average droplet size since the initial deployment can increase the upgrade impact on your system. |
 
 
