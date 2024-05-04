@@ -7,14 +7,22 @@ This topic explains advanced details in regards to updating the configuration of
 
 ## <a id='overview'></a> Overview
 
-When configuring Ops Manager `Bosh Director for (IaaS Type)` platform operators are asked to specify Availability Zones for their deployments. Changes to Availability Zones after the initial deployment are subject to limitations.
+When configuring Ops Manager `Bosh Director for (IaaS Type)`, platform operators are asked to specify Availability Zones for their deployments. Changes to Availability Zones after the initial deployment are subject to limitations.
 
-If you are in a situation where updating the AZ configuration of your installation becomes necessary, read the information iprovided on this page to understand the implications of this task.
+If you are in a situation where updating the AZ configuration of your installation becomes necessary, read the information provided on this page to understand the implications of this task.
+
+<p class="note important">
+<span class="note__title">Important</span>
+If you have trouble with this procedure, you can contact
+<a href="https://tanzu.vmware.com/support">Tanzu Support</a>.
+<br>
+Note that these limitations don't apply to Tanzu Operations Manager 3.0.
+</p>
 
 ## <a id='procedure'></a> Procedure
 
-The detailed procedure for updating AZs in existing deployments is outlined in [KB](https://community.pivotal.io/s/article/How-to-add-or-modify-my-availability-zones-without-the-need-to-reinstall-Tanzu-Application-Services?language=en_US). The procedure for AZ migrations depends on multiple factors like deployment size, stateful vs stateless instances, state syncing feature of the deployed software... The referenced KB aims to provide Tile specific instructions, it is important to follow these instructions to avoid complications. Additional care is required if your changes include:
-- Removal of in-use AZs.
+The detailed procedure for updating AZs in existing deployments is described in [KB](https://community.pivotal.io/s/article/How-to-add-or-modify-my-availability-zones-without-the-need-to-reinstall-Tanzu-Application-Services?language=en_US). The procedure for AZ migrations depends on multiple factors like deployment size, stateful vs. stateless instances, state syncing feature of the deployed software, and so on. The referenced KB provides Tile-specific instructions, it is important to follow these instructions to avoid complications. Additional care is required if your changes include:
+- Removal of in-use AZs
 - Changes to AZs used by singleton jobs
 
 If the Tile you want to migrate is not listed in the KB, it is mandatory to understand how BOSH Director handles changes in regards to AZs: [BOSH Documentation](https://bosh.io/docs/) to avoid complications in your migration deployments.
@@ -24,7 +32,7 @@ Migrating AZs is an advanced procedure and understanding how BOSH handles additi
 The rough outline of steps to update the AZ Config of existing installations consists of these steps:
 - Enable Ops Manager Advanced Mode. This will allow changes to AZ Configurations via the Ops Manager API:
   `om curl -p /api/v0/staged/infrastructure/locked -x PUT --data '{"locked" : "false"}' -H "Content-Type: application/json"`
-- Modify AZs using the Ops Manager Api
+- Modify AZs using the Ops Manager API
   Get current config:
   `om curl -p /api/v0/staged/director/availability_zones >az.json`
   Edit az.json as required
