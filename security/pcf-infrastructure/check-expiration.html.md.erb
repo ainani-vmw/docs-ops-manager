@@ -73,4 +73,4 @@ To check certificate expiration dates and types through the <%= vars.ops_manager
 
     2. For any certificates expiring soon, identify the procedure listed in the `rotation_procedure_name` field. This is the name of the rotation procedure that will be used to rotate the certificate. The URL for the documentation for this procedure is listed in the `rotation_procedure_url` field.
 
-    Note that most procedures operate on multiple certificates at once. For example, all CA certificates listed as using the Standard CA Procedure will be rotated together; there is no need to repeat the procedure for each of these certificates. It is also recommended to rotate CA certificates first, as rotating CAs will also rotate any leaf certificates signed by those CAs.
+    Note that most procedures operate on multiple certificates at once. For example, all CA certificates listed as using the Standard CA Procedure are rotated together; there is no need to repeat the procedure for each of these certificates. VMware also recommends rotating CA certificates first, as rotating CAs also rotates any leaf certificates signed by those CAs.
