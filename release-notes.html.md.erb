@@ -56,6 +56,7 @@ BOSH Director that causes the Healthwatch and RabbitMQ tiles to fail to deploy w
 This release includes a new version of System Metrics, which causes all VMs to redeploy.
 </p>
 
+- **[Bug Fix]** BlobstoreVerifier on vSphere no longer fails with SocketError due to <%= vars.ops_manager %> loading before network configuration is applied
 - **[Bug Fix]** AZs and networks can be assigned to previously installed tiles without entering Advanced Mode if the tile is adding Jobs for the first time
 - **[Bug Fix]** The Director properties API no longer returns a `short_lived_nats_bootstrap_credentials_enabled` property. This feature is only available on Ops Manager 3.0 and above.
 
