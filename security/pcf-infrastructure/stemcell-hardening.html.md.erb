@@ -70,12 +70,10 @@ category of tests is still under development and additional tests will be added 
 
     6. **File System Hardening**
 
-        6. The temporary storage directories such as /tmp and /var/tmp are mounted on a dedicated partition, and configured with appropriately limiting options such as nodev, nosuid, and noexec.
+        6. The temporary storage directories such as /tmp and /var/tmp are mounted on a separate partition, and configured with appropriately limiting options such as nodev, nosuid, and noexec.
 
-        7. Each of the following directories is in a separate mount, with mount options managed via BOSH agent:
-           + /var
+        7. Each of the following directories is in a separate mount, with mount options managed through BOSH agent:
            + /var/log
-           + /var/log/audit
            + /home
            + /tmp
 
