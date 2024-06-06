@@ -12,31 +12,31 @@ These reference architectures meet the following requirements:
 * They are publicly accessible.
 * They include common <%= vars.ops_manager %>-managed services such as VMware Tanzu SQL, VMware Tanzu RabbitMQ, and Spring Cloud Services for VMware Tanzu.
 * They can host at least 100 app instances.
-* They have been deployed and validated by VMware to support <%= vars.ops_manager %>, <%= vars.app_runtime_abbr %>, and <%= vars.k8s_runtime_abbr %>
+* They have been deployed and validated by VMware to support <%= vars.ops_manager %>, <%= vars.app_runtime_abbr %>, and <%= vars.k8s_runtime_abbr %>.
 
-You can use <%= vars.ops_manager %> reference architectures to help plan the best configuration for your <%= vars.ops_manager %> deployment on your IaaS.
+You can use <%= vars.ops_manager %> reference architectures to help plan the best configuration for deploying your <%= vars.ops_manager %> on your IaaS.
 
 ## <a id='topics'></a> Reference architecture and planning topics
 
-All <%= vars.ops_manager %> reference architectures start with the base <%= vars.app_runtime_abbr %> architecture and base <%= vars.k8s_runtime_abbr %> architecture.
+All <%= vars.ops_manager %> reference architectures start with the base <%= vars.app_runtime_abbr %> architecture and the base <%= vars.k8s_runtime_abbr %> architecture.
 
 These IaaS-specific topics build on these two common base architectures:
 
-* [AWS reference architecture for Tanzu Operations Manager](aws/aws_ref_arch.html).
+* [AWS reference architecture for Tanzu Operations Manager](aws/aws_ref_arch.html)
 
-* [Azure reference architecture for Tanzu Operations Manager](azure/azure_ref_arch.html).
+* [Azure reference architecture for Tanzu Operations Manager](azure/azure_ref_arch.html)
 
-* [GCP reference architecture for Tanzu Operations Manager](gcp/gcp_ref_arch.html).
+* [GCP reference architecture for Tanzu Operations Manager](gcp/gcp_ref_arch.html)
 
-* [OpenStack reference architecture for Tanzu Operations Manager](openstack/openstack_ref_arch.html).
+* [OpenStack reference architecture for Tanzu Operations Manager](openstack/openstack_ref_arch.html)
 
-* [vSphere reference architecture for Tanzu Operations Manager](vsphere/vsphere_ref_arch.html).
+* [vSphere reference architecture for Tanzu Operations Manager](vsphere/vsphere_ref_arch.html)
 
 The following topics address aspects of platform architecture and planning that the <%= vars.ops_manager %>
 reference architectures do not cover:
 
-* [Implementing a multi-foundation <%= vars.k8s_runtime_abbr %> deployment](https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/1.15/tkgi/GUID-nsxt-multi.html).
-* [Global DNS load balancers for multi-foundation environments](global-dns-lb.html).
+* [Implementing a multi-foundation <%= vars.k8s_runtime_abbr %> deployment](https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/1.15/tkgi/GUID-nsxt-multi.html)
+* [Global DNS load balancers for multi-foundation environments](global-dns-lb.html)
 
 ## <a id='pas-base'></a> <%= vars.app_runtime_abbr %> architecture
 
@@ -73,13 +73,13 @@ The following sections describe <%= vars.app_runtime_abbr %>'s recommendations f
 
 * <%= vars.app_runtime_abbr %> subnet - `/24` segment<br>This subnet contains <%= vars.app_runtime_abbr %> runtime VMs, such as Gorouters, Diego Cells, and Cloud Controllers.
 
-* Services subnet - `/24` segment<br>The services and on-demand services networks support <%= vars.ops_manager %> tiles that you might add in addition to <%= vars.app_runtime_abbr %>. In other words, they are the networks for everything that is not <%= vars.app_runtime_abbr %>. Some services tiles can call for additional network capacity to grow into on-demand. If you use services with this capability, <%= vars.company_name %> recommends that you add an on-demand services network for each on-demand service.
+* Services subnet - `/24` segment<br>The services and on-demand services networks support <%= vars.ops_manager %> tiles that you might add in addition to <%= vars.app_runtime_abbr %>. These are the networks for everything that is not <%= vars.app_runtime_abbr %>. Some services tiles can call for additional network capacity to grow into on-demand. If you use services with this capability, <%= vars.company_name %> recommends that you add an on-demand services network for each on-demand service.
 
-* Ondemand services subnets - `/24` segments<br>This is for services that can allocate network capacity on-demand from BOSH for their worker VMs. <%= vars.company_name %> recommends allocating a dedicated subnet to each on-demand service. For example, you can configure the Redis for VMware Tanzu tile as follows:
-  * **Network:** Enter the existing `Services` network, to host the service broker.
-  * **Services network:** Deploy a new network `OD-Services1`, to host the Redis worker VMs.
+* On-demand services subnets - `/24` segments<br>This is for services that can allocate network capacity on-demand from BOSH for their worker VMs. <%= vars.company_name %> recommends allocating a dedicated subnet to each on-demand service. For example, you can configure the Redis for VMware Tanzu tile as follows:
+  * **Network:** Enter the existing `Services` network to host the service broker.
+  * **Services network:** Deploy a new network `OD-Services1` to host the Redis worker VMs.
   <br>
-  Another ondemand service tile can then also use `Services` for its broker and a new `OD-Services2` network for its workers, and so on.
+  Another on-demand service tile can then also use `Services` for its broker and a new `OD-Services2` network for its workers, and so on.
 
 * Isolation segment subnets - `/24` segments<br>You can add one or more isolation segment tiles to a <%= vars.app_runtime_abbr %> installation to compartmentalize hosting and routing resources. For each isolation segment you deploy, you should designate a `/24` network for its range of address space.
 
@@ -91,13 +91,13 @@ The load balancer can also perform Layer 4 or Layer 7 load balancing functions. 
 
 Common deployments of load balancing in <%= vars.app_runtime_abbr %> are:
 
-* HTTP/HTTPS traffic to and from GoRouters.
+* HTTP/HTTPS traffic to and from GoRouters
 
-* TCP traffic to and from TCP routers.
+* TCP traffic to and from TCP routers
 
-* Traffic from the Diego Brain, when developers access app containers through SSH.
+* Traffic from the Diego Brain, when developers access app containers through SSH
 
-To load balance across multiple <%= vars.app_runtime_abbr %> foundations, use an IaaS- or vendor-specific Global Traffic Manager or Global DNS load balancer.
+To load balance across multiple <%= vars.app_runtime_abbr %> foundations, use an IaaS-specific or vendor-specific Global Traffic Manager or Global DNS load balancer.
 
 For more information, see [Global DNS load balancers for multi-foundation environments](global-dns-lb.html).
 
@@ -114,7 +114,7 @@ see the [BOSH backup and restore](https://docs.cloudfoundry.org/bbr/) documentat
 
 ### <a id='pas-storage'></a> Storage
 
-<%= vars.app_runtime_abbr %> requires disk storage for each component, for both persistent data and to allocate to ephemeral data. You size these disks in the **Resource Config** pane of the <%= vars.app_runtime_abbr %> tile. For more information about storage configuration and capacity planning, see the corresponding section in the [reference architecture for your IaaS](#topics).
+<%= vars.app_runtime_abbr %> requires disk storage for each component, both for persistent data and to allocate to ephemeral data. You size these disks in the **Resource Config** pane of the <%= vars.app_runtime_abbr %> tile. For more information about storage configuration and capacity planning, see the corresponding section in the [reference architecture for your IaaS](#topics).
 
 The platform also requires you to configure file storage for large shared objects. These blobstores can be external or internal. For details, see [Configuring File Storage for <%= vars.app_runtime_abbr %>](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/4.0/tas-for-vms/pas-file-storage.html).
 
@@ -122,34 +122,34 @@ The platform also requires you to configure file storage for large shared object
 
 For information about how <%= vars.app_runtime_abbr %> implements security, see:
 
-* [Tanzu Operations Manager security infrastructure](../security/pcf-infrastructure/index.html).
+* [Tanzu Operations Manager security infrastructure](../security/pcf-infrastructure/index.html)
 
-* [Security concepts in Tanzu Operations Manager](../security/concepts/index.html).
+* [Security concepts in Tanzu Operations Manager](../security/concepts/index.html)
 
-* [Certificates and TLS in your Tanzu Operations Manager deployment](../security/pcf-infrastructure/certificates-index.html).
+* [Certificates and TLS in your Tanzu Operations Manager deployment](../security/pcf-infrastructure/certificates-index.html)
 
-* [Network communication paths in <%= vars.ops_manager %>](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/4.0/tas-for-vms/networking-routing-network-paths.html) in network security.
+* [Routing Network Communications](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/4.0/tas-for-vms/networking-routing-network-paths.html)
 
 ### <a id='pas-domains'></a> Domain names
 
-<%= vars.app_runtime_abbr %>  requires these domain names to be registered:
+<%= vars.app_runtime_abbr %> requires these domain names to be registered:
 
-* System domain, for <%= vars.app_runtime_abbr %>  and other tiles: `sys.domain.name`
-* App domain, for your apps: `app.domain.name`
+* System domain for <%= vars.app_runtime_abbr %> and other tiles: `sys.domain.name`
+* App domain for your apps: `app.domain.name`
 
 You must also define these wildcard domain names and include them when creating certificates that access <%= vars.app_runtime_abbr %>  and its hosted apps:
 
-* \*.SYSTEM-DOMAIN
+* `\*.SYSTEM-DOMAIN`
 
-* \*.APPS-DOMAIN
+* `\*.APPS-DOMAIN`
 
-* \*.login.SYSTEM-DOMAIN
+* `\*.login.SYSTEM-DOMAIN`
 
-* \*.uaa.SYSTEM-DOMAIN
+* `\*.uaa.SYSTEM-DOMAIN`
 
 ### <a id='pas-scaling'></a> Component scaling
 
-For recommendations on scaling <%= vars.app_runtime_abbr %> for different deployment scenarios, see [Scaling <%= vars.app_runtime_abbr %> ](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/4.0/tas-for-vms/scaling-ert-components.html).
+For recommendations about scaling <%= vars.app_runtime_abbr %> for different deployment scenarios, see [Scaling <%= vars.app_runtime_abbr %> ](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/4.0/tas-for-vms/scaling-ert-components.html).
 
 ## <a id='pks-base'></a> <%= vars.k8s_runtime_abbr %> Architecture
 
