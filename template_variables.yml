@@ -20,9 +20,9 @@ template_variables:
   dot_major_version: "3.0"
 
   # Associated Tanzu Application Service for VMs version
-  current_tas_version: "5-0"
-  v_major_tas_version: "v5.0"
-  dot_major_tas_version: "5.0"
+  current_tas_version: "6-0"
+  v_major_tas_version: "v6.0"
+  dot_major_tas_version: "6.0"
 
   gtm_account_id: GTM-MM86KCJ
 
@@ -46,7 +46,7 @@ template_variables:
 # Deprecated variables -- replace with current product variables when possible
   platform_name: Ops Manager
   product_name: Tanzu Platform
-  first_product_name: Tanzu Operations Manager
+  first_product_name: VMware Tanzu Operations Manager
   product_full: Tanzu Application Service (TAS for VMs)
   product_runtime: Tanzu Application Service
   product_short: TAS for VMs
