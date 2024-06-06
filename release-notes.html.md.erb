@@ -10,9 +10,9 @@ see [Jump Upgrading to <%= vars.ops_manager %> <%= vars.v_major_version %>](jump
 
 See also:
 
-- [New Features in <%= vars.ops_manager %> v3.0](#major-features).
-- [Breaking Changes in <%= vars.ops_manager %> v3.0](#breaking-changes).
-- [Known Issues in <%= vars.ops_manager %> v3.0](#known-issues).
+- [New Features in <%= vars.ops_manager %> v3.0](#major-features)
+- [Breaking Changes in <%= vars.ops_manager %> v3.0](#breaking-changes)
+- [Known Issues in <%= vars.ops_manager %> v3.0](#known-issues)
 
 <%= vars.ops_manager %> is certified by the Cloud Foundry Foundation for 2023.
 
@@ -975,8 +975,7 @@ performance characteristics and are more cost-effective than previous instance t
 
 New installations of <%= vars.ops_manager %> <%= vars.v_major_version %> use 5th-generation AMD instances by default. If you upgrade to
 <%= vars.ops_manager %> <%= vars.v_major_version %> from <%= vars.ops_manager %> v2.10 or earlier, you can either keep your current VM types or convert your
-VMs to 5th-generation AMD instances in the **AWS Config** pane of the BOSH Director tile. For more information, see [Step 2: AWS Config
-Page](aws/config-manual.html#pcfaws-om-awsconfig) in _Configuring BOSH Director on AWS_.
+VMs to 5th-generation AMD instances in the **AWS Config** pane of the BOSH Director tile. For more information, see [Step 2: AWS Config Page](aws/config-manual.html#pcfaws-om-awsconfig) in _Configuring BOSH Director on AWS_.
 
 If you are using a custom instance type catalog, the VM types that you can use do not change.
 
@@ -985,8 +984,10 @@ types that are smaller than the previous sizes for their jobs. For example, Dieg
 convert your VMs to 5th-generation AMD instances, you might need to either scale up the number of Diego Cell instances or change the selected VM type of certain
 jobs to a larger VM type. You can configure both the number of instances and VM type of each job in the **Resource Config** pane of a product tile.
 
-For more information about AWS Linux instance types, see the [AWS documentation](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html). For
-more information about AWS Windows instance types, see the [AWS documentation](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/instance-types.html).
+For more information about:
+
+* AWS Linux instance types, see the [AWS documentation](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html)
+* AWS Windows instance types, see the [AWS documentation](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/instance-types.html).
 
 ### <a id='aws-gp3'></a> AWS deployments use gp3 disks
 
@@ -1026,22 +1027,20 @@ RAM specifications. This allows you to use specialized VM types that are not in 
 If you do not specify a machine type as a custom VM type, the BOSH Director continues to create VMs that match the CPU and RAM specifications.
 
 For more information about custom VM type catalogs for GCP deployments, see the [<%= vars.ops_manager %> API
-documentation](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-ops-man-api.html).
+documentation](./install/ops-man-api.html).
 
 ### <a id='short-lived-nats-creds'></a> Short-lived NATS bootstrap credentials
 
 In <%= vars.ops_manager %> <%= vars.v_major_version %>, the **Director Config** pane includes the **Enable Short Lived NATS Bootstrap Credentials** check box.
-Activating this check box configures your VMs to use short-lived NATS credentials during the bootstrap process. This increases the security of your
-<%= vars.ops_manager %> deployment by rotating the TLS certificate that the BOSH Agents in your VMs use to communicate with the BOSH Director through BOSH
-NATS.
+Selecting this check box configures your VMs to use short-lived NATS credentials during the bootstrap process. This increases the security of your
+<%= vars.ops_manager %> deployment by rotating the TLS certificate that the BOSH Agents in your VMs use to communicate with the BOSH Director through BOSH NATS. The certificate used during the bootstrap process is not used again.
 
-For more information about short-lived NATS bootstrap credentials, see [Using Short-Lived NATS Bootstrap
-Credentials](security/pcf-infrastructure/rotate-bootstrap-nats-certificates.html).
+For more information about short-lived NATS bootstrap credentials, see [Using Short-Lived NATS Bootstrap Credentials](security/pcf-infrastructure/rotate-bootstrap-nats-certificates.html).
 
 <p class="note caution">
 <span class="note__title">Caution</span>
 Before configuring your VMs to use short-lived NATS bootstrap credentials, you must ensure that all VMs in
-your <%= vars.ops_manager %> deployment are using stemcells that support them, including VMs deployed by service tiles. VMs that do not use stemcells that
+your <%= vars.ops_manager %> deployment are using stemcells that support this, including VMs deployed by service tiles. VMs that do not use stemcells that
 support short-lived NATS bootstrap credentials might become unresponsive. For more information, see
 <a href="security/pcf-infrastructure/rotate-bootstrap-nats-certificates.html#stemcells">Stemcell Compatibility</a> in <em>Using Short-Lived NATS Bootstrap
 Credentials</em>.
@@ -1050,7 +1049,7 @@ Credentials</em>.
 ### <a id='rotate-certs-redeploy'></a> Rotate non-configurable leaf certificates during redeployment
 
 In <%= vars.ops_manager %> <%= vars.v_major_version %>, the **Review Pending Changes** page in the <%= vars.ops_manager %> Installation Dashboard includes the
-**Rotate All Non-Configurable Leaf Certificates** check box. Activating this check box allows you to rotate non-configurable leaf certificates when you
+**Rotate All Non-Configurable Leaf Certificates** check box. Selecting this check box allows you to rotate non-configurable leaf certificates when you
 redeploy your tiles through the <%= vars.ops_manager %> Installation Dashboard, instead of having to rotate them through the <%= vars.ops_manager %> API.
 
 For more information about rotating non-configurable leaf certificates through the <%= vars.ops_manager %> Installation Dashboard, see [Review Pending Changes
@@ -1059,7 +1058,7 @@ Page](install/review-pending-changes.html#review-pending-changes) in _Reviewing 
 ### <a id='auto-rotate-bosh-dns'></a> Automatic rotation of the BOSH DNS certificates (experimental)
 
 In <%= vars.ops_manager %> 3.0.17+LTS-T, the **Director Config** pane includes the **Enable automatic rotation of the BOSH DNS CA certificate (experimental)** check box.
-Activating this check box will cause <%= vars.ops_manager %> to automatically rotate the BOSH DNS CA certificate and associated leaf certificates during Apply Changes.
+Selecting this check box will cause <%= vars.ops_manager %> to automatically rotate the BOSH DNS CA certificate and associated leaf certificates during Apply Changes.
 The rotated BOSH DNS certificates will only be deployed to VMs during Apply Changes when new stemcells are also being deployed to those VMs. This allows the BOSH DNS
 certificates to be rotated gradually over time without user intervention, and without encountering unexpected long Apply Changes times. You can force the rotated
 BOSH DNS certificates to be deployed without updating a stemcell using the **Force latest BOSH DNS certificates to be used without requiring a stemcell update** check
@@ -1084,13 +1083,17 @@ For more information, see the [Certificates page](pcf-interface.html) section of
 The BOSH System Metrics Server is removed from <%= vars.ops_manager %> <%= vars.v_major_version %>.
 
 If you upgrade to <%= vars.ops_manager %> <%= vars.v_major_version %> from <%= vars.ops_manager %> v2.10 or earlier, and you previously configured the BOSH
-Director to deploy the BOSH System Metrics Server, you must deactivate the **Enable deprecated BOSH System Metrics Server** check box and activate the
-**Enable additional System Metrics** check box in the **Director Config** pane of the BOSH Director tile before you begin upgrading. In <%= vars.ops_manager %>
-<%= vars.v_major_version %>, the **Enable BOSH System Metrics Server** check box is removed from the BOSH Director tile.
+Director to deploy the BOSH System Metrics Server, you must make the following changes *before* upgrading:
+
+* un-select the **Enable deprecated BOSH System Metrics Server** check box, and
+* select the **Enable additional System Metrics** check box in the **Director Config** pane of the BOSH Director tile
+
+In <%= vars.ops_manager %> <%= vars.v_major_version %>, 
+the **Enable BOSH System Metrics Server** check box is removed from the BOSH Director tile.
 
 ### <a id='nsx-v-removed'></a> NSX-V networking is removed
 
-NSX-V networking reached EOGS in January 2022. Because of this, you cannot configure NSX-V networking in <%= vars.ops_manager %> <%= vars.v_major_version %>.
+NSX-V networking reached EOGS in January 2022. You cannot configure NSX-V networking in <%= vars.ops_manager %> <%= vars.v_major_version %>.
 
 You can still configure NSX-T networking for compatible vSphere deployments. For more information, see [Resource Requirements](install/vsphere.html#runtimes)
 in _Installing <%= vars.ops_manager %> on vSphere_.
@@ -1139,11 +1142,12 @@ In <%= vars.ops_manager %> <%= vars.v_major_version %> includes the following kn
 
 ### <a id='aws-ami-deprecated'></a> <%= vars.ops_manager %> AMI does not appear in search or light stemcell fails to deploy on AWS
 
-AWS automatically deprecates public AMIs that are older than 2 years. This includes the AMIs associated with each release of <%= vars.ops_manager %> on AWS, as well as the AMIs associated with AWS light stemcells. For more information, see [Amazon EC2 now reduces visibility of public Amazon Machine Images (AMIs) older than two years](https://aws.amazon.com/about-aws/whats-new/2022/03/amazon-machine-images-public-visibility-two-years/).
+AWS automatically deprecates public Amazon Machine Images (AMIs) that are older than 2 years. This includes the AMIs associated with each release of <%= vars.ops_manager %> on AWS, as well as the AMIs associated with AWS light stemcells. For more information, see [Amazon EC2 now reduces visibility of public Amazon Machine Images (AMIs) older than two years](https://aws.amazon.com/about-aws/whats-new/2022/03/amazon-machine-images-public-visibility-two-years/).
 
 Deprecated AMIs no longer appear when searching for the <%= vars.ops_manager %> AMI in AWS. However, it is still possible to launch the <%= vars.ops_manager %> AMI using either the `aws` CLI or Platform Automation.
 
 Users that attempt to deploy a VM using a deprecated light stemcell may receive an error similar to the following:
+
 ```
 Task 10 | 23:24:16 | Update stemcell: Uploading stemcell bosh-aws-xen-hvm-ubuntu-xenial-go_agent/621.125 to the cloud (cpi: 543ec2c1aa4f72578fa3) (00:00:02)
                    L Error: CPI error 'Bosh::Clouds::CloudError' with message 'Stemcell does not contain an AMI in region us-west-1' in 'create_stemcell' CPI method (CPI request ID: 'cpi-457127')
@@ -1157,7 +1161,7 @@ If you are unable to upgrade, follow the steps in [AWS AMIs Stemcells deprecate 
 
 ### <a id='vsphere-8-0-3'></a> vSphere v8.0.3 incompatibility
 
-This version is incompatible with vSphere v8.0.3 and later. Upgrade to at least <%= vars.ops_manager %> v3.0.17 for compatibility with vSphere v8.0.3 and later
+This version is incompatible with vSphere v8.0.3 and later. Upgrade to at least <%= vars.ops_manager %> v3.0.17 for compatibility with vSphere v8.0.3 and later.
 
 ### <a id='postgres-db-index'></a> Upgrading <%= vars.ops_manager %> corrupts BOSH Director PostgreSQL database indexes
 
@@ -1169,7 +1173,7 @@ the BOSH Director to become corrupt. As a result, upgrading to <%= vars.ops_mana
 This issue is resolved in <%= vars.ops_manager %> <%= vars.v_major_version %>.5+LTS-T. If you previously upgraded to <%= vars.ops_manager %>
 <%= vars.v_major_version %> from an earlier version and have already encountered this issue, upgrading to <%= vars.ops_manager %>
 <%= vars.v_major_version %>.5+LTS-T might cause your <%= vars.ops_manager %> deployment to fail. If this happens, contact
-[Support](https://tanzu.vmware.com/support) for assistance.
+[Support](https://support.broadcom.com/) for assistance.
 
 ### <a id='re-deploy-fail'></a> Missing classes cause redeployment failures
 
@@ -1202,6 +1206,6 @@ the <%= vars.ops_manager %> Installation Dashboard might take a long time to imp
 
 ### <a id='bosh-reuses-packages'></a> BOSH inappropriately reuses compiled packages
 
-The BOSH Director attempts to match packages from an uploaded release to "similar" packages that were previously uploaded. The match is made using the fingerprint on the uncompiled package contents. However, the packages in <code>golang-release</code> were recently modified to be templated. Because of this, packages that shared the same fingerprint were used interchangeably, even though they represented different versions of Go. Reusing these packages can cause Apply Changes to fail if a tile expected one version of Go but encountered another version.
+The BOSH Director attempts to match packages from an uploaded release to similar packages that were previously uploaded. The match is made using the fingerprint on the uncompiled package contents. However, the packages in <code>golang-release</code> were recently modified to be templated. Because of this, packages that shared the same fingerprint were used interchangeably, even though they represented different versions of Go. Reusing these packages can cause Apply Changes to fail if a tile expected one version of Go but encountered another version.
 
 This issue is resolved in <%= vars.ops_manager %> <%= vars.v_major_version %>.9+LTS-T.
