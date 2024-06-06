@@ -1,13 +1,13 @@
 ---
-title: Overview of Tanzu Operations Manager
+title: Overview of <%= vars.ops_manager %>
 owner: Ops Manager
 ---
 
-This topic introduces Tanzu Operations Manager and describes how you can get started.
+This topic introduces <%= vars.ops_manager %> and describes how you can get started.
 
 ## <a id='overview'></a> About <%= vars.ops_manager %>
 
-<%= vars.ops_manager %> is a software tool to help you expand and manage products you can install on your deployment. Each of these products is represented as a _tile_ in the UI.
+<%= vars.ops_manager %> is a software tool to help you expand and manage products that you can install on your deployment. Each of these products is represented as a _tile_ in the UI.
 
 <%= vars.ops_manager %> deploys with the BOSH Director tile by default, which is a single point of control for VMs. The BOSH Director supports various IaaSes, including AWS, Azure, GCP, OpenStack, and vSphere.
 
@@ -20,7 +20,7 @@ other processes to balance demand throughout app lifecycles. Example runtimes ma
 services you can manage through <%= vars.ops_manager %> include MySQL, Redis, and Gemfire.
 
 For more information about the tiles you can install,
-see [<%= vars.product_network %>](https://tanzu.vmware.com/products).
+see [<%= vars.product_network %>](https://network.tanzu.vmware.com/).
 
 ## <a id='responsibilities'></a> <%= vars.ops_manager %> responsibilities
 
@@ -51,10 +51,10 @@ The <%= vars.ops_manager %> operator is responsible for:
 
 ### <a id='limited-access-operator'></a> Limited-access operator responsibilities
 
-Operators can give limited-access view or write <%= vars.ops_manager %> responsibilites to others within an
+Operators can give limited-access view or write <%= vars.ops_manager %> responsibilities to others within an
 organization.
 
-For more information about privileges, see [Configuring role-based access control in Tanzu Operations Manager](opsguide/config-rbac.html).
+For more information about privileges, see [Configuring role-based access control in <%= vars.ops_manager %>](opsguide/config-rbac.html).
 
 ## <a id='related'></a> <%= vars.ops_manager %> documentation
 
@@ -62,49 +62,49 @@ The following sections describe where to get started in the <%= vars.ops_manager
 
 ### <a id='release-notes-upgrade'></a> Release notes and upgrading
 
-For information on new features, security patches, and upgrading Tanzu Operations Manager, see the following topics:
+For information on new features, security patches, and upgrading <%= vars.ops_manager %>, see the following topics:
 
-- [Ops Manager v2.10 release notes](./release-notes.html)
-- [Upgrading your Ops Manager deployment](./install/upgrading-pcf.html)
+- [<%= vars.ops_manager %> v2.10 release notes](./release-notes.html)
+- [Upgrading your <%= vars.ops_manager %> deployment](./install/upgrading-pcf.html)
 
 ### <a id='administering'></a> Installing and configuring by IaaS
 
-For information about managing each IaaS on Ops Manager, see the following documentation sets:
+For information about managing each IaaS on Operations Manager, see the following documentation sets:
 
-- [Installing and configuring Tanzu Operations Manager on AWS](./aws/index.html)
-- [Installing and configuring Tanzu Operations Manager on Azure](./azure/index.html)
-- [Installing and configuring Tanzu Operations Manager on GCP](./gcp/index.html)
-- [Installing and configuring Tanzu Operations Manager on OpenStack](./openstack/index.html)
-- [Installing and configuring Tanzu Operations Manager on vSphere](./vsphere/index.html)
+- [Installing and configuring <%= vars.ops_manager %> on AWS](./aws/index.html)
+- [Installing and configuring <%= vars.ops_manager %> on Azure](./azure/index.html)
+- [Installing and configuring <%= vars.ops_manager %> on GCP](./gcp/index.html)
+- [Installing and configuring <%= vars.ops_manager %> on OpenStack](./openstack/index.html)
+- [Installing and configuring <%= vars.ops_manager %> on vSphere](./vsphere/index.html)
 
 ### <a id='using-ui'></a> Using the UI
 
 For information about how to fulfill common operator duties with the UI, see the following topics:
 
-- [Using the Tanzu Operations Manager interface](./pcf-interface.html).
-- [Adding and deleting products from Tanzu Operations Manager](./install/add-delete.html).
-- [Importing and managing stemcells in Tanzu Operations Manager](./opsguide/managing-stemcells.html).
-- [Managing errands in your Tanzu Operations Manager deployment](./install/managing_errands.html).
+- [Using the <%= vars.ops_manager %> interface](./pcf-interface.html)
+- [Adding and deleting products from <%= vars.ops_manager %>](./install/add-delete.html)
+- [Importing and managing stemcells in <%= vars.ops_manager %>](./opsguide/managing-stemcells.html)
+- [Managing errands in your <%= vars.ops_manager %> deployment](./install/managing_errands.html)
 
 ### <a id='using-api-cli'></a> Using the API or CLI
 
-For information about how to use the Ops Manager API or CLI and to configure deployments programmatically, see the following topics:
+For information about how to use the <%= vars.ops_manager %> API or CLI and to configure deployments programmatically, see the following topics:
 
-- [Using the Tanzu Operations Manager CLI](./install/cli.html).
-- [Using the Tanzu Operations ManagerAPI](./install/ops-man-api.html).
-- [Using Tanzu Operations Manager programmatically and from the command line](./install/ops-man-api-cli.html).
+- [Using the <%= vars.ops_manager %> CLI](./install/cli.html)
+- [Using the <%= vars.ops_manager %>API](./install/ops-man-api.html)
+- [Using <%= vars.ops_manager %> programmatically and from the command line](./install/ops-man-api-cli.html)
 
 ### <a id='backup-troubleshoot'></a> Backing up and troubleshooting
 
-For information about how to back up, restore, and troubleshoot Tanzu Operations Manager deployments, see
+For information about how to back up, restore, and troubleshoot <%= vars.ops_manager %> deployments, see
 the following topics:
 
-- [Backing up and restoring your Tanzu Operations Manager deployment](./install/backup-restore/index.html).
-- [Troubleshooting problems in your Tanzu Operations Manager deployment](./install/troubleshooting.html).
+- [Backing up and restoring your <%= vars.ops_manager %> deployment](./install/backup-restore/index.html)
+- [Troubleshooting problems in your <%= vars.ops_manager %> deployment](./install/troubleshooting.html)
 
 ### <a id='monitoring-logging'></a> Monitoring and logging
 
 For information about accessing logs and metrics for VMs and app containers, see the following topics:
 
-- [Accessing logs and metrics for your Tanzu Operations Manager deployment](./install/viewing-logs-and-metrics.html).
-- [Monitoring VM status in Tanzu Operations Manager](./install/monitoring.html).
+- [Accessing logs and metrics for your <%= vars.ops_manager %> deployment](./install/viewing-logs-and-metrics.html)
+- [Monitoring VM status in <%= vars.ops_manager %>](./install/monitoring.html)
