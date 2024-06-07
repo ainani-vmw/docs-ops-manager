@@ -9,7 +9,7 @@ For information about upgrading <%= vars.ops_manager %>, see [Task 2: Upgrade <%
 
 <%= partial "./om_upgrade_overview" %>
 
-To create an <%= vars.ops_manager %> VM instance:
+To create a <%= vars.ops_manager %> VM instance:
 
 1. Locate the <%= vars.ops_manager %> installation file. For more information, see [Locate the <%= vars.ops_manager %> installation file](#select-tgz).
 
@@ -64,9 +64,9 @@ To create a private VM image:
 
 ## <a id='start-vm'></a> Create the <%= vars.ops_manager %> VM instance
 
-Create an <%= vars.ops_manager %> VM instance to host the new version of <%= vars.ops_manager %>.
+Create a <%= vars.ops_manager %> VM instance to host the new version of <%= vars.ops_manager %>.
 
-To create an <%= vars.ops_manager %> VM instance:
+To create a <%= vars.ops_manager %> VM instance:
 
 1. Select the check box for the image you created above.
 
@@ -78,7 +78,7 @@ To create an <%= vars.ops_manager %> VM instance:
 
     * **Name:** Enter a name that matches the naming conventions of your existing deployment.
     * **Zone:** Select a zone from the region of your existing deployment.
-    * **Machine type:** Click **Customize** to manually configure the vCPU and memory. An <%= vars.ops_manager %> VM instance requires the following minimum specifications:
+    * **Machine type:** Click **Customize** to manually configure the vCPU and memory. a <%= vars.ops_manager %> VM instance requires the following minimum specifications:
 
         | **Machine Spec** | **Minimum Value** |
         |------------------|-------------------|
@@ -87,7 +87,7 @@ To create an <%= vars.ops_manager %> VM instance:
 
     * **Boot disk:** Click **Change**, then perform the following steps:
         * Click **Custom images** if it is not already selected.
-        * Click the **Boot disk type**. If you have an <%= vars.ops_manager %> environment with high performance needs, select **SSD**. As an example, environments used to develop <%= vars.ops_manager %> tiles may benefit from a higher performing <%= vars.ops_manager %> VM boot disk. For most environments, however, you can select **Standard**.
+        * Click the **Boot disk type**. If you have a <%= vars.ops_manager %> environment with high performance needs, select **SSD**. As an example, environments used to develop <%= vars.ops_manager %> tiles may benefit from a higher performing <%= vars.ops_manager %> VM boot disk. For most environments, however, you can select **Standard**.
         * Set the **Size (GB)** of the boot disk to the minimum or higher.
 
             | **Machine Spec** | **Minimum Value** |

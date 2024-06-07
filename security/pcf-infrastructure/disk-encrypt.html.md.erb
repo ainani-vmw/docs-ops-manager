@@ -16,9 +16,9 @@ To encrypt disks in <%= vars.ops_manager %>, you must:
 
 The procedures below describe how to do this for each IaaS.
 
-### <a id='disks'></a> Disks you can encrypt on an <%= vars.ops_manager %> VM
+### <a id='disks'></a> Disks you can encrypt on a <%= vars.ops_manager %> VM
 
-The disks you can encrypt on an <%= vars.ops_manager %> VM are:
+The disks you can encrypt on a <%= vars.ops_manager %> VM are:
 
 * The root file system for the VM. For BOSH-created VMs, this comes from the stemcell.
 
@@ -30,7 +30,7 @@ The disks you can encrypt on an <%= vars.ops_manager %> VM are:
 
 For each IaaS, there are two disk encryption procedures, which encrypt different VMs:
 
-* The **BOSH Director** procedure encrypts the disks used by the BOSH Director VM when you first create an <%= vars.ops_manager %> environment.
+* The **BOSH Director** procedure encrypts the disks used by the BOSH Director VM when you first create a <%= vars.ops_manager %> environment.
 
 * The **BOSH-deployed VM** procedure encrypts disks for the VMs that the BOSH Director creates, after BOSH has been deployed.
 
