@@ -383,13 +383,13 @@ To accommodate these dynamically-created networks, <%= vars.company_name %> reco
 
 Multiple clusters provide additional features such as security, customization on a per-cluster basis, privileged containers, failure domains, and version choice. Namespaces can be used as a naming construct and not as a tenancy construct.
 
-### <a id='pks-nsx-t-master-nodes'></a> Master nodes
+### <a id='pks-nsx-t-master-nodes'></a> Primary nodes
 
-The <%= vars.k8s_runtime_abbr %> on vSphere with NSX-T architecture supports multiple master nodes for <%= vars.k8s_runtime_abbr %> v1.2 and later.
+The <%= vars.k8s_runtime_abbr %> on vSphere with NSX-T architecture supports multiple primary nodes for <%= vars.k8s_runtime_abbr %> v1.2 and later.
 
-You can define the number of master nodes per plan in the <%= vars.k8s_runtime_abbr %> tile in <%= vars.ops_manager %>. The number of master nodes can be an odd number to allow `etcd` to form a quorum.
+You can define the number of primary nodes per plan in the <%= vars.k8s_runtime_abbr %> tile in <%= vars.ops_manager %>. The number of primary nodes can be an odd number to allow `etcd` to form a quorum.
 
-<%= vars.company_name %> recommends that you have at least one master node per AZ for HA and disaster recovery.
+<%= vars.company_name %> recommends that you have at least one primary node per AZ for HA and disaster recovery.
 
 ### <a id='pks-nsx-t-ha'></a> High availability
 

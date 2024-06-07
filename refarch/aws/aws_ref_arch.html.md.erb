@@ -14,7 +14,7 @@ This section describes the reference architecture for a <%= vars.app_runtime_abb
 ### <a id='diagram'></a> Reference architecture diagram
 
 The following diagram illustrates the reference architecture for <%= vars.app_runtime_abbr %> on AWS.
-The diagram shows the flow and components from the HQ, branch offices, and broader Internet into the VPC Network. Categories of elements in the VPC Network include:
+The diagram shows the flow and components from the HQ, branch offices, and broader internet into the VPC Network. Categories of elements in the VPC Network include:
 
 * Infrastructure subnet (with Tanzu Operations Manager, BOSH Director, Jumpbox, NLB interface, NAT GW Interface, and VPC Endpoints)
 * 3 TAS subnets
@@ -38,17 +38,20 @@ You can use AWS Route 53 for DNS resolution to host your <%= vars.app_runtime_ab
 
 #### <a id='lb'></a> Load balancing
 
-AWS offer Application Load Balancers (ALBs) and Network Load Balancers (NLBs). <%= vars.company_name %> recommends using NLBs because of the simplicity and security of leaving all encrypted traffic in place until it reaches the GoRouters. If you require Amazon Certificate Management or more complex Layer 7 routing rules, you can front or replace the NLB with an ALB.
+AWS offers Application Load Balancers (ALBs) and Network Load Balancers (NLBs). <%= vars.company_name %> recommends using NLBs because of the simplicity and security of leaving all encrypted traffic in place until it reaches the GoRouters. If you require Amazon Certificate Management or more complex Layer 7 routing rules, you can front or replace the NLB with an ALB.
 
 #### <a id='subnets'></a> Networks, subnets, and IP spacing planning
 
 When planning networks, subnets, and IP spacing, some things to consider are:
 
-* In AWS, each availability zone (AZ) requires its' own subnet; the first five IPs must be reserved.
+* In AWS, each availability zone (AZ) requires its own subnet; the first five IPs must be reserved.
 
-* Your organization might not have the IP space necessary to deploy <%= vars.app_runtime_abbr %> in a consistent manner. To alleviate this, <%= vars.company_name %> recommends using the `100.64` address space to deploy a NAT instance and router so that the <%= vars.ops_manager %> deployment can use few IP addresses.
+* Your organization might not have the IP space necessary to deploy <%= vars.app_runtime_abbr %> in a consistent manner. To alleviate this, <%= vars.company_name %> recommends using the `100.64` address space to deploy a NAT instance and router so that the <%= vars.ops_manager %> deployment can use fewer IP addresses.
 
-* If you want the front end of <%= vars.app_runtime_abbr %> to be accessible from your corporate network or the services running on <%= vars.app_runtime_abbr %> to be able to access corporate resources, you must either provide routable IPs to your VPC or use NAT.
+* If you want the front end of <%= vars.app_runtime_abbr %> to be accessible from your corporate network, or the services running on <%= vars.app_runtime_abbr %> to be able to access corporate resources, you must either:
+
+    * provide routable IPs to your VPC
+    * use NAT
 
 * If you want a VPC that is only public-facing, no special consideration is necessary for the use of IPs.
 
@@ -61,19 +64,19 @@ When planning networks, subnets, and IP spacing, some things to consider are:
   </tr>
   </thead>
   <tr>
-   <td>Internet ingress</td>
+   <td>internet ingress</td>
    <td>Create the load balancers with Elastic IPs.</td>
   </tr>
   <tr>
-   <td>Internet egress</td>
-   <td>Create the NAT Gateway toward the Internet.</td>
+   <td>internet egress</td>
+   <td>Create the NAT Gateway toward the internet.</td>
   </tr>
   <tr>
-   <td>Corporate ingress</td>
+   <td>corporate ingress</td>
    <td>Create load balancers on your corporate subnet.</td>
   </tr>
   <tr>
-   <td>Corporate egress (for accessing corporate resources)</td>
+   <td>corporate egress (for accessing corporate resources)</td>
    <td>Create the NAT instance on your corporate subnet, or if business requirements dictate, make the entire VPC corporate-routable.</td>
   </tr>
  </table>
@@ -87,39 +90,39 @@ These options are available for choosing your network topology:
 <table class=“table”>
    <thead>
     <tr>
-      <th>Type of rraffic</th>
+      <th>Type of traffic</th>
       <th>Options</th>
     </tr>
   </thead>
      <tr>
-      <td>Internet ingress</td>
+      <td>internet ingress</td>
       <td><ul>
-        <li>Allow Internet ingress by associating load balancers with Elastic IPs.</li>
-        <li>Do not allow Internet ingress.</li>
+        <li>Allow internet ingress by associating load balancers with Elastic IPs.</li>
+        <li>Do not allow internet ingress.</li>
       </ul></td>
     </tr>
     <tr>
-      <td>Internet egress</td>
+      <td>internet egress</td>
       <td>
       <ul>
-        <li>Allow <%= vars.app_runtime_abbr %> to access the Internet through a NAT gateway.</li>
-        <li>Do not allow <%= vars.app_runtime_abbr %> to access the Internet. Use only a corporate network.</li>
+        <li>Allow <%= vars.app_runtime_abbr %> to access the internet through a NAT gateway.</li>
+        <li>Do not allow <%= vars.app_runtime_abbr %> to access the internet. Use only a corporate network.</li>
       </ul>
       </td>
     </tr>
     <tr>
-      <td>Peering</td>
+      <td>peering</td>
       <td><ul>
-        <li>Isolated. This is normally Internet-only facing.</li>
-        <li>Peered with corporate or other VPCs through Transit Gateway.</li>
-        <li>Peered directly with other VPCs and corporate connections.</li>
+        <li>Isolated. This is normally internet-only facing.</li>
+        <li>Peered with corporate or other VPCs through Transit Gateway</li>
+        <li>Peered directly with other VPCs and corporate connections</li>
       </ul></td>
     </tr>
     <tr>
-      <td>Corporate peering</td>
+      <td>corporate peering</td>
       <td><ul>
         <li>SNAT for corporate resources. This requires three corporate IPs.</li>
-        <li>Routable IP addresses for VPC using <code>/20</code> or a larger CIDR block necessary.</li>
+        <li>Routable IP addresses for VPC using <code>/20</code> or a larger CIDR block.</li>
       </ul></td>
     </tr>
   </table>
@@ -127,8 +130,11 @@ These options are available for choosing your network topology:
 ### <a id='rds'></a> RDS
 
 Use a single RDS instance for BOSH and <%= vars.app_runtime_abbr %>. This instance requires several databases.
-For more information, see [Step 3: Director Config Page](../../aws/config-manual.html#pcfaws-om-dirconfig) in _Configuring BOSH Director on AWS_
-and [Creating databases for TAS for VMs](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/<%= vars.dot_major_tas_version %>/tas-for-vms/create-pas-dbs.html).
+For more information, see:
+
+* [Step 3: Director Config Page](../../aws/config-manual.html#pcfaws-om-dirconfig) in _Configuring BOSH Director on AWS_
+
+* [Creating databases for TAS for VMs](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/<%= vars.dot_major_tas_version %>/tas-for-vms/create-pas-dbs.html)
 
 ### <a id='blobstore'></a> Blobstore storage accounts
 
@@ -153,7 +159,7 @@ The following sections describe the reference architecture for a <%= vars.k8s_ru
 
 ### <a id='pks-diagram'></a> Diagram
 
-The following diagram illustrates the reference architecture for <%= vars.k8s_runtime_abbr %> on AWS. The diagram shows the flow and components from the HQ, branch offices, and broader Internet into the VPC Network. Categories of elements in the VPC Network include:
+The following diagram illustrates the reference architecture for <%= vars.k8s_runtime_abbr %> on AWS. The diagram shows the flow and components from the HQ, branch offices, and the broader internet into the VPC Network. Categories of elements in the VPC Network include:
 
 * Infrastructure subnet (with Tanzu Operations Manager, BOSH Director, Jumpbox, NLB interface, NAT GW Interface, and VPC Endpoints)
 * 3 Services subnets
@@ -189,7 +195,10 @@ When planning networks, subnets, and IP spacing, some things to consider are:
 
 * In AWS, each AZ requires its own subnet; the first five IPs must be reserved.
 
-* If you want the front end of <%= vars.k8s_runtime_abbr %> to be accessible from your corporate network or the services running on <%= vars.k8s_runtime_abbr %> to be able to access corporate resources, you must either provide routable IPs to your VPC or use NAT.
+* If you want the front end of <%= vars.k8s_runtime_abbr %> to be accessible from your corporate network, or the services running on <%= vars.k8s_runtime_abbr %> to be able to access corporate resources, you must either:
+
+    * provide routable IPs to your VPC
+    * use NAT
 
 * Create the <%= vars.k8s_runtime_abbr %> subnets that host the Kubernetes cluster VMs with enough IP address capacity to accommodate the number of VMs and clusters you expect to deploy. The reference architecture diagram above shows a `/24` CIDR for the <%= vars.k8s_runtime_abbr %> subnets, which allows for about 250 VMs per AZ. If you expect a larger number of clusters for your organization, consider defining larger subnets, such as `/20`, to make room for future growth.
 
@@ -205,25 +214,25 @@ These options are available for choosing your network topology:
   </tr>
 </thead>
   <tr>
-    <td>Internet ingress</td>
+    <td>internet ingress</td>
     <td><ul>
-        <li>Allow Internet ingress by associating load balancers with Elastic IPs.</li>
-        <li>Do not allow Internet ingress.</li>
+        <li>Allow internet ingress by associating load balancers with Elastic IPs.</li>
+        <li>Do not allow internet ingress.</li>
       </ul></td>
   </tr>
   <tr>
-    <td>Internet egress</td>
+    <td>internet egress</td>
     <td>
       <ul>
-        <li>Allow nodes and pods to access the Internet through a NAT gateway.</li>
-        <li>Do not allow nodes or pods to access the Internet. Use only a corporate network.</li>
+        <li>Allow nodes and pods to access the internet through a NAT gateway.</li>
+        <li>Do not allow nodes or pods to access the internet. Use only a corporate network.</li>
       </ul>
     </td>
   </tr>
   <tr>
     <td>Peering</td>
     <td><ul>
-        <li>Isolated. This is normally Internet-only facing.</li>
+        <li>Isolated. This is normally internet-only facing.</li>
         <li>Peered with corporate or other VPCs through Transit Gateway.</li>
         <li>Peered directly with other VPCs and corporate connections.</li>
       </ul></td>
@@ -232,7 +241,7 @@ These options are available for choosing your network topology:
     <td>Corporate peering</td>
     <td><ul>
         <li>SNAT for corporate resources. This requires three corporate IPs.</li>
-        <li>Routable IP Addresses for VPC using /20 or a larger CIDR block necessary.</li>
+        <li>Routable IP Addresses for VPC using <code>/20</code> or a larger CIDR block.</li>
       </ul></td>
   </tr>
 </table>
@@ -243,6 +252,6 @@ Use a single RDS instance for BOSH. This instance requires a database. For more 
 
 ### <a id='pks-id'></a> Identity management
 
-To create and manage Kubernetes master and worker nodes, use Instance Profiles. For more information, see [Kubernetes cloud provider](https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/<%= vars.current_tkgi_version %>/tkgi/GUID-installing-aws.html#cloud-provider) in _Installing Enterprise <%= vars.k8s_runtime_abbr %> on AWS_.
+To create and manage Kubernetes primary and worker nodes, use Instance Profiles. For more information, see [Kubernetes cloud provider](https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/<%= vars.current_tkgi_version %>/tkgi/GUID-installing-aws.html#cloud-provider) in _Installing Enterprise <%= vars.k8s_runtime_abbr %> on AWS_.
 
 For information about installing the required AWS constructs for <%= vars.k8s_runtime_abbr %>, see [Installing <%= vars.ops_manager %> on AWS](../../install/aws.html).
