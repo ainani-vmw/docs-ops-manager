@@ -174,7 +174,7 @@ In a <%= vars.app_runtime_abbr %> on GCP deployment, the GoRouter receives two t
 
 * Encrypted secure web socket traffic on port 443 that is passed through the TCP WebSockets load balancer
 
-TLS is stopped for HTTPS on the HTTP load balancer, and for WebSockets (WSS) traffic on the GoRouter.
+TLS is terminated for HTTPS on the HTTP load balancer, and for WebSockets (WSS) traffic on the GoRouter.
 
 <%= vars.app_runtime_abbr %> deployments on GCP use two load balancers to handle GoRouter traffic because HTTP load balancers currently do not support WebSockets.
 
