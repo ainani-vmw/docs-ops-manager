@@ -35,7 +35,7 @@ These IaaS-specific topics build on these two common base architectures:
 The following topics address aspects of platform architecture and planning that the <%= vars.ops_manager %>
 reference architectures do not cover:
 
-* [Implementing a multi-foundation <%= vars.k8s_runtime_abbr %> deployment](https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/1.19/tkgi/GUID-nsxt-multi.html)
+* [Implementing a multi-foundation <%= vars.k8s_runtime_abbr %> deployment](https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/<%= vars.current_tkgi_version %>/tkgi/GUID-nsxt-multi.html)
 * [Global DNS load balancers for multi-foundation environments](global-dns-lb.html)
 
 ## <a id='pas-base'></a> <%= vars.app_runtime_abbr %> architecture
@@ -168,7 +168,7 @@ The following table describes the internal component placements shown in the pre
 | <%= vars.ops_manager %> VM | Deployed on one of the subnets. Accessible by fully-qualified domain name (FQDN) or through an optional jumpbox |
 | BOSH Director | Deployed on the infrastructure subnet |
 | Jumpbox       | Optional. Deployed on the infrastructure subnet for accessing <%= vars.k8s_runtime_abbr %> management components such as <%= vars.ops_manager %> and the `kubectl` command line interface |
-| <%= vars.k8s_runtime_abbr %> API | Deployed as a service broker VM on the <%= vars.k8s_runtime_abbr %> services subnet. Handles <%= vars.k8s_runtime_abbr %> API and service adapter requests, and manages <%= vars.k8s_runtime_abbr %> clusters. For more information, see [<%= vars.k8s_runtime_abbr %> Architecture](https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/1.19/tkgi/GUID-control-plane.html). |
+| <%= vars.k8s_runtime_abbr %> API | Deployed as a service broker VM on the <%= vars.k8s_runtime_abbr %> services subnet. Handles <%= vars.k8s_runtime_abbr %> API and service adapter requests, and manages <%= vars.k8s_runtime_abbr %> clusters. For more information, see [<%= vars.k8s_runtime_abbr %> Architecture](https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/<%= vars.current_tkgi_version %>/tkgi/GUID-control-plane.html). |
 | Harbor tile   | Optional container images registry, typically deployed to the services subnet |
 | <%= vars.k8s_runtime_abbr %> Cluster | Deployed to a dynamically-created, dedicated <%= vars.k8s_runtime_abbr %> cluster subnet. Each cluster consists of worker nodes that run the workloads, or apps, and one or more primary nodes. |
 
@@ -200,7 +200,7 @@ Load balancers can be used to manage traffic across primary nodes of a <%= vars.
 
 ### <a id='pks-security'></a> Security
 
-For information about how <%= vars.k8s_runtime_abbr %> implements security, see [Enterprise <%= vars.k8s_runtime_abbr %> Security](https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/1.19/tkgi/GUID-security.html) and [Firewall Ports](https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/1.19/tkgi/GUID-ports-protocols-nsx-t.html).
+For information about how <%= vars.k8s_runtime_abbr %> implements security, see [Enterprise <%= vars.k8s_runtime_abbr %> Security](https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/<%= vars.current_tkgi_version %>/tkgi/GUID-security.html) and [Firewall Ports](https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/<%= vars.current_tkgi_version %>/tkgi/GUID-ports-protocols-nsx-t.html).
 
 ### <a id='pks-domains'></a> Domain names
 
@@ -210,4 +210,4 @@ The wildcard certificate covers both the <%= vars.k8s_runtime_abbr %> API domain
 
 ### <a id='pks-management'></a> Cluster management
 
-For information about managing <%= vars.k8s_runtime_abbr %> clusters, see [Managing clusters](https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/1.19/tkgi/GUID-managing-clusters.html).
+For information about managing <%= vars.k8s_runtime_abbr %> clusters, see [Managing clusters](https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/<%= vars.current_tkgi_version %>/tkgi/GUID-managing-clusters.html).
