@@ -84,11 +84,11 @@ The following table describes how to access VM logs on foundations with <%= vars
 		<td><code>Admin</code></td>
 		<td>Enable system logging in <%= vars.k8s_runtime_abbr %>. For more information, see <em>Host Monitoring</em> in the <%= vars.k8s_runtime_abbr %> installation topic for your IaaS:
 			<ul>
-				<li><a href="https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/1.16/tkgi/GUID-installing-aws.html#syslog">Installing <%= vars.k8s_runtime_abbr %> on AWS</a></li>
-				<li><a href="https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/1.16/tkgi/GUID-installing-azure.html#syslog">Installing <%= vars.k8s_runtime_abbr %> on Azure</a></li>
-				<li><a href="https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/1.16/tkgi/GUID-installing-gcp.html#syslog">Installing <%= vars.k8s_runtime_abbr %> on GCP</a></li>
-				<li><a href="https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/1.16/tkgi/GUID-vsphere-nsxt-index.html">Installing <%= vars.k8s_runtime_abbr %> on vSphere</a></li>
-				<li><a href="https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/1.16/tkgi/GUID-installing-nsx-t.html#syslog">Installing <%= vars.k8s_runtime_abbr %> on vSphere with NSX-T</a></li>
+				<li><a href="https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/1.19/tkgi/GUID-installing-aws.html#syslog">Installing <%= vars.k8s_runtime_abbr %> on AWS</a></li>
+				<li><a href="https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/1.19/tkgi/GUID-installing-azure.html#syslog">Installing <%= vars.k8s_runtime_abbr %> on Azure</a></li>
+				<li><a href="https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/1.19/tkgi/GUID-installing-gcp.html#syslog">Installing <%= vars.k8s_runtime_abbr %> on GCP</a></li>
+				<li><a href="https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/1.19/tkgi/GUID-vsphere-nsxt-index.html">Installing <%= vars.k8s_runtime_abbr %> on vSphere</a></li>
+				<li><a href="https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/1.19/tkgi/GUID-installing-nsx-t.html#syslog">Installing <%= vars.k8s_runtime_abbr %> on vSphere with NSX-T</a></li>
 			</ul>
 		</td>
 		<td></td>
@@ -163,14 +163,14 @@ The following table describes how to access VM metrics on foundations with <%= v
 		<td>Operator</td>
 		<td><code>Admin</code></td>
 		<td>Configure an output plug-in in the <%= vars.k8s_runtime_abbr %> tile. For more information,
-		see <a href="https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/1.16/tkgi/GUID-create-sinks.html">Creating Sink Resources</a> in the <%= vars.k8s_runtime_abbr %> documentation.</td>
+		see <a href="https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/1.19/tkgi/GUID-create-sinks.html">Creating Sink Resources</a> in the <%= vars.k8s_runtime_abbr %> documentation.</td>
 		<td>Component VM Metrics include the master node only.</td>
 	</tr>
 	<tr>
 		<td>Cluster admin</td>
 		<td>The operator defines the role-based access policy for accessing VM metrics.</td>
 		<td>Configure a <code>ClusterMetricSink</code> in the cluster. For more information,
-		see <a href="https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/1.16/tkgi/GUID-create-sinks.html">Creating Sink Resources</a> in the <%= vars.k8s_runtime_abbr %> documentation.</td>
+		see <a href="https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/1.19/tkgi/GUID-create-sinks.html">Creating Sink Resources</a> in the <%= vars.k8s_runtime_abbr %> documentation.</td>
 		<td>
 			<ul>
 				<li>You must configure a <code>ClusterMetricSink</code> for each new cluster.</li>
@@ -267,11 +267,11 @@ The following table describes how to access app container logs on foundations wi
 		<td>Operator</td>
 		<td><code>Admin</code></td>
 		<td>Configure a <code>ClusterSink</code> in the cluster. For more information,
-		see <a href="https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/1.16/tkgi/GUID-create-sinks.html">Creating Sink Resources</a> in the <%= vars.k8s_runtime_abbr %> documentation.</td>
+		see <a href="https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/1.19/tkgi/GUID-create-sinks.html">Creating Sink Resources</a> in the <%= vars.k8s_runtime_abbr %> documentation.</td>
 		<td>
 			<ul>
 				<li>You can send logs from a namespace within a cluster to a log destination by configuring a namespace log <code>Sink</code>. For more information,
-				see <a href="https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/1.16/tkgi/GUID-create-sinks.html">Creating Sink Resources</a> in the <%= vars.k8s_runtime_abbr %> documentation.</li>
+				see <a href="https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/1.19/tkgi/GUID-create-sinks.html">Creating Sink Resources</a> in the <%= vars.k8s_runtime_abbr %> documentation.</li>
 				<li>You must configure a <code>ClusterSink</code> for each new cluster.</li>
 			</ul>
 		</td>
@@ -280,11 +280,11 @@ The following table describes how to access app container logs on foundations wi
 		<td>Cluster admin</td>
 		<td>The operator defines the role-based access policy for accessing app logs.</td>
 		<td>Configure a <code>ClusterSink</code> in the cluster. For more information,
-		see <a href="https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/1.16/tkgi/GUID-create-sinks.html">Creating Sink Resources</a> in the <%= vars.k8s_runtime_abbr %> documentation.</td>
+		see <a href="https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/1.19/tkgi/GUID-create-sinks.html">Creating Sink Resources</a> in the <%= vars.k8s_runtime_abbr %> documentation.</td>
 		<td>
 			<ul>
 				<li>You can send logs from a namespace within a cluster to a log destination by configuring a namespace log <code>Sink</code>. For more information,
-				see <a href="https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/1.16/tkgi/GUID-create-sinks.html">Creating Sink Resources</a> in the <%= vars.k8s_runtime_abbr %> documentation.</li>
+				see <a href="https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/1.19/tkgi/GUID-create-sinks.html">Creating Sink Resources</a> in the <%= vars.k8s_runtime_abbr %> documentation.</li>
 				<li>You must configure a <code>ClusterSink</code> for each new cluster.</li>
 			</ul>
 		</td>
@@ -293,11 +293,11 @@ The following table describes how to access app container logs on foundations wi
 		<td>Developer</td>
 		<td>The operator defines the role-based access policy for accessing app logs.</td>
 		<td>Configure a <code>Sink</code> in the <%= vars.k8s_runtime_abbr %> tile for a cluster namespace. For more information,
-		see <a href="https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/1.16/tkgi/GUID-create-sinks.html">Creating Sink Resources</a> in the <%= vars.k8s_runtime_abbr %> documentation.</td>
+		see <a href="https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/1.19/tkgi/GUID-create-sinks.html">Creating Sink Resources</a> in the <%= vars.k8s_runtime_abbr %> documentation.</td>
 		<td>
 			<ul>
 				<li>You can send logs from a namespace within a cluster to a log destination by configuring a namespace log <code>Sink</code>. For more information,
-				see <a href="https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/1.16/tkgi/GUID-create-sinks.html">Creating Sink Resources</a> in the <%= vars.k8s_runtime_abbr %> documentation.</li>
+				see <a href="https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/1.19/tkgi/GUID-create-sinks.html">Creating Sink Resources</a> in the <%= vars.k8s_runtime_abbr %> documentation.</li>
 				<li>You must configure a <code>ClusterSink</code> for each new cluster.</li>
 				<li>You must provide your own access policy.</li>
 				<li>Developers might not have permissions to configure a <code>ClusterSink</code>. Operators must define an access policy that allows developers to create a <code>ClusterSink</code>.</li>
@@ -381,7 +381,7 @@ The following table describes how to access app container metrics on foundations
 		<td>Operator</td>
 		<td><code>Admin</code></td>
 		<td>Configure a <code>ClusterMetricSink</code> in the cluster. For more information,
-		see <a href="https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/1.16/tkgi/GUID-create-sinks.html">Creating Sink Resources</a> in the <%= vars.k8s_runtime_abbr %> documentation.</td>
+		see <a href="https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/1.19/tkgi/GUID-create-sinks.html">Creating Sink Resources</a> in the <%= vars.k8s_runtime_abbr %> documentation.</td>
 		<td>
 			<ul>
 				<li>You must configure a <code>ClusterMetricSink</code> for each new cluster.</li>
@@ -393,7 +393,7 @@ The following table describes how to access app container metrics on foundations
 		<td>Cluster admin</td>
 		<td>The operator defines the role-based access policy for accessing app metrics.</td>
 		<td>Configure a <code>ClusterMetricSink</code> in the cluster. For more information,
-		see <a href="https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/1.16/tkgi/GUID-create-sinks.html">Creating Sink Resources</a> in the <%= vars.k8s_runtime_abbr %> documentation.</td>
+		see <a href="https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/1.19/tkgi/GUID-create-sinks.html">Creating Sink Resources</a> in the <%= vars.k8s_runtime_abbr %> documentation.</td>
 		<td>
 			<ul>
 				<li>You must configure a <code>ClusterMetricSink</code> for each new cluster.</li>
@@ -405,7 +405,7 @@ The following table describes how to access app container metrics on foundations
 		<td>Developer</td>
 		<td>The operator defines the role-based access policy for accessing app metrics.</td>
 		<td>Configure a <code>MetricSink</code> in the <%= vars.k8s_runtime_abbr %> tile for a cluster namespace. For more information,
-		see <a href="https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/1.16/tkgi/GUID-create-sinks.html">Creating Sink Resources</a> in the <%= vars.k8s_runtime_abbr %> documentation.
+		see <a href="https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/1.19/tkgi/GUID-create-sinks.html">Creating Sink Resources</a> in the <%= vars.k8s_runtime_abbr %> documentation.
 		</td>
 		<td>
 			<ul>

@@ -179,9 +179,9 @@ You can use AWS Route 53 for DNS resolution to host your <%= vars.k8s_runtime_ab
 
 You can configure a front end load balancer to enable public access to the <%= vars.k8s_runtime_abbr %> API VM.
 
-For each <%= vars.k8s_runtime_abbr %> cluster, <%= vars.company_name %> recommends creating a load balancer for the corresponding primary node or nodes. For more information, see [Creating and Configuring an AWS Load Balancer for <%= vars.k8s_runtime_abbr %> Clusters](https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/1.16/tkgi/GUID-aws-cluster-load-balancer.html).
+For each <%= vars.k8s_runtime_abbr %> cluster, <%= vars.company_name %> recommends creating a load balancer for the corresponding primary node or nodes. For more information, see [Creating and Configuring an AWS Load Balancer for <%= vars.k8s_runtime_abbr %> Clusters](https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/1.19/tkgi/GUID-aws-cluster-load-balancer.html).
 
-For deployed workloads, Kubernetes can automatically create load balancers when applying the service definition to the app instances. For more information, see [Deploying and Exposing Basic Workloads](https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/1.16/tkgi/GUID-deploy-workloads.html).
+For deployed workloads, Kubernetes can automatically create load balancers when applying the service definition to the app instances. For more information, see [Deploying and Exposing Basic Workloads](https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/1.19/tkgi/GUID-deploy-workloads.html).
 
 #### <a id='pks-subnets'></a> Networks, subnets, and IP spacing planning
 
@@ -243,6 +243,6 @@ Use a single RDS instance for BOSH. This instance requires a database. For more 
 
 ### <a id='pks-id'></a> Identity management
 
-To create and manage Kubernetes master and worker nodes, use Instance Profiles. For more information, see [Kubernetes cloud provider](https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/1.16/tkgi/GUID-installing-aws.html#cloud-provider) in _Installing Enterprise <%= vars.k8s_runtime_abbr %> on AWS_.
+To create and manage Kubernetes master and worker nodes, use Instance Profiles. For more information, see [Kubernetes cloud provider](https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/1.19/tkgi/GUID-installing-aws.html#cloud-provider) in _Installing Enterprise <%= vars.k8s_runtime_abbr %> on AWS_.
 
 For information about installing the required AWS constructs for <%= vars.k8s_runtime_abbr %>, see [Installing <%= vars.ops_manager %> on AWS](../../install/aws.html).
