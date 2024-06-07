@@ -144,9 +144,9 @@ The following table describes how to access VM metrics on foundations with <%= v
 
 ### <a id='vm-metrics-tkgi'></a> Access VM metrics on <%= vars.k8s_runtime_abbr %>
 
-For <%= vars.k8s_runtime_abbr %> deployments, VM metrics include metrics for the master and worker nodes.
+For <%= vars.k8s_runtime_abbr %> deployments, VM metrics include metrics for the primary and worker nodes.
 
-<p> VM metrics are available on <%= vars.k8s_runtime_abbr %> v1.5 and later.</p>
+VM metrics are available on <%= vars.k8s_runtime_abbr %> v1.5 and later.
 
 The following table describes how to access VM metrics on foundations with <%= vars.k8s_runtime_abbr %> based on user role and permissions.
 
@@ -164,7 +164,7 @@ The following table describes how to access VM metrics on foundations with <%= v
 		<td><code>Admin</code></td>
 		<td>Configure an output plug-in in the <%= vars.k8s_runtime_abbr %> tile. For more information,
 		see <a href="https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/<%= vars.current_tkgi_version %>/tkgi/GUID-create-sinks.html">Creating Sink Resources</a> in the <%= vars.k8s_runtime_abbr %> documentation.</td>
-		<td>Component VM Metrics include the master node only.</td>
+		<td>Component VM Metrics include the primary node only.</td>
 	</tr>
 	<tr>
 		<td>Cluster Admin</td>
