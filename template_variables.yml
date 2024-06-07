@@ -24,6 +24,9 @@ template_variables:
   v_major_tas_version: "v4.0"
   dot_major_tas_version: "4.0"
 
+  # Associated Tanzu Kubernetes Grid Integrated Edition version
+  current_tkgi_version: "1.19"
+
   gtm_account_id: GTM-MM86KCJ
 
 # Tanzu product variables - v2.9 and later
