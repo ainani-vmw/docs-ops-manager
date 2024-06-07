@@ -153,7 +153,7 @@ For recommendations about scaling <%= vars.app_runtime_abbr %> for different dep
 
 ## <a id='pks-base'></a> <%= vars.k8s_runtime_abbr %> Architecture
 
-The following diagram illustrates a base architecture for <%= vars.k8s_runtime_abbr %> and how its network topology places and replicates <%= vars.k8s_runtime_abbr %> components across subnets and AZs:
+The following diagram illustrates a base architecture for <%= vars.k8s_runtime_first %> and how its network topology places and replicates <%= vars.k8s_runtime_abbr %> components across subnets and AZs:
 
 ![TKGI Base Deployment Topology. Each AZ includes Infrastructure subnet, Services subnet, and PKS Cluster Subnets, which are dynamically generated.](images/v2/export/PKS_Base.png)
 
@@ -174,11 +174,11 @@ The table below describes the internal component placements shown in the diagram
 
 ### <a id='pks-network'></a> Networks
 
-These sections describe <%= vars.company_name %>'s recommendations for defining your networks and load-balancing their incoming requests.
+These sections describe <%= vars.company_name %>'s recommendations for defining your networks and load-balancing incoming requests.
 
 #### <a id='pks-subnets'></a> Subnets requirements
 
-<%= vars.k8s_runtime_abbr %> requires two defined networks to host the main elements:
+<%= vars.k8s_runtime_abbr %> requires these defined networks to host the main elements:
 
 * Infrastructure subnet - `/24`<br>This subnet contains VMs that require access only for Platform Administrators, such as the <%= vars.ops_manager %> VM, the BOSH Director VM, and an optional jumpbox.
 
@@ -188,11 +188,11 @@ These sections describe <%= vars.company_name %>'s recommendations for defining 
 
 #### <a id='pks-lb'></a> Load balancing
 
-Load balancers can be used to manage traffic across master nodes of a <%= vars.k8s_runtime_abbr %> cluster or for deployed workloads. For more information on how to configure load balancers for <%= vars.k8s_runtime_abbr %>, see the corresponding section in the [reference architecture for your IaaS](#topics).
+Load balancers can be used to manage traffic across primary nodes of a <%= vars.k8s_runtime_abbr %> cluster or for deployed workloads. For information about how to configure load balancers for <%= vars.k8s_runtime_abbr %>, see the corresponding section in the [reference architecture for your IaaS](#topics).
 
 ### <a id='pks-ha'></a> High availability
 
-<%= vars.k8s_runtime_abbr %> has no inherent HA capabilities to design for. Make the best efforts to have HA design at the IaaS, storage, power, and access layers to support <%= vars.k8s_runtime_abbr %>.
+<%= vars.k8s_runtime_abbr %> has no inherent HA capabilities to design for. Make the best efforts to design HA at the IaaS, storage, power, and access layers to support <%= vars.k8s_runtime_abbr %>.
 
 ### <a id='pks-storage'></a> Storage
 
@@ -200,7 +200,7 @@ Load balancers can be used to manage traffic across master nodes of a <%= vars.k
 
 ### <a id='pks-security'></a> Security
 
-For information about how <%= vars.k8s_runtime_abbr %> implements security, see [Enterprise <%= vars.k8s_runtime_abbr %> Security](https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/1.16/tkgi/GUID-security.html) and [Firewall Ports](https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/1.16/tkgi/GUID-ports-protocols-nsx-t.html).
+For information about how <%= vars.k8s_runtime_abbr %> implements security, see [Enterprise <%= vars.k8s_runtime_abbr %> Security](https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/1.19/tkgi/GUID-security.html) and [Firewall Ports](https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/1.19/tkgi/GUID-ports-protocols-nsx-t.html).
 
 ### <a id='pks-domains'></a> Domain names
 
@@ -210,4 +210,4 @@ The wildcard certificate covers both the <%= vars.k8s_runtime_abbr %> API domain
 
 ### <a id='pks-management'></a> Cluster management
 
-For information about managing <%= vars.k8s_runtime_abbr %> clusters, see [Managing clusters](https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/1.16/tkgi/GUID-managing-clusters.html).
+For information about managing <%= vars.k8s_runtime_abbr %> clusters, see [Managing clusters](https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/1.19/tkgi/GUID-managing-clusters.html).
