@@ -5,7 +5,7 @@ owner: OpsMan
 
 This topic provides an overview of how you can use custom certificate authorities (CAs) in your <%= vars.ops_manager_first %> deployment.
 
-To secure traffic in your <%= vars.ops_manager %> deployment, you must provide a CA to issue digital certificates. This can be either an <%= vars.ops_manager %>-generated or custom CA. When you add and activate a new CA, a digital certificate is issued to BOSH Director. BOSH Director then passes the certificate to other components in your <%= vars.ops_manager %> deployment.
+To secure traffic in your <%= vars.ops_manager %> deployment, you must provide a CA to issue digital certificates. This can be either a <%= vars.ops_manager %>-generated or custom CA. When you add and activate a new CA, a digital certificate is issued to BOSH Director. BOSH Director then passes the certificate to other components in your <%= vars.ops_manager %> deployment.
 
 <%= vars.company_name %> recommends you supply a CA from a trusted provider when using a production environment. While you can create your own custom CAs if necessary, a trusted CA is more secure because it has been authenticated by the trusted entities permitted to issue them.
 

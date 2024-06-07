@@ -8,12 +8,11 @@ This topic describes the Azure reference architecture for <%= vars.ops_manager_f
 For additional requirements and installation instructions for running <%= vars.ops_manager %> on Azure, see
 [Installing <%= vars.ops_manager %> on Azure](../../install/azure.html).
 
-Azure Virtual Data Center (VDC) uses a hub and spoke model for extending on-premises data centers. For more
+Azure Virtual Data Center (VDC) uses a hub and spoke model for extending on-premise data centers. For more
 information about VDC, see the [Azure Virtual Datacenter e-book](https://azure.microsoft.com/en-us/resources/azure-virtual-datacenter/).
 
 When you install <%= vars.ops_manager %>, you can use this model to place resources in resource groups.
-For example, an
-<%= vars.ops_manager %> installation contains:
+For example, a <%= vars.ops_manager %> installation contains:
 
 * **Hub**:
   * A central IT resource group included in Azure VDC setup. This is where you define firewall, access control, and
@@ -67,7 +66,7 @@ exfiltration.
 For your domains, use a sub-zone of an Azure DNS zone.
 
 Azure DNS supports DNS delegation, which allows sub-level domains to be hosted within Azure. For example, a company
-domain of `example.com` has an <%= vars.ops_manager %> zone in Azure DNS of `pcf.example.com`.
+domain of `example.com` has a <%= vars.ops_manager %> zone in Azure DNS of `pcf.example.com`.
 
 Azure DNS does not support recursion. To properly configure Azure DNS:
 
@@ -129,7 +128,7 @@ For additional guidance depending on your use case, see the following table:
   </tr>
   <tr>
     <td>Existing foundation in AZ-enabled region</td>
-    <td>Migrate to a new <%= vars.ops_manager %> foundation, or to an <%= vars.ops_manager %> v2.5.3 or later foundation
+    <td>Migrate to a new <%= vars.ops_manager %> foundation, or to a <%= vars.ops_manager %> v2.5.3 or later foundation
         so that you can use AZs. These existing foundations, especially those using older families of VMs such as
         <code>DS_v2</code>, risk running out of capacity as they scale.
     </td>
