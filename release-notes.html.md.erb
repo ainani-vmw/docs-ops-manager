@@ -26,6 +26,8 @@ Provider?](https://www.cloudfoundry.org/certified-platforms-how-to/) on the Clou
 
 **Release Date:** May 24, 2024
 
+- **[Known Issue]** Usage of `additional_cloud_properties` can unintentionally mutate credentials causing Apply Changes to fail.
+- **[Known Issue]** Configuring NSX-T with Certificate Authentication on vSphere results in CPI error "The URL https://<VCENTER_URL>/sdk/vimService does not have a valid SSL certificate" causing Apply Changes to fail.
 - **[Bug Fix]** The correct rotation procedure is now recommended for Antrea certificates in TKGI
 - **[Bug Fix]** Clean up sockets after crash to prevent Support Bundle from failing to generate
 - **[Bug Fix]** Fix links for special KB certificate rotation procedures
