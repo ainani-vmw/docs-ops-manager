@@ -55,11 +55,11 @@ The following table describes the internal component placements shown in the pre
 | <%= vars.ops_manager %> VM | Deployed on one of the three public subnets. Accessible by fully-qualified domain name (FQDN) or through an optional jumpbox. |
 | BOSH Director | Deployed on the infrastructure subnet. |
 | Jumpbox | Optional. Deployed on the infrastructure subnet for accessing <%= vars.app_runtime_abbr %> management components such as <%= vars.ops_manager %> and the Cloud Foundry Command Line Interface (cf CLI). |
-| GoRouters (HTTP routers in <%= vars.ops_manager %>) | Deployed on all three <%= vars.app_runtime_abbr %> subnets, one per AZ. Accessed through the HTTP, HTTPS, and SSL load balancers. |
+| Gorouters (HTTP routers in <%= vars.ops_manager %>) | Deployed on all three <%= vars.app_runtime_abbr %> subnets, one per AZ. Accessed through the HTTP, HTTPS, and SSL load balancers. |
 | Diego Brain | Deployed on all three <%= vars.app_runtime_abbr %> subnets, one per AZ. The Diego Brain component is required, but SSH container access support through the Diego Brain is optional, and enabled through the SSH load balancers. |
 | TCP routers | Optional. Deployed on all three <%= vars.app_runtime_abbr %> subnets, one per AZ, to support TCP routing. |
 | Service tiles | Service brokers and shared services instances are deployed to the Services subnet. Dedicated on-demand service instances are deployed to an on-demand services subnet. |
-| Isolation segments | Deployed on an isolation segment subnet. Includes Diego Cells and GoRouters for running and accessing apps hosted within isolation segments. |
+| Isolation segments | Deployed on an isolation segment subnet. Includes Diego Cells and Gorouters for running and accessing apps hosted within isolation segments. |
 
 ### <a id='pas-network'></a> Networks
 
@@ -85,13 +85,13 @@ The following sections describe <%= vars.app_runtime_abbr %>'s recommendations f
 
 #### <a id='pas-lb'></a> Load balancing
 
-Any <%= vars.app_runtime_abbr %> installation needs a suitable load balancer to send incoming HTTP, HTTPS, SSH, and SSL traffic to its GoRouters and app containers. All installations approaching production-level use rely on external load balancing from hardware appliance vendors or other network-layer solutions.
+Any <%= vars.app_runtime_abbr %> installation needs a suitable load balancer to send incoming HTTP, HTTPS, SSH, and SSL traffic to its Gorouters and app containers. All installations approaching production-level use rely on external load balancing from hardware appliance vendors or other network-layer solutions.
 
 The load balancer can also perform Layer 4 or Layer 7 load balancing functions. SSL can be terminated at the load balancer or used as a pass-through to the Gorouter.
 
 Common deployments of load balancing in <%= vars.app_runtime_abbr %> are:
 
-* HTTP/HTTPS traffic to and from GoRouters
+* HTTP/HTTPS traffic to and from Gorouters
 
 * TCP traffic to and from TCP routers
 
