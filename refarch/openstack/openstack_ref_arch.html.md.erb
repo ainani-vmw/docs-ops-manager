@@ -24,7 +24,7 @@ a <%= vars.ops_manager %> reference architecture describes a proven approach for
 
 ## <a id='base_components'></a> Base reference architecture components
 
-The following table lists the components that are part of a base reference architecture deployment on OpenStack with three AZs:
+The following table lists the components of a base reference architecture deployment on OpenStack with three AZs:
 
 <table class=“table”>
 <thead>
@@ -35,7 +35,7 @@ The following table lists the components that are part of a base reference archi
     <td><strong>Domains and DNS</strong></td>
     <td>Domain zones and routes in use by the reference architecture include:<br><br>
       <ul>
-         <li>Zones for *.apps and *.sys (required)</li>
+         <li>Zones for <code>*.apps</code> and <code>*.sys</code> (required)</li>
          <li>A route for <%= vars.ops_manager %> (required)</li>
          <li>A route for Doppler (required)</li>
          <li>A route for Loggregator (required)</li>
@@ -89,7 +89,7 @@ The following table lists the components that are part of a base reference archi
   	<td><%= vars.company_name %> recommends two service accounts: one for OpenStack "paving," and the other for <%= vars.ops_manager %> and BOSH.<br><br>
       <ul>
         <li><strong>Admin account:</strong> Concourse uses this account to provision required OpenStack resources as well as a Keystone service account.</li>
-  		  <li><strong>Keystone service account:</strong> This service account is automatically provisioned with restricted access only to resources needed by <%= vars.ops_manager %> and BOSH.
+  		  <li><strong>Keystone service account:</strong> This service account is automatically provisioned with access restricted to only resources needed by <%= vars.ops_manager %> and BOSH.
       </ul>
   	 </td>
   </tr>
@@ -102,6 +102,7 @@ The following table lists the components that are part of a base reference archi
 ## <a id='openstack_components'></a> OpenStack objects
 
 The following table lists the network objects in this reference architecture:
+
 <table class=“table”>
 <thead>
   <tr>
@@ -130,7 +131,7 @@ The following table lists the network objects in this reference architecture:
         <li>1 x (/20) <strong>Services</strong> (VMware Tanzu SQL, VMware Tanzu RabbitMQ, and Spring Cloud Services for VMware Tanzu, etc.)</li>
         <li>1 x (/24) <strong>On-demand services</strong> (various)</li>
       </ul>
-      An Internet-facing network is also required:
+      An internet-facing network is also required:
       <ul>
         <li>One <strong>Public</strong> network.<br/>
       </ul>
@@ -140,16 +141,16 @@ The following table lists the network objects in this reference architecture:
   </tr>
   <tr>
     <td><strong>Routers</strong></td>
-    <td>This reference architecture requires one router attached to all networks:
+    <td>One router attached to all networks:
     	<ul>
-    	   <li><strong>VirtualRouter:</strong> This router table enables the ingress and egress routes to and from the Internet to the project networks and provides SNAT services.</li>
+    	   <li><strong>VirtualRouter:</strong> This router table enables the ingress and egress routes to and from the internet to the project networks and provides SNAT services.</li>
     	</ul>
     </td>
     <td>1</td>
   </tr>
   <tr>
     <td><strong>Security groups</strong></td>
-    <td>The reference architecture requires one Security Groups. The following table describes the Security Group ingress rules:
+    <td>The reference architecture requires one Security Group. The following table describes the Security Group ingress rules:
     <table class=“table”>
       <thead>
     	<tr>
@@ -179,10 +180,10 @@ The following table lists the network objects in this reference architecture:
     		<td>ALL</td>
     		<td>VPC_CIDR</td>
     		<td>ALL</td>
-    		<td>Open up connections among BOSH-deployed VMs</td>
+    		<td>To open connections among BOSH-deployed VMs</td>
     	</tr>
     </table>
-    Additional security groups might be needed which are specific to your chosen load balancing solution.
+    Additional security groups might be needed, specific to your chosen load balancing solution.
     </td>
     <td>5</td>
   </tr>
@@ -234,7 +235,7 @@ The following table lists the network objects in this reference architecture:
   </tr>
   <tr>
     <td><strong>Jumpbox</strong></td>
-    <td>Optional. Provides a way of accessing different network components. For example, you can configure it with your own permissions and then set it up to access to VMware Tanzu network to download tiles. Using a jumpbox is particularly useful in IaaSes where the <%= vars.ops_manager %> VM does not have a public IP address. In these cases, you can SSH into the <%= vars.ops_manager %> VM or any other component through the jumpbox.
+    <td>Optional. Provides a way of accessing different network components. For example, you can configure it with your own permissions, and then set it up to access to VMware Tanzu network to download tiles. Using a jumpbox is particularly useful in IaaSes where the <%= vars.ops_manager %> VM does not have a public IP address. In these cases, you can SSH into the <%= vars.ops_manager %> VM or any other component through the jumpbox.
     </td>
     <td>1</td>
   </tr>
