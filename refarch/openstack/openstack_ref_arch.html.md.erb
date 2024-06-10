@@ -126,10 +126,10 @@ The following table lists the network objects in this reference architecture:
     <td><strong>Networks</strong></td>
     <td>The reference architecture requires these Tenant Networks:
       <ul>
-        <li>1 x (/24) <strong>Infrastructure</strong> (<%= vars.ops_manager %>, BOSH Director, Jumpbox).</li>
-        <li>1 x (/20) <strong><%= vars.app_runtime_abbr %></strong> (Gorouters, Diego Cells, Cloud Controllers, etc.).</li>
-        <li>1 x (/20) <strong>Services</strong> (VMware Tanzu SQL, VMware Tanzu RabbitMQ, and Spring Cloud Services for VMware Tanzu, etc.)</li>
-        <li>1 x (/24) <strong>On-demand services</strong> (various)</li>
+        <li>1 x (<code>/24</code>) <strong>Infrastructure</strong> (<%= vars.ops_manager %>, BOSH Director, Jumpbox).</li>
+        <li>1 x (<code>/20</code>) <strong><%= vars.app_runtime_abbr %></strong> (Gorouters, Diego Cells, Cloud Controllers, etc.).</li>
+        <li>1 x (<code>/20</code>) <strong>Services</strong> (VMware Tanzu SQL, VMware Tanzu RabbitMQ, and Spring Cloud Services for VMware Tanzu, etc.)</li>
+        <li>1 x (<code>/24</code>) <strong>On-demand services</strong> (various)</li>
       </ul>
       An internet-facing network is also required:
       <ul>
