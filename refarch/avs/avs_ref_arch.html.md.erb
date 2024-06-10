@@ -82,11 +82,11 @@ For more information about DNS requirements for <%= vars.app_runtime_abbr %>, se
 
 The load balancing requirements and recommendations for <%= vars.app_runtime_abbr %> on AVS with NSX-T deployments are:
 
-* You must configure NSX-T load balancers for the GoRouters.
+* You must configure NSX-T load balancers for the Gorouters.
   * The domains for the <%= vars.app_runtime_abbr %> system and apps must resolve to the load balancer VIP.
   * You must assign either a private or a public IP address assigned to the domains for the <%= vars.app_runtime_abbr %> system and apps.
 
-* Any TCP GoRouters and SSH Proxies within the platform also require NSX-T load balancers.
+* Any TCP Gorouters and SSH Proxies within the platform also require NSX-T load balancers.
 
 * Layer 4 and Layer 7 NSX-T load balancers are created automatically during app deployment.
 

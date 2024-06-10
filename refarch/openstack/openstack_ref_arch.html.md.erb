@@ -54,14 +54,14 @@ The following table lists the components of a base reference architecture deploy
   </tr>
   <tr>
     <td><strong>Application load balancer</strong></td>
-    <td>Required. Load balancer that handles incoming HTTP, HTTPS, TCP, and SSL traffic and forwards them to the GoRouters. Load balancers are outside the scope of this topic.</td>
+    <td>Required. Load balancer that handles incoming HTTP, HTTPS, TCP, and SSL traffic and forwards them to the Gorouters. Load balancers are outside the scope of this topic.</td>
   </tr>
   <tr>
     <td><strong>SSH load balancer</strong></td>
     <td>Optional. Load balancer that provides SSH access to app containers for developers. Load balancers are outside the scope of this topic.</td>
   </tr>
   <tr>
-    <td><strong>GoRouters</strong></td>
+    <td><strong>Gorouters</strong></td>
     <td>Accessed through the Application Load Balancer. Deployed on the <%= vars.app_runtime_abbr %> network, one per AZ.</td>
   </tr>
   <tr>
@@ -127,7 +127,7 @@ The following table lists the network objects in this reference architecture:
     <td>The reference architecture requires these Tenant Networks:
       <ul>
         <li>1 x (/24) <strong>Infrastructure</strong> (<%= vars.ops_manager %>, BOSH Director, Jumpbox).</li>
-        <li>1 x (/20) <strong><%= vars.app_runtime_abbr %></strong> (GoRouters, Diego Cells, Cloud Controllers, etc.).</li>
+        <li>1 x (/20) <strong><%= vars.app_runtime_abbr %></strong> (Gorouters, Diego Cells, Cloud Controllers, etc.).</li>
         <li>1 x (/20) <strong>Services</strong> (VMware Tanzu SQL, VMware Tanzu RabbitMQ, and Spring Cloud Services for VMware Tanzu, etc.)</li>
         <li>1 x (/24) <strong>On-demand services</strong> (various)</li>
       </ul>
@@ -189,7 +189,7 @@ The following table lists the network objects in this reference architecture:
   </tr>
   <tr>
     <td><strong>Load Balancers</strong></td>
-    <td><%= vars.ops_manager %> on OpenStack requires a load balancer, which can be configured with multiple listeners to forward HTTP, HTTPS, and TCP traffic. <%= vars.company_name %> recommends two load balancers: one to forward the traffic to the GoRouters, <code>AppsLB</code>; and the other to forward the traffic to the Diego Brain SSH proxy, <code>SSHLB</code>.
+    <td><%= vars.ops_manager %> on OpenStack requires a load balancer, which can be configured with multiple listeners to forward HTTP, HTTPS, and TCP traffic. <%= vars.company_name %> recommends two load balancers: one to forward the traffic to the Gorouters, <code>AppsLB</code>; and the other to forward the traffic to the Diego Brain SSH proxy, <code>SSHLB</code>.
     <br><br>
     The following table describes the required listeners for each load balancer:
     <table class=“table”>
@@ -207,14 +207,14 @@ The following table lists the network objects in this reference architecture:
     			<td>gorouter/80</td>
     			<td>80</td>
     			<td>HTTP</td>
-    			<td>Forward traffic to GoRouters
+    			<td>Forward traffic to Gorouters
     		</tr>
     		<tr>
     			<td>AppsLB</td>
     			<td>gorouter/80</td>
     			<td>443</td>
     			<td>HTTPS</td>
-    			<td>SSL termination and forward traffic to GoRouters</td>
+    			<td>SSL termination and forward traffic to Gorouters</td>
     		</tr>
     		<tr>
     			<td>SSHLB</td>
@@ -226,7 +226,7 @@ The following table lists the network objects in this reference architecture:
     	</table>
     Each load balancer needs a check to validate the health of the back end instances:
       <ul>
-    	   <li><code>AppsLB</code> checks the health on GoRouter port 80 with TCP.</li>
+    	   <li><code>AppsLB</code> checks the health on Gorouter port 80 with TCP.</li>
     	   <li><code>SSHLB</code> checks the health on Diego Brain port 2222 with TCP.</li>
       </ul>
       <p> In many cases, the load balancers are provided as an "under the cloud" service that is shared across projects.</p>
