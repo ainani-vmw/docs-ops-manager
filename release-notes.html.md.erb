@@ -26,6 +26,8 @@ Provider?](https://www.cloudfoundry.org/certified-platforms-how-to/) on the Clou
 
 **Release Date:** May 23, 2024
 
+- **[Known Issue]** Usage of `additional_cloud_properties` can unintentionally mutate credentials causing Apply Changes to fail.
+- **[Known Issue]** Configuring NSX-T with Certificate Authentication on vSphere results in CPI error "The URL https://<VCENTER_URL>/sdk/vimService does not have a valid SSL certificate" causing Apply Changes to fail.
 - **[Feature]** Add support for Tiles to access BOSH read-only credentials.
 - **[Feature]** Show a warning when configuring Ops Manager with an export older than 24 hours.
 - **[Bug Fix]** Clean up sockets after Ops Manager crash to prevent Support Bundle from failing to generate.
