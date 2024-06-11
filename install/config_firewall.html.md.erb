@@ -9,14 +9,14 @@ This topic describes how to configure your firewall for <%= vars.ops_manager_fir
 
 <%= vars.ops_manager_first %> and <%= vars.app_runtime_first %> require the following open TCP ports:
 
-* **25555:** Routes from <%= vars.ops_manager %> VM to the BOSH Director.
-* **443:** If configured, routes to your own load balancer.
-* **80:** If configured, routes to your own load balancer.
-* **8844:** Routes from <%= vars.ops_manager %> VM to BOSH CredHub.
-* **8443:** Routes from <%= vars.ops_manager %> VM to BOSH Director UAA.
-* **6868:** Routes to the BOSH Agent.
-* **2222:** Necessary for using App SSH.
-* **25595:** Routes from the Traffic Controller to the BOSH Director, to enable sending BOSH health metrics to the Firehose.
+* **25555:** Routes from <%= vars.ops_manager %> VM to the BOSH Director
+* **443:** If configured, routes to your own load balancer
+* **80:** If configured, routes to your own load balancer
+* **8844:** Routes from <%= vars.ops_manager %> VM to BOSH CredHub
+* **8443:** Routes from <%= vars.ops_manager %> VM to BOSH Director UAA
+* **6868:** Routes to the BOSH Agent
+* **2222:** Necessary for using App SSH
+* **25595:** Routes from the Traffic Controller to the BOSH Director, to enable sending BOSH health metrics to the Firehose
 * **For vSphere Only:** <%= partial '../common/vsphere-firewall-ports' %>
 
 If you want to use an external NTP server, UDP port `123` must be open.
@@ -24,11 +24,13 @@ If you want to use an external NTP server, UDP port `123` must be open.
 For more information about required ports for additional installed products, see
 [Routing Network Communications](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/<%= vars.dot_major_tas_version %>/tas-for-vms/networking-routing-network-paths.html).
 
-### <a id='example'></a> Example: Configure firewall with iptables
+### <a id='example'></a> Example: Configure firewall with `iptables'
 
 The following example uses `iptables` commands to configure a firewall.
 
-<p> <code>GATEWAY_EXTERNAL_IP</code> is a placeholder. Replace this value with your <code>PUBLIC_IP</code>.</p>
+<p class="note">
+<span class="note__title">Note</span>
+<code>GATEWAY_EXTERNAL_IP</code> is a placeholder. Replace this value with your <code>PUBLIC_IP</code>.</p>
 
 1. Open `/etc/sysctl.conf`, a file that contains configurations for Linux kernel settings, by running:
 
@@ -90,7 +92,7 @@ The following example uses `iptables` commands to configure a firewall.
             --to $VMWARETANZU_IP:80
   	  ```
 
-1. Save the iptables by running:
+1. Save the `iptables` by running:
 
     ```
     service iptables save
@@ -106,16 +108,16 @@ When you install <%= vars.ops_manager %> in an environment that uses a strong fi
 
 To verify that component VMs can correctly resolve DNS entries:
 
-1. SSH into the <%= vars.ops_manager %> VM by following the procedure in [Log Into the <%= vars.ops_manager %> VM with SSH](ssh-login.html#ssh-by-iaas) in
-_Logging Into <%= vars.ops_manager %> VMs with SSH_.
+1. SSH into the <%= vars.ops_manager %> VM by following the procedure in [Log Into the <%= vars.ops_manager %> VM with SSH](ssh-login.html#ssh-by-iaas).
 
-1. Run any of the following network administration commands with the IP address of the VM:
+2. Run any of the following network administration commands with the IP address of the VM:
+
   * `nslookup`
   * `dig`
   * `host`
   * The appropriate `traceroute` command for your OS.
 
-1. Review the output of the command and fix any blocked routes. If the output displays an error message, review the firewall logs to determine which blocked
+3. Review the output of the command and fix any blocked routes. If the output displays an error message, review the firewall logs to determine which blocked
 route or routes you need to clear.
 
 1. Repeat steps 1 through 3 with the BOSH Director VM.
