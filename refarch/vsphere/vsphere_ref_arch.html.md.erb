@@ -178,67 +178,6 @@ For information about security requirements and recommendations for <%= vars.app
 For more information about blobstore storage requirements and recommendations,
 see [Configure file storage](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/<%= vars.dot_major_tas_version %>/tas-for-vms/configuring.html#file-storage) in _Configuring <%= vars.app_runtime_abbr %> for Upgrades_.
 
-### <a id='pas-nsx-t-networking'></a> Networking
-
-For information about installing TAS with NSX-T,
-see [Deploying <%= vars.app_runtime_abbr %> with NSX-T networking](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/<%= vars.dot_major_tas_version %>/tas-for-vms/vsphere-nsx-t.html).
-
-#### <a id='pas-nsx-v-ip-spacing'></a> Networks, subnets, and IP address spacing
-
-For information about network, subnet, and IP address space planning requirements and recommendations, see [Required subnets](../index.html#pas-network) in _Platform Architecture and Planning Overview_.
-
-### <a id='pas-nsx-v-ha'></a> High availability
-
-For information about HA requirements and recommendations for <%= vars.app_runtime_abbr %> on vSphere, see [High Availability](../index.html#pas-ha) in _Platform Architecture and Planning Overview_.
-
-### <a id='pas-nsx-v-shared-storage'></a> Shared storage
-
-<%= vars.app_runtime_abbr %> requires shared storage. You can allocate networked storage to the host clusters following one of two common approaches: horizontal or vertical. The approach you follow reflects how your data center arranges its storage and host blocks in its physical layout.
-
-For information about horizontal and vertical shared storage, see [Shared storage](#pas-nsx-t-shared-storage).
-
-### <a id='pas-nsx-v-storage-capacity'></a> Storage capacity
-
-<%= vars.company_name %> recommends these storage capacity allocations for production and non-production <%= vars.app_runtime_abbr %> environments:
-
-* **Production environments**: Configure at least 8&nbsp;TB of data storage. You can configure this as either one 8&nbsp;TB store or a number of smaller volumes that sum to 8&nbsp;TB. Frequently-used developments might require significantly more storage to accommodate new code and buildpacks.
-
-* **Nonproduction environments**: Configure 4 to 6&nbsp;TB of data storage.
-
-<p class="note">
-<span class="note__title">Note</span>
-The latest versions of <%= vars.ops_manager %> validated for the reference architecture do not support using vSphere Storage Clusters. Datastores can be listed in the vSphere tile by their native name, not the cluster name created by vCenter for the storage cluster.</p>
-
-<p class="note important">
-<span class="note__title">Important</span>
-If a datastore is part of a vSphere Storage Cluster using DRS storage (sDRS), you must deactivate the s-vMotion feature on any datastores used by <%= vars.ops_manager %>. Otherwise, s-vMotion activity can rename independent disks and cause BOSH to malfunction. For more information, see <a href="./vsphere_migrate_datastore.html">How to Migrate <%= vars.ops_manager %> to a New Datastore in vSphere</a>.</p>
-
-For more information about general storage requirements and recommendations for <%= vars.app_runtime_abbr %>, see
-[Storage](../index.html#pas-storage) in _Platform Architecture and Planning Overview_.
-
-### <a id='pas-nsx-v-sql'></a> SQL Server
-
-An internal MySQL database is sufficient for use in production environments.
-
-However, an external database provides more control over database management for large environments that require multiple data centers.
-
-For information about configuring system databases on <%= vars.app_runtime_abbr %>,
-see [Databases](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/<%= vars.dot_major_tas_version %>/tas-for-vms/config-databases.html#sys-db).
-
-### <a id='pas-nsx-v-security'></a> Security
-
-For information about security requirements and recommendations for <%= vars.app_runtime_abbr %> on vSphere deployments, see [Security](../index.html#pas-security) in _Platform Architecture and Planning Overview_.
-
-### <a id='pas-nsx-v-blobstore'></a> Blobstore storage
-
-<%= vars.company_name %> recommends that you use these blobstore storages for production and non-production <%= vars.app_runtime_abbr %> environments:
-
-* **Production environments**: Use an S3 storage appliance as the blobstore.
-* **Nonproduction environments**: Use an NFS/WebDAV blobstore. <br>For non-production environments, the NFS/WebDAV blobstore can be the primary consumer of storage, as the NFS/WebDAV blobstore must be actively maintained. <%= vars.app_runtime_abbr %> deployments experience downtime during events such as storage upgrades or migrations to new disks.
-
-For more information about blobstore storage requirements and recommendations,
-see [Configure file storage](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/<%= vars.dot_major_tas_version %>/tas-for-vms/configuring.html#file-storage) in _Configuring <%= vars.app_runtime_abbr %> for Upgrades_.
-
 
 ## <a id='pas-no-nsx'></a> <%= vars.app_runtime_abbr %> on vSphere without NSX
 
