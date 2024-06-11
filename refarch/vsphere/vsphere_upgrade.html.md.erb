@@ -12,7 +12,7 @@ At minimum, vSphere contains a vCenter Server and one or more ESXi hosts.
 You cannot complete an in-place upgrade of vSphere without at least two ESXi hosts in your cluster.
 
 If you do not meet this requirement, you have insufficient resources to evacuate an entire
-host. Because of this, you might experience runtime downtime during the upgrade.
+host and you might experience runtime downtime during the upgrade.
 
 To upgrade vSphere with only one ESXi host or without sufficient headroom capacity, you must
 reduce your runtime deployment size. In other words, you can either reduce the number of Diego
@@ -32,10 +32,10 @@ your vSphere deployment has these components:
 
 * Three or more clusters
 
-* One (or HA pair) NSX Edge appliances
+* One NSX Edge appliances (or an HA pair)
 
-<p> <%= vars.company_name %> recommends having at least
-  three ESXi hosts in your cluster to maintain high availability (HA) during your upgrade.</p>
+<%= vars.company_name %> recommends having at least
+three ESXi hosts in your cluster to maintain high availability (HA) during your upgrade.
 
 
 ## <a id='upgrade_procedure'></a> Upgrade vSphere
@@ -58,9 +58,9 @@ To upgrade your ESXi hosts:
 1. Verify that your ESXi hosts have sufficient resources and headroom to evacuate the VM workload
 of a single ESXi host to the two remaining hosts.
 
-<p> If you have enabled vSphere HA on your ESXi host,
-      each ESXi host should have sufficient headroom capacity, since vSphere HA reserves 66%
-      of available memory.</p>
+    If you have enabled vSphere HA on your ESXi host,
+    each ESXi host should have sufficient headroom capacity, since vSphere HA reserves 66%
+    of available memory.
 
 1. Use vMotion to move all the VMs on the host you want to upgrade to the other ESXi hosts.
 vMotion places the VMs on the other hosts based on available capacity. For more information,
@@ -83,7 +83,7 @@ When you upgrade an ESG on VMware NSX, you upgrade the NSX Manager software. Thi
 cause some slight downtime, the amount of which depends on the number of ESGs you are using:
 
 * If your deployment only has one ESG, you can expect a downtime of five minutes for network
-reconvergence.
+re-convergence.
 
 * If your ESGs are deployed in HA, upgrade the first ESG. Then, upgrade the second ESG. This
 upgrade causes only 15-20 seconds of downtime.
