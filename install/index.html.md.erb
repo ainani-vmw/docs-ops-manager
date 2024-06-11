@@ -7,11 +7,11 @@ This topic gives you an overview of how to install and configure <%= vars.ops_ma
 
 The <%= vars.ops_manager %> installation process takes place in the following steps:
 
-- **Prepare Your <%= vars.ops_manager %> Deployment:** To prepare your deployment, you must create the required components within your IaaS, which can include load balancers, blobstores, databases, TCP routers, DNS records, and more.
+- **Prepare your <%= vars.ops_manager %> Deployment:** To prepare your deployment, you must create the required components within your IaaS, which can include load balancers, blobstores, databases, TCP routers, DNS records, and more.
 
 - **Deploy <%= vars.ops_manager %>:** To deploy <%= vars.ops_manager %>, you must download <%= vars.ops_manager %> from <%= vars.product_network %>, create a VM image, create a VM instance, and configure the VM instance to run <%= vars.ops_manager %>.
 
-- **Configure <%= vars.ops_manager %>:** To configure <%= vars.ops_manager %>, you must log into the <%= vars.ops_manager %> interface and configure settings.
+- **Configure <%= vars.ops_manager %>:** To configure <%= vars.ops_manager %>, you must log into the <%= vars.ops_manager %> interface to configure the settings.
 
 - **Install Runtimes:** To install runtime tiles, you must download the tile from <%= vars.product_network %> and follow that runtime's procedure to configure and deploy the tile.
 
@@ -24,13 +24,13 @@ After you successfully install and configure <%= vars.ops_manager %>, you can le
 <%= vars.ops_manager %>, app runtimes, and associated products can run on multiple IaaSes.
 
 Planning and installing <%= vars.ops_manager %> and app runtimes means building layers from the bottom up,
-starting with the details of your IaaS and progressing to configurations within the <%= vars.ops_manager %> interface.
+starting with the details of your IaaS and progressing to configurations in the <%= vars.ops_manager %> interface.
 
-The following sections list how to prepare, install, and deploy <%= vars.ops_manager %> by IaaS.
+The following sections includes lists of topics containing instructions for preparing, installing, and deploying <%= vars.ops_manager %>, by IaaS.
 
 ### <a id='install-part-1'></a> Part 1: Prepare your Tanzu Opefations Manager deployment
 
-For more information about planning your deployment by IaaS, see the following topics.
+For more information about planning your deployment, select the relevant topic:
 
 - [Preparing to deploy Tanzu Operations Manager on AWS](../aws/prepare-env-manual.html)
 - [Preparing to deploy Tanzu Operations Manager on Azure](../azure/prepare-env-manual.html)
@@ -40,7 +40,7 @@ For more information about planning your deployment by IaaS, see the following t
 
 ### <a id='install-part-2'></a> Part 2: Deploy Tanzu Operationss Manager
 
-For more information about deploying by IaaS with Tanzu Operations Manager, see the following topics.
+For more information about deploying <%= vars.ops_manager %>, select the relevant topic:
 
 - [Deploying Tanzu Operations Manager on AWS](../aws/deploy-manual.html)
 - [Deploying Tanzu Operations Manager on Azure](../azure/deploy-manual.html)
@@ -50,7 +50,7 @@ For more information about deploying by IaaS with Tanzu Operations Manager, see 
 
 ### <a id='install-part-3'></a> Part 3: Configure Tanzu Operations Manager
 
-For more information about configuring the BOSH Director tile by IaaS, see the following topics.
+For more information about configuring the BOSH Director tile by IaaS, select the relevant topic:
 
 - [Configuring BOSH Director on AWS](../aws/config-manual.html)
 - [Configuring BOSH Director on Azure](../azure/config-manual.html)
@@ -60,7 +60,7 @@ For more information about configuring the BOSH Director tile by IaaS, see the f
 
 ### <a id='install-part-4'></a> Part 4: Install runtimes
 
-For more information about runtimes, see the following documentation sets.
+For more information about the runtimes, see the following documentation sets:
 
 - [VMware Tanzu Application Service for VMs](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/4.0/tas-for-vms/configure-pas.html)
 - [VMware Tanzu Kubernetes Grid Integrated Edition](https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/<%= vars.current_tkgi_version %>/tkgi/GUID-index.html)
@@ -70,6 +70,4 @@ For more information about runtimes, see the following documentation sets.
 
 ### <a id='install-part-5'></a> Part 5: Install services
 
-For more information about various services, see the documentation sets listed on the Tanzu Docs homepage.
-
-- [Runtimes and Add-Ons](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/install-runtimes.html)
+For more information about various services, see the documentation sets listed on the [VMware Tanzu Platform Documentation](https://docs.vmware.com/en/VMware-Tanzu-Platform/index.html) home page.
