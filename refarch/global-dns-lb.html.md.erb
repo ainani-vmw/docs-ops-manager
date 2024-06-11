@@ -52,7 +52,7 @@ Different GLBs have their own mechanisms to achieve this. For more information, 
 </tr>
 <tr>
   <td><strong>Static-persist / member-hashing affinity</strong></td>
-  <td>The GLB attempts to direct traffic to the graphically nearest foundation based on IP geolocation or provided topology for private networks of the LDNS server performing the lookup.</td>
+  <td>The Static Persist load balancing method uses the persist mask with the source IP address of the Local DNS in a deterministic algorithm to send requests to a specific pool member (virtual server). Using this method, the traffic manager sends DNS name resolution requests to the first available pool member based on a hash algorithm that determines the order of the pool members.</td>
 </tr>
 <tr>
   <td><strong>Active-passive foundations</strong></td>
