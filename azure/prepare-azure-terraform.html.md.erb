@@ -132,7 +132,6 @@ deploy <%= vars.ops_manager %> in order to deploy <%= vars.app_runtime_first %> 
       "appPermissions": null,
       "availableToOtherTenants": false,
       "displayName": "Service Principal for BOSH",
-      "homepage": "http://BOSHAzureCIP",
       "identifierUris": [
         "http://BOSHAzureCPI"
       ],
@@ -142,70 +141,38 @@ deploy <%= vars.ops_manager %> in order to deploy <%= vars.app_runtime_first %> 
     }
     </pre>
 
+## <a id='create-configure'></a> Step 4: Create and configure a service principal
 
-## <a id='create-credential'></a> Step 4: Create a credential for the ADD app
+1. To create a service principal, run the following command:
 
-1. To create a credential associated with the app, run:
     ```
-    az ad app credential reset --id YOUR-APP-ID
+    az ad sp create-for-rbac --display-name "Service Principal for BOSH" \
+      -n YOUR-APPLICATION-ID \
+      --role Owner \
+      --scopes /subscriptions/SUBSCRIPTION-ID
     ```
-    Where `YOUR-APP-ID` is the `APP_ID` that you recorded in [Create an AAD App](#create-aad).
+
+    Where `YOUR-APPLICATION-ID` is the `APPLICATION_ID` that you recorded in
+    [Create an AAD Application](#create-aad).
 
     For example:
+
     <pre class="terminal">
-    $ az ad app credential reset --id 5c552e8f-b977-45f5-a50b-981cfe17cb9d
-    The output includes credentials that you must protect. Be sure that you do not include these credentials in your code or check the credentials into your source control. For more information, see https://aka.ms/azadsp-cli
-    {
-      "appId": "5c552e8f-b977-45f5-a50b-981cfe17cb9d",
-      "password": "RFy8Q~~Bs.pCVsoKhDNDUIdAveJ2Ig5SkuW4NdhP",
-      "tenant": "22222222-1234-5678-1234-678912345678"
-    }
-    </pre>
-
-1. From the output of `az ad app credential reset` that you ran in the previous step, locate and record the value of `password`. This is your `CLIENT_SECRET` for creating a service principal.
-
-## <a id='create-configure'></a> Step 5: Create and configure a service principal
-
-1. To create a service principal, run:
-
-    ```
-    az ad sp create --id YOUR-APP-ID
-    ```
-    Where `YOUR-APP-ID` is the `APP_ID` that you recorded in [Create an AAD App](#create-aad).
-
-    For example:
-    <pre class="terminal">
-    $ az ad sp create --id 5c552e8f-b977-45f5-a50b-981cfe17cb9d
+    $ az ad sp create-for-rbac --display-name "Service Principal for BOSH" \
+       -n 5c552e8f-b977-45f5-a50b-981cfe17cb9d \
+       --role Owner \
+      --scopes /subscriptions/1e9249d9-c682-410b-8d50-31fda4736c8b
     {
       "appId": "5c552e8f-b977-45f5-a50b-981cfe17cb9d",
       "displayName": "Service Principal for BOSH",
-      "objectId": "cc13c685-4c3b-461e-ae96-7a0563960b83",
-      "objectType": "ServicePrincipal",
-      "servicePrincipalNames": [
-        "5c552e8f-b977-45f5-a50b-981cfe17cb9d",
-        "http://BOSHAzureCPI"
-      ]
+      "password": "9Hf8Q~4kYUPJ7wDqWoBVM5DctJZ~8xAxg8842axC",
+      "tenant": "b39165ca-3cee-4b8a-a4d6-cd1239dd62f0"
     }
     </pre>
 
-1. You must have the Owner role on your service principal to deploy <%= vars.ops_manager %> to Azure.
-To assign the Owner role on your service principal, run:
+    From the output of `az ad sp create-for-rbac` that you ran in the previous step, locate and record the value of `password`. This is your `CLIENT_SECRET` for creating a service principal.
 
-    ```
-    az role assignment create --assignee "SERVICE-PRINCIPAL-NAME" \
-    --role "Owner" --scope /subscriptions/SUBSCRIPTION-ID
-    ```
-    Where:
-    * `SERVICE-PRINCIPAL-NAME` is any value of `servicePrincipalNames` from the preceding output, for example, `YOUR-APP-ID`.
-    * `SUBSCRIPTION-ID` is the value of the `id` of the default subscription that you recorded in [Set Your Default Subscription](#default-subscription).
-
-    For example:
-    <pre class="terminal">
-    $ az role assignment create \
-    --assignee "5c552e8f-b977-45f5-a50b-981cfe17cb9d" \
-    --role "Owner" \
-    --scope /subscriptions/87654321-1234-5678-1234-567891234567
-    </pre>
+    You must have the Owner role on your service principal to deploy <%= vars.ops_manager to Azure.
 
     <p> If you need to use multiple resource groups for your deployment on Azure, you can define custom roles for your Service Principal. These roles enable BOSH to deploy to pre-existing network resources outside of the resource group.</p>
 
@@ -238,7 +205,7 @@ To assign the Owner role on your service principal, run:
     </pre>
 
 
-## <a id='verify-your-service-principal'></a> Step 6: Verify your service principal
+## <a id='verify-your-service-principal'></a> Step 5: Verify your service principal
 
 To verify your service principal, run the following command to log in to your service principal:
 
@@ -249,7 +216,7 @@ az login --username APP_ID --password CLIENT_SECRET \
 Where:
 
 * `APP_ID` is the `APP_ID` that you recorded in [Create an AAD App](#create-aad).
-* `CLIENT_SECRET` is the password that you recoded in [Create a credential for the ADD App](#create-credential).
+* `CLIENT_SECRET` is the password that you recorded in [Create a service principal](#create-configure).
 * `TENANT_ID` is the value of `tenantID` of the default subscription that you recorded in [Set Your Default Subscription](#default-subscription).
 
 For example:
@@ -276,7 +243,7 @@ $ az login --username 5c552e8f-b977-45f5-a50b-981cfe17cb9d \
 If you cannot log in, the service principal is invalid. Create a new service principal and log in again.
 
 
-## <a id='register'></a> Step 7: Complete registrations
+## <a id='register'></a> Step 6: Complete registrations
 
 1. To register your subscription with Microsoft.Storage, run:
 
