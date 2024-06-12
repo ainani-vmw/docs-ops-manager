@@ -5,12 +5,12 @@ owner: Ops Manager
 
 <html class="list-style-none"></html>
 
-This topic describes how you can prepare Azure to deploy <%= vars.ops_manager_first %>. You must deploy <%= vars.ops_manager %> in order to deploy
+This topic describes how you can prepare Azure to deploy <%= vars.ops_manager_first %>. You must deploy <%= vars.ops_manager %> before you can deploy
 <%= vars.app_runtime_first %> or <%= vars.k8s_runtime_first %>.
 
 ## <a id='install'></a> Step 1: Install and configure the Azure CLI
 
-1. Install the Azure CLI 2.0 by following the instructions for your operating system in
+1. Install the Azure CLI by following the instructions for your operating system in
 [Install the Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli) in the
 Microsoft Azure documentation.
 
@@ -24,7 +24,7 @@ Microsoft Azure documentation.
     environment on which you are installing <%= vars.ops_manager %>:
 
     - **Azure**: `AzureCloud`.
-    - **Azure China**: `AzureChinaCloud`. If logging in to <code>AzureChinaCloud</code> fails with
+    - **Azure China**: `AzureChinaCloud`. If logging in to `AzureChinaCloud` fails with
       a `CERT_UNTRUSTED`, use the latest version of node, 4.x or later. For more information about
       this error, see
       [Failed to login AzureChinaCloud](https://github.com/Azure/azure-xplat-cli/issues/2725) in
@@ -44,12 +44,13 @@ Microsoft Azure documentation.
     az login
     ```
 
-    Authenticate by navigating to the URL in the output from the command, entering the provided
-    code, and clicking your account.
+1. Authenticate by going to the URL in the output from the command, entering the provided
+code, and clicking your account.
+
 
 ## <a id='default-subscription'></a> Step 2: Set your default subscription
 
-1. To list your Azure subscriptions,  run the following command:
+1. To list your Azure subscriptions, run the following command:
 
     ```
     az account list
@@ -90,7 +91,7 @@ Microsoft Azure documentation.
     </pre>
 
 1. Identify your default subscription in the output of this command by locating the subscription
-listed that has `isDefault` set to `true`. To deploy <%= vars.ops_manager %> to a different subscription, you must set
+that has `isDefault` set to `true`. To deploy <%= vars.ops_manager %> to a different subscription, you must set
 the other subscription as the default. To set a new default subscription, run the following command:
 
     ```
@@ -99,15 +100,17 @@ the other subscription as the default. To set a new default subscription, run th
 
     Where `SUBSCRIPTION-ID` is the value of the `id` field of the subscription that you want to set
     as the default.
+
     <br><br>
-    The following example sets the default to a subscription that has an `id` with the value of
+
+    Example: This command sets the default to a subscription that has an `id` with the value of
     `"87654321-1234-5678-1234-567891234567"`.
 
     <pre class="terminal">
     $ az account set --subscription "87654321-1234-5678-1234-567891234567"
     </pre>
 
-1. Record the value of the `id` of the default subscription. You use this value in future
+1. Record the value of the `id` of the default subscription. You will use this value in future
 configuration steps.
 
 1. Record the value of `tenantID` of the default subscription. This is your `TENANT_ID` for
@@ -136,14 +139,13 @@ account to log in to your Azure subscription.
     <code>web-home-page-url</code> and <code>identifier-uris</code> flags, but the value of
     <code>identifer-uris</code> must be unique within the organization associated with your Azure
     subscription. For the <code>web-home-page-url</code>, <%= vars.company_name %> recommends using
-    <code>http://BOSHAzureCPI</code> as shown in the example above.
+    <code>http://BOSHAzureCPI</code>, as shown in the preceding example.
     </p>
 
-1. From the output of the `az ad app create` that you ran in the previous step, locate and record
+1. From the output of the `az ad app create` command that you ran in the previous step, locate and record
 the value of `appId`. This is your `APPLICATION_ID` for creating a service principal.
 
-    The following example output shows `"5c552e8f-b977-45f5-a50b-981cfe17cb9d"` as the value of
-    `appId`.
+    The following example output shows an `appId` value of `"5c552e8f-b977-45f5-a50b-981cfe17cb9d"`.
 
     <pre class="terminal">
     {
@@ -192,17 +194,18 @@ the value of `appId`. This is your `APPLICATION_ID` for creating a service princ
     }
     </pre>
 
-    From the output of `az ad sp create-for-rbac` that you ran in the previous step, locate and record the value of `password`. This is your `CLIENT_SECRET` for creating a service principal.
+2. From the output of `az ad sp create-for-rbac` command in the previous step, locate and record the value of `password`. This is your `CLIENT_SECRET` for creating a service principal.
 
-    You must have the Owner role on your service principal to deploy <%= vars.ops_manager to Azure.
-    <p> If you need to use multiple resource groups for your
+    You must have the `Owner` role on your service principal to deploy <%= vars.ops_manager %> to Azure.
+    If you need to use multiple resource groups for your
     deployment on Azure, you can define custom roles for your service principal. These roles enable
     BOSH to deploy to pre-existing network resources outside of the resource group.
-    </p>
 
-   For more information about Azure Role-Based Access Control, see <a href="https://azure.microsoft.com/en-us/documentation/articles/role-based-access-built-in-roles/">Built-in roles for Azure resource</a> the Microsoft Azure documentation.
+    <p class="note">
+    <span class="note__title">Note</span>
+    For more information about Azure Role-Based Access Control, see <a href="https://azure.microsoft.com/en-us/documentation/articles/role-based-access-built-in-roles/">Built-in roles for Azure resource</a> the Microsoft Azure documentation.</p>
 
-1. To verify the role assignment, run the following command:
+3. To verify the role assignment, run the following command:
 
     ```
     az role assignment list --assignee "SERVICE-PRINCIPAL-NAME"
@@ -233,7 +236,7 @@ the value of `appId`. This is your `APPLICATION_ID` for creating a service princ
 
 ## <a id='verify-your-service-principal'></a> Step 5: Verify your service principal
 
-To verify your service principal, run the following command to log in to your service principal:
+To verify your service principal, run the following command to log in:
 
 ```
 az login --username APPLICATION_ID --password CLIENT_SECRET \
@@ -246,7 +249,7 @@ Where:
   [Create an AAD Application](#create-aad).
 * `CLIENT_SECRET` is the password that you recorded in [Create a service principal](#create-configure).
 * `TENANT_ID` is the value of `tenantID` of the default subscription that you recorded in
-  [Set Your Default Subscription](#default-subscription).
+  [Set your Default Subscription](#default-subscription).
 
 For example:
 
@@ -275,19 +278,19 @@ again.
 
 ## <a id='register'></a> Step 6: Complete registrations
 
-1. To register your subscription with Microsoft.Storage, run the following command:
+1. To register your subscription with Microsoft.Storage, run:
 
     ```
     az provider register --namespace Microsoft.Storage
     ```
 
-1. To register your subscription with Microsoft.Network, run the following command:
+2. To register your subscription with Microsoft.Network, run:
 
     ```
     az provider register --namespace Microsoft.Network
     ```
 
-1. To register your subscription with Microsoft.Compute, run the following command:
+3. To register your subscription with Microsoft.Compute, run:
 
     ```
     az provider register --namespace Microsoft.Compute
