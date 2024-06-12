@@ -120,25 +120,22 @@ account to log in to your Azure subscription.
 
     ```
     az ad app create --display-name "Service Principal for BOSH" \
-    --password "PASSWORD" --homepage "http://BOSHAzureCPI" \
+    --web-home-page-url "http://BOSHAzureCPI" \
     --identifier-uris "http://BOSHAzureCPI"
     ```
-
-    Where `PASSWORD` is a password of your choice. This is your `CLIENT_SECRET` for creating a
-    service principal.
 
     For example:
 
     <pre class="terminal">
     $ az ad app create --display-name "Service Principal for BOSH" \
-    --password "Swordfish" --homepage "http://BOSHAzureCPI" \
+    --web-home-page-url "http://BOSHAzureCPI" \
     --identifier-uris "http://BOSHAzureCPI"
     </pre>
 
     <p> You can provide any string for the
-    <code>homepage</code> and <code>identifier-uris</code> flags, but the value of
+    <code>web-home-page-url</code> and <code>identifier-uris</code> flags, but the value of
     <code>identifer-uris</code> must be unique within the organization associated with your Azure
-    subscription. For the <code>homepage</code>, <%= vars.company_name %> recommends using
+    subscription. For the <code>web-home-page-url</code>, <%= vars.company_name %> recommends using
     <code>http://BOSHAzureCPI</code> as shown in the example above.
     </p>
 
@@ -154,7 +151,9 @@ the value of `appId`. This is your `APPLICATION_ID` for creating a service princ
       "appPermissions": null,
       "availableToOtherTenants": false,
       "displayName": "Service Principal for BOSH",
-      "homepage": "http://BOSHAzureCIP",
+      "web": {
+        "homePageUrl": "http://BOSHAzureCIP",
+      },
       "identifierUris": [
         "http://BOSHAzureCPI"
       ],
@@ -169,7 +168,10 @@ the value of `appId`. This is your `APPLICATION_ID` for creating a service princ
 1. To create a service principal, run the following command:
 
     ```
-    az ad sp create --id YOUR-APPLICATION-ID
+    az ad sp create-for-rbac --display-name "Service Principal for BOSH" \
+      -n YOUR-APPLICATION-ID \
+      --role Owner \
+      --scopes /subscriptions/SUBSCRIPTION-ID
     ```
 
     Where `YOUR-APPLICATION-ID` is the `APPLICATION_ID` that you recorded in
@@ -178,43 +180,21 @@ the value of `appId`. This is your `APPLICATION_ID` for creating a service princ
     For example:
 
     <pre class="terminal">
-    $ az ad sp create --id 5c552e8f-b977-45f5-a50b-981cfe17cb9d
+    $ az ad sp create-for-rbac --display-name "Service Principal for BOSH" \
+       -n 5c552e8f-b977-45f5-a50b-981cfe17cb9d \
+       --role Owner \
+      --scopes /subscriptions/1e9249d9-c682-410b-8d50-31fda4736c8b
     {
       "appId": "5c552e8f-b977-45f5-a50b-981cfe17cb9d",
       "displayName": "Service Principal for BOSH",
-      "objectId": "cc13c685-4c3b-461e-ae96-7a0563960b83",
-      "objectType": "ServicePrincipal",
-      "servicePrincipalNames": [
-        "5c552e8f-b977-45f5-a50b-981cfe17cb9d",
-        "http://BOSHAzureCPI"
-      ]
+      "password": "9Hf8Q~4kYUPJ7wDqWoBVM5DctJZ~8xAxg8842axC",
+      "tenant": "b39165ca-3cee-4b8a-a4d6-cd1239dd62f0"
     }
     </pre>
 
-1. You must have the Owner role on your service principal to deploy <%= vars.ops_manager %> to Azure. To assign
-the Owner role on your service principal, run the following command:
+    From the output of `az ad sp create-for-rbac` that you ran in the previous step, locate and record the value of `password`. This is your `CLIENT_SECRET` for creating a service principal.
 
-    ```
-    az role assignment create --assignee "SERVICE-PRINCIPAL-NAME" \
-    --role "Owner" --scope /subscriptions/SUBSCRIPTION-ID
-    ```
-
-    Where:
-
-    * `SERVICE-PRINCIPAL-NAME` is any value of `servicePrincipalNames` from the output above, such
-      as `YOUR-APPLICATION-ID`.
-    * `SUBSCRIPTION-ID` is the value of the `id` of the default subscription that you recorded in
-      [Set Your Default Subscription](#default-subscription).
-
-    For example:
-
-    <pre class="terminal">
-    $ az role assignment create \
-    --assignee "5c552e8f-b977-45f5-a50b-981cfe17cb9d" \
-    --role "Owner" \
-    --scope /subscriptions/87654321-1234-5678-1234-567891234567
-    </pre>
-
+    You must have the Owner role on your service principal to deploy <%= vars.ops_manager to Azure.
     <p> If you need to use multiple resource groups for your
     deployment on Azure, you can define custom roles for your service principal. These roles enable
     BOSH to deploy to pre-existing network resources outside of the resource group.
@@ -264,7 +244,7 @@ Where:
 
 * `APPLICATION_ID` is the `APPLICATION_ID` that you recorded in
   [Create an AAD Application](#create-aad).
-* `CLIENT_SECRET` is the password that you provided in [Create an AAD Application](#create-aad).
+* `CLIENT_SECRET` is the password that you recorded in [Create a service principal](#create-configure).
 * `TENANT_ID` is the value of `tenantID` of the default subscription that you recorded in
   [Set Your Default Subscription](#default-subscription).
 
