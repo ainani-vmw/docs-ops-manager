@@ -12,12 +12,15 @@ At minimum, vSphere contains a vCenter Server and one or more ESXi hosts.
 You cannot perform an in-place upgrade of vSphere without at least two ESXi hosts in your cluster.
 
 If you do not meet this requirement, you have insufficient resources to evacuate an entire
-host,and you will experience runtime downtime during the upgrade.
+host, and you will experience runtime downtime during the upgrade.
 
-To upgrade vSphere with only one ESXi host or without sufficient headroom capacity, you must
-reduce your runtime deployment size. In other words, you can either reduce the number of Diego
-Cells in your deployment or pause VMs to make more capacity available. These actions might result
-in downtime for <%= vars.app_runtime_abbr %> or <%= vars.k8s_runtime_abbr %>.
+To upgrade vSphere with only one ESXi host, or without sufficient headroom capacity, you must
+reduce your runtime deployment size. To do this, you can:
+
+* Reduce the number of Diego Cells in your deployment
+* Pause VMs to make more capacity available.
+
+These actions might result in downtime for <%= vars.app_runtime_abbr %> or <%= vars.k8s_runtime_abbr %>.
 
 
 ## <a id='rec_start'></a> Recommended starting configuration
@@ -32,7 +35,7 @@ your vSphere deployment has these components:
 
 * Three or more clusters
 
-* One NSX Edge appliances (or an HA pair)
+* One NSX Edge appliance (or an HA pair)
 
 <%= vars.company_name %> recommends having at least
 three ESXi hosts in your cluster to maintain high availability (HA) during your upgrade.
@@ -44,7 +47,7 @@ The following sections describe the procedure to upgrade the vSphere management 
 
 ### <a id='upgrade_vcenter'></a> Step 1: Upgrade vCenter
 
-For more information about how to upgrade vCenter, see [Overview of the vCenter server upgrade
+To upgrade vCenter, see the instructions in [Overview of the vCenter server upgrade
 process](https://docs.vmware.com/en/VMware-vSphere/7.0/com.vmware.vcenter.upgrade.doc/GUID-C5CBFB63-4E95-4143-BA89-89AA5D292C68.html) in the
 vSphere documentation.
 
@@ -58,15 +61,14 @@ To upgrade your ESXi hosts:
 1. Verify that your ESXi hosts have sufficient resources and headroom to evacuate the VM workload
 of a single ESXi host to the two remaining hosts.
 
-    If you have enabled vSphere HA on your ESXi host,
-    each ESXi host should have sufficient headroom capacity, since vSphere HA reserves 66% of available memory.
+    If you have enabled vSphere HA on your ESXi host, ensure that
+    each ESXi host has sufficient headroom capacity; vSphere HA reserves 66% of available memory.
 
 1. Use vMotion to move all the VMs on the host you want to upgrade to the other ESXi hosts.
 vMotion places the VMs on the other hosts based on available capacity. For more information,
 see [Migration with vMotion](https://docs.vmware.com/en/VMware-vSphere/7.0/com.vmware.vcenter.upgrade.doc/GUID-C5CBFB63-4E95-4143-BA89-89AA5D292C68.html) in the vSphere documentation.
 
-1. Upgrade the evacuated ESXi host. For example, you might be upgrading from ESXi v6.0 to ESX
-v6.5. For more information, see [Upgrading ESXi hosts](https://docs.vmware.com/en/VMware-vSphere/7.0/com.vmware.esxi.upgrade.doc/GUID-122035F6-8433-463E-A0F7-B4FC71A05B04.html) in the vSphere
+1. Upgrade the evacuated ESXi host. See [Upgrading ESXi hosts](https://docs.vmware.com/en/VMware-vSphere/7.0/com.vmware.esxi.upgrade.doc/GUID-122035F6-8433-463E-A0F7-B4FC71A05B04.html) in the vSphere
 documentation.
 
 1. Repeat the previous steps for each remaining host, one at a time. vSphere automatically

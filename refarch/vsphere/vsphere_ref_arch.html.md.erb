@@ -13,13 +13,13 @@ vSphere offers NSX-T to support SDN infrastructure.
 
 <%= vars.ops_manager %> supports these configurations for vSphere deployments:
 
-* <%= vars.app_runtime_abbr %> on vSphere with NSX-T. For more information, see [<%= vars.app_runtime_abbr %> on vSphere with NSX-T](#pas-nsx-t).
+* [<%= vars.app_runtime_abbr %> on vSphere with NSX-T](#pas-nsx-t)
 
-* <%= vars.app_runtime_abbr %> on vSphere without NSX. For more information, see [<%= vars.app_runtime_abbr %> on vSphere without NSX](#pas-no-nsx).
+* [<%= vars.app_runtime_abbr %> on vSphere without NSX](#pas-no-nsx)
 
-* <%= vars.k8s_runtime_abbr %> on vSphere with NSX-T. For more information, see [<%= vars.k8s_runtime_abbr %> on vSphere with NSX-T](#pks-nsx-t).
+* [<%= vars.k8s_runtime_abbr %> on vSphere with NSX-T](#pks-nsx-t)
 
-* <%= vars.k8s_runtime_abbr %> on vSphere without NSX-T. For more information, see [<%= vars.k8s_runtime_abbr %> on vSphere without NSX-T](#pks-without-nsx-t).
+* [<%= vars.k8s_runtime_abbr %> on vSphere without NSX-T](#pks-without-nsx-t)
 
 
 ## <a id='pas-nsx-t'></a> <%= vars.app_runtime_abbr %> on vSphere with NSX-T
@@ -60,7 +60,7 @@ Several Tier-1 routers, such as the router for the <%= vars.app_runtime_abbr %> 
 
 <%= vars.app_runtime_abbr %> deployments require the VMware NSX-T Container Plug-in to enable the SDN features available through NSX-T.
 
-The NSX-T Container Plug-in enables a container networking stack and integrates with NSX-T.
+The NSX-T Container Plug-in integrates with NSX-T and enables a container networking stack.
 
 To use NSX-T with <%= vars.app_runtime_abbr %>, the NSX-T Container Plug-in must be installed, configured,
 and deployed at the same time as the <%= vars.app_runtime_abbr %> tile. To download the NSX-T Container Plug-in, go to
@@ -93,9 +93,7 @@ The load balancing requirements and recommendations for <%= vars.app_runtime_abb
 
 * You must configure NSX-T load balancers for the Gorouters.
   * The domains for the <%= vars.app_runtime_abbr %> system and apps must resolve to the load balancer IP.
-  * You must assign either a private or a public IP address assigned to the domains for the <%= vars.app_runtime_abbr %> system and apps.
-
-  	You can use Layer 7 load balancers and stop TSL at the load balancers. However, <%= vars.company_name %> discourages this approach because it results in additional overhead processing.
+  * You must assign either a private or a public IP address assigned to the domains for the <%= vars.app_runtime_abbr %> system and apps.<br>You can use Layer 7 load balancers and stop TSL at the load balancers. However, <%= vars.company_name %> discourages this approach because it results in additional overhead processing.
 
 * Any TCP Gorouters and SSH proxies within the platform also require NSX-T load balancers.
 
@@ -153,7 +151,7 @@ The latest versions of <%= vars.ops_manager %> validated for the reference archi
 
 <p class="note important">
 <span class="note__title">Important</span>
-If a datastore is part of a vSphere Storage Cluster using DRS storage (sDRS), you must deactivate the s-vMotion feature on any datastores used by <%= vars.ops_manager %>. Otherwise, s-vMotion activity can rename independent disks and cause BOSH to malfunction. For more information, see <a href="./vsphere_migrate_datastore.html">Migrating <%= vars.ops_manager %> to a New Datastore in vSphere</a>.</p>
+If a datastore is part of a vSphere Storage Cluster using DRS storage (SDRS), you must deactivate the Storage vMotion feature on any datastores used by <%= vars.ops_manager %>. Otherwise, Storage vMotion activity can rename independent disks and cause BOSH to malfunction. For more information, see <a href="./vsphere_migrate_datastore.html">Migrating <%= vars.ops_manager %> to a New Datastore in vSphere</a>.</p>
 
 For more information about general storage requirements and recommendations for <%= vars.app_runtime_abbr %>, see [Storage](../index.html#pas-storage) in _Platform Architecture and Planning Overview_.
 
@@ -162,7 +160,7 @@ For more information about general storage requirements and recommendations for 
 An internal MySQL database is sufficient for use in production environments. However, an external database provides more control over database management for large environments that require multiple data centers.
 
 For information about configuring system databases on <%= vars.app_runtime_abbr %>,
-see [Databases](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/<%= vars.dot_major_tas_version %>/tas-for-vms/config-databases.html#sys-db).
+see [Databases](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/<%= vars.dot_major_tas_version %>/tas-for-vms/config-databases.html#sys-db) in the <%= vars.app_runtime_abbr %> documentation.
 
 ### <a id='pas-nsx-t-securty'></a> Security
 
@@ -170,18 +168,18 @@ For information about security requirements and recommendations for <%= vars.app
 
 ### <a id='pas-nsx-t-blobstore'></a> Blobstore storage
 
-<%= vars.company_name %> recommends that you use these blobstore storages for production and non-production <%= vars.app_runtime_abbr %> environments:
+<%= vars.company_name %> recommends that you use these blobstore storage types for production and non-production <%= vars.app_runtime_abbr %> environments:
 
 * **Production environments**: Use an S3 storage appliance as the blobstore.
 * **Non-production environments**: Use an NFS/WebDAV blobstore. <br>For non-production environments, the NFS/WebDAV blobstore can be the primary consumer of storage, as the NFS/WebDAV blobstore must be actively maintained. <%= vars.app_runtime_abbr %> deployments experience downtime during events such as storage upgrades or migrations to new disks.
 
 For more information about blobstore storage requirements and recommendations,
-see [Configure file storage](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/<%= vars.dot_major_tas_version %>/tas-for-vms/configuring.html#file-storage) in _Configuring <%= vars.app_runtime_abbr %> for Upgrades_.
+see [Configure file storage](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/<%= vars.dot_major_tas_version %>/tas-for-vms/configuring.html) in the <%= vars.app_runtime_abbr %> documentation.
 
 
 ## <a id='pas-no-nsx'></a> <%= vars.app_runtime_abbr %> on vSphere without NSX
 
-These sections describe the architecture for <%= vars.app_runtime_abbr %> on vSphere without software-defined networking deployments.
+These sections describe the differences in architecture for <%= vars.app_runtime_abbr %> on vSphere without software-defined networking deployments.
 
 ### <a id='pas-routed-networking'></a> Networking
 
@@ -191,7 +189,7 @@ This is a best-guess layout for IP address space utilization in a single <%= var
 
 * Infrastructure - `/28`
 
-* <%= vars.app_runtime_abbr %> deployment - `/23`<br>This size is almost completely dependent on the estimated desired capacity for containers. It can be smaller, but <%= vars.company_name %> discourages using a larger size in a single deployment.
+* <%= vars.app_runtime_abbr %> deployment - `/23`<br>This size is almost completely dependent on the estimated desired capacity for containers and you might need less space than this. <%= vars.company_name %> discourages using a larger size in a single deployment.
 
 * Services - `/23`<br>This size is almost completely dependent on the estimated desired capacity for services. Resize as necessary.
 
@@ -220,11 +218,11 @@ The following diagram illustrates the reference architecture for <%= vars.k8s_ru
 
 <%= vars.k8s_runtime_abbr %> deployments with NSX-T are deployed with three clusters and three AZs.
 
-An NSX-T Tier-0 router is on the front end of the <%= vars.k8s_runtime_abbr %> deployment. This router is a central logical router into the <%= vars.k8s_runtime_abbr %> platform. You can configure static or dynamic routing using BGP from the routed IP address backbone through the Tier-0 router.
+An NSX-T Tier-0 router is on the front end of the <%= vars.k8s_runtime_abbr %> deployment. This router is a central logical router into the <%= vars.k8s_runtime_abbr %> platform. You can configure static or dynamic routing using Border Gateway Protocol (BGP) from the routed IP address backbone through the Tier-0 router.
 
 Several Tier-1 routers, such as the router for the infrastructure subnet, connect to the Tier-0 router. New Tier-1 routers are created on-demand as new clusters and namespaces are added to <%= vars.k8s_runtime_abbr %>.
 
-The <%= vars.k8s_runtime_abbr %> on vSphere with NSX-T architecture supports multiple primary nodes for <%= vars.k8s_runtime_abbr %> v1.2 and later.
+The <%= vars.k8s_runtime_abbr %> on vSphere with NSX-T architecture supports multiple primary nodes.
 
 ### <a id='pks-nsx-t-networking'></a> Networking
 
@@ -286,12 +284,11 @@ The routable IP address requirements and recommendations for <%= vars.k8s_runtim
 * **Deployments with <%= vars.k8s_runtime_abbr %> NSX-T ingress:** <%= vars.company_name %> recommends a `/25` network for deployments with <%= vars.k8s_runtime_abbr %> NSX-T ingress.
 The Tier-0 router must have routable external IP address space to advertise on the BGP network with its peers.
 	</br>
-	</br>
 	Select a network range for the Tier-0 router with enough space so that you can separate the network into these two jobs:
     * Routing incoming and outgoing traffic
     * DNATs and SNATs, load balancer WIPs, and other platform components
 
-* **Deployments with several load balancers:** <%= vars.company_name %> recommends a `/23` network for deployments that use several load balancers. Deployments with several load balancers have much higher address space consumption for load balancer WIPs. This is because Kubernetes service types allocate IP addresses very frequently. To accommodate the higher address space, allow for four times the address space.
+* **Deployments with several load balancers:** <%= vars.company_name %> recommends a `/23` network for deployments that use several load balancers. Deployments with several load balancers have much higher address space consumption for load balancer WIPs. This is because Kubernetes service types allocate IP addresses very frequently. To accommodate the higher address space, allow for 4 times the address space.
 
 #### <a id='pks-nsx-t-firewall'></a> Firewall
 
@@ -328,7 +325,7 @@ Multiple clusters provide additional features such as security, customization on
 
 ### <a id='pks-nsx-t-master-nodes'></a> Primary nodes
 
-The <%= vars.k8s_runtime_abbr %> on vSphere with NSX-T architecture supports multiple primary nodes for <%= vars.k8s_runtime_abbr %> v1.2 and later.
+The <%= vars.k8s_runtime_abbr %> on vSphere with NSX-T architecture supports multiple primary nodes.
 
 You can define the number of primary nodes per plan in the <%= vars.k8s_runtime_abbr %> tile in <%= vars.ops_manager %>. The number of primary nodes can be an odd number to allow `etcd` to form a quorum.
 
@@ -362,5 +359,5 @@ Select from networks already identified in <%= vars.ops_manager %> to deploy the
 <%= vars.k8s_runtime_abbr %> API and <%= vars.k8s_runtime_abbr %>-provisioned
 Kubernetes clusters.
 
-<p> VMware recommends deploying <%= vars.k8s_runtime_abbr %> on its own dedicated <%= vars.ops_manager %>
-instance, rather than on a shared <%= vars.ops_manager %> that also hosts other runtimes such as <%= vars.app_runtime_abbr %>.</p>
+VMware recommends deploying <%= vars.k8s_runtime_abbr %> on its own dedicated <%= vars.ops_manager %>
+instance, rather than on a shared <%= vars.ops_manager %> that also hosts other runtimes such as <%= vars.app_runtime_abbr %>.
