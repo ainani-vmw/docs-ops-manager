@@ -14,7 +14,7 @@ This topic describes how to migrate your <%= vars.ops_manager_first %> installat
 
 ## <a id='prep'></a> Before you begin
 
-These sections describe the steps you should perform prior to the migration.
+The following sections describe the steps to do prior to the migration.
 
 ### <a id='backup'></a> Step 1: Back up your environment
 
@@ -24,8 +24,8 @@ For more information about how to back up <%= vars.ops_manager %>, see [Backing 
 
 ### <a id='doc'></a> Step 2: Document current environment settings
 
-Document your current environment settings before proceeding with the datastore migration. Record which VMs are running
-and in which datastore they reside. If you experience any issues during or after the migration, you must have this
+Document your current environment settings. Record which VMs are running
+and in which datastore each one resides. If you experience any issues during or after the migration, you must have this
 information to restore your environment.
 
 To obtain this information:
@@ -45,9 +45,9 @@ To obtain this information:
         bosh-old instances --details > instances.txt
         ```
 
-1. Save the resulting `instances.txt` file to a safe location.
+2. Save the resulting `instances.txt` file to a safe location.
 
-1. Note the datastore where each VM resides in vSphere.
+3. Note the datastore where each VM resides in vSphere.
 
 ### <a id='system_health'></a> Step 3: Check system health
 
@@ -56,7 +56,7 @@ Check the **Status** tab in your runtime product tiles, such as <%= vars.app_run
 
 ### <a id='tile_heatlh'></a> Step 4: Check installed products health
 
-In each tile installed in your <%= vars.ops_manager %> deployment, check the **Status** tab and verify
+In each tile installed in your <%= vars.ops_manager %> deployment, check the **Status** tab and verify that
 there are no errors or reported issues.
 
 ### <a id='opsman_health'></a> Step 5: Check BOSH Director status
@@ -94,7 +94,7 @@ only the BOSH Director tile is still selected.
 1. Click **Apply Changes**.
 
 2. Confirm that the BOSH Director VM has persistent disk on the new datastore.
-   1. From the vCenter, find the BOSH Director VM.
+   1. From vCenter, find the BOSH Director VM.
    2. In the **Related Objects** section, verify that the storage has been updated to the new datastore.
 
 3. In the BOSH Director tile, click **Director Config**.
@@ -103,6 +103,6 @@ only the BOSH Director tile is still selected.
 
 5. Click **Review Pending Changes**.
 
-6. If you are using any service tiles, select the **Recreate All On-Demand Service Instances** errand for each of the tiles you migrate.
+6. If you are using any service tiles, select the **Recreate All On-Demand Service Instances** errand for each tile you migrate.
 
 7. Click **Apply Changes**.
