@@ -256,7 +256,6 @@ See [Configure a Security Group for the Web ELB](prepare-env-manual.html#pcfaws-
 </tr>
 </table>
 
-
 ### TCP ELB
 
 The TCP ELB Security Group must be named `pcf-tcp-elb-security-group` and have the following inbound rule.
@@ -286,10 +285,10 @@ The TCP ELB Security Group must have the following outbound rule:
 <table class=“table”>
 <thead>
 <tr>
-  <th><strong>Type </strong></th>
-  <th><strong>Protocol</strong></th>
-  <th><strong>Port range</strong></th>
-  <th colspan='2'><strong>Source</strong></th>
+  <th>Type</th>
+  <th>Protocol</th>
+  <th>Port range</th>
+  <th colspan='2'>Source</th>
 </tr>
 </thead>
 <tr>
@@ -305,6 +304,8 @@ The TCP ELB Security Group must have the following outbound rule:
 ### MySQL
 
 The MySQL Security Group must be named `pcf-mysql-security-group` and have the following inbound rule:
+
+See [Configure a Security Group for MySQL](prepare-env-manual.html#pcfaws-om-mysqlsecgrp) in _Preparing to Deploy <%= vars.ops_manager %> on AWS_.
 
 <table class=“table”>
 <thead>
@@ -326,15 +327,13 @@ The MySQL Security Group must be named `pcf-mysql-security-group` and have the f
 
 The MySQL Security Group must have the following outbound rule.
 
-See [Configure a Security Group for MySQL](prepare-env-manual.html#pcfaws-om-mysqlsecgrp) in _Preparing to Deploy <%= vars.ops_manager %> on AWS_.
-
 <table class=“table”>
 <thead>
 <tr>
-  <th><strong>Type </strong></th>
-  <th><strong>Protocol</strong></th>
-  <th><strong>Port range</strong></th>
-  <th colspan='2'><strong>Destination</strong></th>
+  <th>Type</th>
+  <th>Protocol</th>
+  <th>Port range</th>
+  <th colspan='2'>Destination</th>
 </tr>
 </thead>
 <tr>
