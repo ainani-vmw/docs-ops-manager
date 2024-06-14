@@ -3,32 +3,28 @@ title: Requirements and prerequisites for Tanzu Operations Manager on AWS
 owner: Ops Manager
 ---
 
-Ensure that you meet the following requirements and prerequisites before installing [<%= vars.ops_manager_first %>](https://network.tanzu.vmware.com/products/ops-manager) on Amazon Web Services (AWS).
+Ensure that you meet the following requirements and perform the AWS set up tasks before installing [<%= vars.ops_manager_first %>](https://network.tanzu.vmware.com/products/ops-manager) on Amazon Web Services (AWS).
 
-You can install <%= vars.ops_manager %> on AWS with either the <%= vars.app_runtime_first %> or <%= vars.k8s_runtime_first %> runtime. There are resource requirements specific to each runtime. Ensure you meet the requirements for your runtime and the requirements specific to AWS before installing <%= vars.ops_manager %> on AWS.
+You can install <%= vars.ops_manager %> on AWS with either the <%= vars.app_runtime_first %> or <%= vars.k8s_runtime_first %> runtime. There are resource requirements specific to each runtime. Ensure that you meet the requirements for your runtime and the requirements specific to AWS before installing <%= vars.ops_manager %> on AWS.
 
 ## <a id='requirements'></a> Requirements
 
-This section lists the following resource requirements for installing <%= vars.ops_manager %> on AWS:
-
-* General <%= vars.ops_manager %> resource requirements. For more information, see [<%= vars.ops_manager %> Resource Requirements](#general-requirements).
-
-* AWS-specific resource requirements. For more information, see [AWS Resource Requirements](#aws-requirements).
+This section lists the resource requirements for installing <%= vars.ops_manager %> on AWS, both the general resource requirements, and the AWS-specific resource requirements.
 
 ### <a id='general-requirements'></a> <%= vars.ops_manager %> resource requirements
 
-This section lists resource requirements for installing <%= vars.ops_manager %> on AWS. It includes links to general resource requirements for both the <%= vars.app_runtime_abbr %> and <%= vars.k8s_runtime_abbr %> runtimes.
-
-See one of the following topics, depending on the runtime you plan to install using <%= vars.ops_manager %>:
+Refer to one of the following topics, depending on the runtime you plan to install using <%= vars.ops_manager %>:
 
 * For <%= vars.app_runtime_abbr %>-specific resource requirements, see [<%= vars.app_runtime_abbr %> Resource Requirements](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/<%= vars.dot_major_tas_version %>/tas-for-vms/requirements.html).
 * For <%= vars.k8s_runtime_abbr %>-specific resource requirements, see [AWS Prerequisites and Resource Requirements](https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/<%= vars.current_tkgi_version %>/tkgi/GUID-aws-requirements.html).
 
 ### <a id='aws-requirements'></a> AWS resource requirements
 
-The following are AWS-specific resource requirements for installing <%= vars.ops_manager %> on AWS with an external database and external file storage:
+These are the AWS-specific resource requirements for installing <%= vars.ops_manager %> on AWS with an external database and external file storage:
 
 * Installing <%= vars.ops_manager %> on AWS requires a minimum of the following VM instance limits in your AWS account. The number of VMs required depends on the number of tiles and availability zones (AZs) you plan to deploy. The following VM guidelines apply to the <%= vars.app_runtime_abbr %>, Small Footprint <%= vars.app_runtime_abbr %>, and <%= vars.k8s_runtime_abbr %> runtimes:
+
+    * **<%= vars.k8s_runtime_abbr %>:** See [AWS Prerequisites and Resource Requirements](https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/<%= vars.current_tkgi_version %>/tkgi/GUID-aws-requirements.html).
 
     * **<%= vars.app_runtime_abbr %>:** At a minimum, a new AWS deployment requires the following VMs for <%= vars.app_runtime_abbr %>:
 
@@ -162,6 +158,14 @@ The following are AWS-specific resource requirements for installing <%= vars.ops
           </tr>
         </table>
 
+        Also required:
+
+        * Three Elastic Load Balancers (ELBs)
+        * One Relational Database Service. As a minimum, <%= vars.company_name %> recommends using a db.m5.xlarge instance with at least 100&nbsp;GB of allocated storage.
+        * Five S3 buckets
+
+        <p class="note">
+        <span class="note__title">Note</span>
         If you are deploying a test or sandbox deployment that does not require high availability, then you can scale down the number of VM instances in your deployment. For more information,
         see <a href="https://docs.vmware.com/en/VMware-Tanzu-Application-Service/<%= vars.dot_major_tas_version %>/tas-for-vms/scaling-ert-components.html">Scaling <%= vars.app_runtime_abbr %></a>.
 
@@ -261,18 +265,10 @@ The following are AWS-specific resource requirements for installing <%= vars.ops
           </tr>
         </table>
 
-    * **<%= vars.k8s_runtime_abbr %>:** See [AWS Prerequisites and Resource Requirements](https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/<%= vars.current_tkgi_version %>/tkgi/GUID-aws-requirements.html).
 
-* The following AWS resources are required for installing <%= vars.ops_manager %> on AWS with <%= vars.app_runtime_abbr %>:
+## <a id='prerequisites'></a> Before installing <%= vars.ops_manager %>
 
-    * Three Elastic Load Balancers (ELBs)
-    * One Relational Database Service. As a minimum, <%= vars.company_name %> recommends using a db.m5.xlarge instance with at least 100&nbsp;GB of allocated storage.
-    * Five S3 buckets
-
-
-## <a id='prerequisites'></a> Prerequisites
-
-To install <%= vars.ops_manager %> on AWS, you must:
+Before installing <%= vars.ops_manager %> on AWS, you must:
 
 * Increase or remove the VM instance limits in your AWS account. Installing <%= vars.ops_manager %> requires more than the default 20 concurrent instances. For more information about VM resource requirements, see [Requirements](#requirements), above.
 
@@ -287,11 +283,11 @@ To install <%= vars.ops_manager %> on AWS, you must:
 * Create an SSL certificate for your <%= vars.ops_manager %> domain. For more information, see the [AWS documentation about SSL certificates](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#https-listener-certificates).
   <p> To deploy <%= vars.ops_manager %> to a production environment, you must obtain a certificate from a certificate authority. <%= vars.company_name %> recommends using a self-signed certificate generated by <%= vars.ops_manager %> for development and testing purposes only.</p>
 
-* **(<%= vars.app_runtime_abbr %> only)** Configure sufficient IP allocation. For more information about IP allocation requirements, see [<%= vars.app_runtime_abbr %> Resource Requirements](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/<%= vars.dot_major_tas_version %>/tas-for-vms/requirements.html#general).
+* **(<%= vars.app_runtime_abbr %> only)**: Configure sufficient IP allocation. For more information about IP allocation requirements, see [<%= vars.app_runtime_abbr %> Resource Requirements](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/<%= vars.dot_major_tas_version %>/tas-for-vms/requirements.html#general).
 
-* (Optional) **(<%= vars.app_runtime_abbr %> only)** Configure external storage. <%= vars.company_name %> recommends using external storage if possible. For more information about how file storage location affects platform performance and stability during upgrades, see [Configure File Storage](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/<%= vars.dot_major_tas_version %>/tas-for-vms/configuring.html#file-storage) in _Configuring <%= vars.app_runtime_abbr %> for Upgrades_.
+* (Optional) **(<%= vars.app_runtime_abbr %> only)**: Configure external storage. <%= vars.company_name %> recommends using external storage if possible. For more information about how file storage location affects platform performance and stability during upgrades, see [Configure File Storage](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/<%= vars.dot_major_tas_version %>/tas-for-vms/configuring.html#file-storage) in _Configuring <%= vars.app_runtime_abbr %> for Upgrades_.
 
-* (Optional) **(<%= vars.app_runtime_abbr %> and <%= vars.ops_manager %> only)** Configure external databases. <%= vars.company_name %> recommends using external databases in production deployments for BOSH Director and <%= vars.app_runtime_abbr %>. An external database must be configured to use the UTC timezone.
+* (Optional) **(<%= vars.app_runtime_abbr %> and <%= vars.ops_manager %> only)**: Configure external databases. <%= vars.company_name %> recommends using external databases in production deployments for BOSH Director and <%= vars.app_runtime_abbr %>. An external database must be configured to use the UTC timezone.
 
 * (Optional) **(<%= vars.app_runtime_abbr %> and <%= vars.ops_manager %> only)** Configure external user stores. When you deploy <%= vars.ops_manager %>, you can select a SAML user store for <%= vars.ops_manager %> or a SAML or LDAP user store for <%= vars.app_runtime_abbr %>, to integrate existing user accounts.
 
