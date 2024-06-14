@@ -3,9 +3,10 @@ title: Preparing to deploy Tanzu Operations Manager on AWS
 owner: Ops Manager
 ---
 
-You can manually configure the Amazon Web Services (AWS) components that you need to deploy <%= vars.ops_manager_first %> on AWS.
+
 
 To deploy <%= vars.ops_manager %> on AWS, you must complete the procedures in this topic to create the objects in the AWS Management Console that <%= vars.ops_manager %> requires.
+You can manually configure the Amazon Web Services (AWS) components that you need to deploy <%= vars.ops_manager_first %> on AWS.
 
 To view the list of AWS objects created by the procedures in this topic, see [Required AWS Objects](required-objects.html).
 
@@ -78,7 +79,7 @@ Follow these steps to create a Amazon Identity and Access Management (IAM) polic
 
 1. Paste the policy document into the **JSON** tab on the **Create policy** page.
 
-1. Click **Next:Tags** and click **Next:Review**.
+1. Click **Next: Tags** and click **Next: Review**.
 
 1. In the **Name** text box, enter `pcf-iam-policy`.
 
@@ -89,22 +90,22 @@ Follow these steps to create a Amazon Identity and Access Management (IAM) polic
 
 Follow these steps to create an Amazon Identity and Access Management (IAM) user or role with the minimal permissions necessary to run and install <%= vars.ops_manager %>:
 
-  <p> <%= vars.company_name %> recommends that you use IAM roles instead of users to improve security.</p>
+<%= vars.company_name %> recommends that you use IAM roles instead of users for better security.
 
-1. Click **IAM** to access the IAM Dashboard.
+Click **IAM** to access the IAM Dashboard.
 
-1. If you are configuring AWS access using an AWS instance profile, create an IAM role:
+* If you are configuring AWS access using an AWS instance profile, create an IAM role:
     1. Click **Roles** and then click **Create role**.
-    1. On the **Create role** page, set:
+    2. On the **Create role** page, set:
         * **Role type**: **AWS service**
         * **Use case**: **EC2**
-    2. Click **Next**.
-    3. On the **Add permissions** page, enter the name of the policy you created in the **Permission policies** search box. Select the check box next to the policy in the search results.
-    4. Click **Next**.
-    5. On the **Name, review, and create** page, enter a role name. For example, enter `pcf-role`.
-    6. Click **Create role**.
+    3. Click **Next**.
+    4. On the **Add permissions** page, enter the name of the policy you created in the **Permission policies** search box. Select the check box next to the policy in the search results.
+    5. Click **Next**.
+    6. On the **Name, review, and create** page, enter a role name. For example, enter `pcf-role`.
+    7. Click **Create role**.
 
-2. If you are configuring AWS access using AWS keys, create an IAM user:
+* If you are configuring AWS access using AWS keys, create an IAM user:
     1. Click **Users** and then click **Add users**.
     2. Enter a username. For example, enter `pcf-user`.
     3. In AWS access type, check the **Access key - Programmatic access** check box.
@@ -129,7 +130,7 @@ Follow these steps to create an Amazon Identity and Access Management (IAM) user
 ## <a id='pcfaws-vpc'></a> Create a VPC
 
 1. Follow the AWS tutorial to create an elastic IP address, a VPC, and additional subnets.
-To access the tutorial, see the [AWS documentation](https://docs.aws.amazon.com/batch/latest/userguide/create-public-private-vpc.html). See the following table when configuring the VPC wizard fields and subnets.
+To access the tutorial, see the [AWS documentation](https://docs.aws.amazon.com/batch/latest/userguide/create-public-private-vpc.html). Refer to the following table when configuring the VPC wizard fields and subnets.
 
     <table class=“table”>
     <thead>
@@ -348,7 +349,7 @@ click **Add new subnet** to add the next subnet in the table:
 
 1. Return to the EC2 Dashboard.
 
-1. Click **Security Groups>Create Security Group**.
+1. Click **Security Groups**, then **Create Security Group**.
 
 1. In **Security group name**, enter `pcf-ops-manager-security-group`.
 
@@ -358,16 +359,16 @@ click **Add new subnet** to add the next subnet in the table:
 
 1. In the **Inbound rules** section, add rules using the information in the following table.
 
-    <p> <%= vars.company_name %> recommends limiting access to <%= vars.ops_manager %> to IP ranges within
-    your organization, but you might lessen the IP restrictions after configuring authentication for <%= vars.ops_manager %>.</p>
+    <%= vars.company_name %> recommends limiting access to <%= vars.ops_manager %> to IP ranges within
+    your organization, but you might reduce the IP restrictions after configuring authentication for <%= vars.ops_manager %>.
 
     <table class=“table”>
     <thead>
       <tr>
-        <th><strong>Type </strong></th>
-        <th><strong>Protocol</strong></th>
-        <th><strong>Port Range</strong></th>
-        <th colspan='2'><strong>Source</strong></th>
+        <th>Type</th>
+        <th>Protocol</th>
+        <th>Port Range</th>
+        <th colspan='2'>Source</th>
       </tr>
     </thead>
       <tr>
@@ -407,7 +408,7 @@ click **Add new subnet** to add the next subnet in the table:
       </tr>
     </table>
 
-1. Click **Create security group**.
+2. Click **Create security group**.
 
 
 ## <a id='pcfaws-om-ersecgrp'></a> Configure a security group for BOSH-deployed VMs
@@ -430,10 +431,10 @@ click **Add new subnet** to add the next subnet in the table:
     <table class=“table”>
     <thead>
       <tr>
-        <th><strong>Type </strong></th>
-        <th><strong>Protocol</strong></th>
-        <th><strong>Port Range</strong></th>
-        <th colspan='2'><strong>Source</strong></th>
+        <th>Type</th>
+        <th>Protocol</th>
+        <th>Port Range</th>
+        <th colspan='2'>Source</th>
       </tr>
     </thead>
       <tr>
@@ -474,10 +475,10 @@ click **Add new subnet** to add the next subnet in the table:
       <table class=“table”>
       <thead>
       <tr>
-        <th><strong>Type </strong></th>
-        <th><strong>Protocol</strong></th>
-        <th><strong>Port Range</strong></th>
-        <th colspan='2'><strong>Source</strong></th>
+        <th>Type</th>
+        <th>Protocol</th>
+        <th>Port Range</th>
+        <th colspan='2'>Source</th>
       </tr>
       </thead>
       <tr>
@@ -521,10 +522,10 @@ click **Add new subnet** to add the next subnet in the table:
     <table class=“table”>
     <thead>
     <tr>
-      <th><strong>Type </strong></th>
-      <th><strong>Protocol</strong></th>
-      <th><strong>Port Range</strong></th>
-      <th colspan='2'><strong>Source</strong></th>
+        <th>Type</th>
+        <th>Protocol</th>
+        <th>Port Range</th>
+        <th colspan='2'>Source</th>
     </tr>
     </thead>
     <tr>
@@ -557,10 +558,10 @@ configure a security group that enables the <%= vars.ops_manager %> VM and BOSH 
     <table class=“table”>
     <thead>
     <tr>
-      <th><strong>Type </strong></th>
-      <th><strong>Protocol</strong></th>
-      <th><strong>Port Range</strong></th>
-      <th colspan='2'><strong>Source</strong></th>
+      <th>Type</th>
+      <th>Protocol</th>
+      <th>Port Range</th>
+      <th colspan='2'>Source</th>
     </tr>
     </thead>
     <tr>
@@ -577,10 +578,10 @@ configure a security group that enables the <%= vars.ops_manager %> VM and BOSH 
     <table class=“table”>
     <thead>
     <tr>
-      <th><strong>Type </strong></th>
-      <th><strong>Protocol</strong></th>
-      <th><strong>Port Range</strong></th>
-      <th colspan='2'><strong>Destination</strong></th>
+      <th>Type</th>
+      <th>Protocol</th>
+      <th>Port Range</th>
+      <th colspan='2'>Source</th>
     </tr>
     </thead
     <tr>
