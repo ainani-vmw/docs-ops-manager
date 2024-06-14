@@ -3,7 +3,7 @@ title: AWS objects required for deploying Tanzu Operations Manager
 owner: Ops Manager
 ---
 
-This topic tells you about the objects that can be created in Amazon Web Services (AWS) in order to
+This topic tells you about the objects that can be created in Amazon Web Services (AWS) to
 deploy <%= vars.ops_manager_first %>.
 
 Use the information in this topic to determine the resource requirements of <%= vars.ops_manager %> on AWS, or to verify that you have created the correct resources after completing the procedures in [Preparing to Deploy <%= vars.ops_manager %> on AWS](prepare-env-manual.html) and [Deploying <%= vars.ops_manager %> on AWS](deploy-manual.html).
@@ -35,7 +35,9 @@ Pairs](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html) i
 
 ## <a id='vpc'></a> VPC (public and private subnets)
 
-You must create a VPC with public and private subnets from the VPC Dashboard.
+You must create a VPC with public and private subnets from the VPC Dashboard. 
+
+See [Create a VPC](prepare-env-manual.html#pcfaws-vpc) in _Preparing to Deploy <%= vars.ops_manager %> on AWS_.
 
 The following table lists the subnets in CIDR block `10.0.0.0/16`.
 
@@ -124,8 +126,6 @@ The following table lists the subnets in CIDR block `10.0.0.0/16`.
  </tr>
  </table>
 
-See [Create a VPC](prepare-env-manual.html#pcfaws-vpc) in _Preparing to Deploy <%= vars.ops_manager %> on AWS_.
-
 
 ## <a id='nat-instance'></a> NAT Gateway
 
@@ -139,15 +139,17 @@ The following sections describe the security groups you must create from the EC2
 
 ### <%= vars.ops_manager %>
 
-The <%= vars.ops_manager %> Security Group must be named `pcf-ops-manager-security-group` and have the following inbound rules:
+The <%= vars.ops_manager %> Security Group must be named `pcf-ops-manager-security-group` and have the following inbound rules.
+
+See [Configure a Security Group for <%= vars.ops_manager %>](prepare-env-manual.html#pcfaws-om-secgrp) in _Preparing to Deploy <%= vars.ops_manager %> on AWS_.
 
 <table class=“table”>
 <thead>
 <tr>
-  <th><strong>Type </strong></th>
-  <th><strong>Protocol</strong></th>
-  <th><strong>Port range</strong></th>
-  <th><strong>Source</strong></th>
+  <th>Type</th>
+  <th>Protocol</th>
+  <th>Port range</th>
+  <th>Source</th>
 </tr>
 </thead>
 <tr>
@@ -182,19 +184,21 @@ The <%= vars.ops_manager %> Security Group must be named `pcf-ops-manager-securi
 </tr>
 </table>
 
-See [Configure a Security Group for <%= vars.ops_manager %>](prepare-env-manual.html#pcfaws-om-secgrp) in _Preparing to Deploy <%= vars.ops_manager %> on AWS_.
 
 ### BOSH-deployed VMs
 
-The BOSH-deployed VMs Security Group must be named `pcf-vms-security-group` and have the following inbound rules:
+The BOSH-deployed VMs Security Group must be named `pcf-vms-security-group` and have the following inbound rules.
+
+See [Configure a Security Group for BOSH-Deployed VMs](prepare-env-manual.html#pcfaws-om-ersecgrp)
+in _Preparing to Deploy <%= vars.ops_manager %> on AWS_.
 
 <table class=“table”>
 <thead>
 <tr>
-  <th><strong>Type </strong></th>
-  <th><strong>Protocol</strong></th>
-  <th><strong>Port range</strong></th>
-  <th colspan='2'><strong>Source</strong></th>
+  <th>Type</th>
+  <th>Protocol</th>
+  <th>Port range</th>
+  <th colspan='2'>Source</th>
 </tr>
 </thead>
 <tr>
@@ -213,20 +217,20 @@ The BOSH-deployed VMs Security Group must be named `pcf-vms-security-group` and 
 </tr>
 </table>
 
-See [Configure a Security Group for BOSH-Deployed VMs](prepare-env-manual.html#pcfaws-om-ersecgrp)
-in _Preparing to Deploy <%= vars.ops_manager %> on AWS_.
 
 ### Web ELB
 
-The Web ELB Security Group must be named `pcf-web-elb-security-group` and have the following inbound rules:
+The Web ELB Security Group must be named `pcf-web-elb-security-group` and have the following inbound rules.
+
+See [Configure a Security Group for the Web ELB](prepare-env-manual.html#pcfaws-om-elbsecgrp) in _Preparing to Deploy <%= vars.ops_manager %> on AWS_.
 
 <table class=“table”>
 <thead>
 <tr>
-  <th><strong>Type </strong></th>
-  <th><strong>Protocol</strong></th>
-  <th><strong>Port range</strong></th>
-  <th colspan='2'><strong>Source</strong></th>
+  <th>Type</th>
+  <th>Protocol</th>
+  <th>Port range</th>
+  <th colspan='2'>Source</th>
 </tr>
 </thead>
 <tr>
@@ -252,19 +256,20 @@ The Web ELB Security Group must be named `pcf-web-elb-security-group` and have t
 </tr>
 </table>
 
-See [Configure a Security Group for the Web ELB](prepare-env-manual.html#pcfaws-om-elbsecgrp) in _Preparing to Deploy <%= vars.ops_manager %> on AWS_.
 
 ### TCP ELB
 
-The TCP ELB Security Group must be named `pcf-tcp-elb-security-group` and have the following inbound rule:
+The TCP ELB Security Group must be named `pcf-tcp-elb-security-group` and have the following inbound rule.
+
+See [Configure a Security Group for the TCP ELB](prepare-env-manual.html#pcfaws-om-tcpelbsecgrp) in _Preparing to Deploy <%= vars.ops_manager %> on AWS_.
 
 <table class=“table”>
 <thead>
 <tr>
-  <th><strong>Type </strong></th>
-  <th><strong>Protocol</strong></th>
-  <th><strong>Port range</strong></th>
-  <th colspan='2'><strong>Source</strong></th>
+  <th>Type</th>
+  <th>Protocol</th>
+  <th>Port range</th>
+  <th colspan='2'>Source</th>
 </tr>
 </thead>
 <tr>
@@ -277,6 +282,7 @@ The TCP ELB Security Group must be named `pcf-tcp-elb-security-group` and have t
 </table>
 
 The TCP ELB Security Group must have the following outbound rule:
+
 <table class=“table”>
 <thead>
 <tr>
@@ -295,7 +301,6 @@ The TCP ELB Security Group must have the following outbound rule:
 </tr>
 </table>
 
-See [Configure a Security Group for the TCP ELB](prepare-env-manual.html#pcfaws-om-tcpelbsecgrp) in _Preparing to Deploy <%= vars.ops_manager %> on AWS_.
 
 ### MySQL
 
@@ -304,10 +309,10 @@ The MySQL Security Group must be named `pcf-mysql-security-group` and have the f
 <table class=“table”>
 <thead>
 <tr>
-  <th><strong>Type </strong></th>
-  <th><strong>Protocol</strong></th>
-  <th><strong>Port range</strong></th>
-  <th colspan='2'><strong>Source</strong></th>
+  <th>Type</th>
+  <th>Protocol</th>
+  <th>Port range</th>
+  <th colspan='2'>Source</th>
 </tr>
 </thead>
 <tr>
@@ -319,7 +324,9 @@ The MySQL Security Group must be named `pcf-mysql-security-group` and have the f
 </tr>
 </table>
 
-The MySQL Security Group must have the following outbound rule:
+The MySQL Security Group must have the following outbound rule.
+
+See [Configure a Security Group for MySQL](prepare-env-manual.html#pcfaws-om-mysqlsecgrp) in _Preparing to Deploy <%= vars.ops_manager %> on AWS_.
 
 <table class=“table”>
 <thead>
@@ -339,13 +346,17 @@ The MySQL Security Group must have the following outbound rule:
 </tr>
 </table>
 
-See [Configure a Security Group for MySQL](prepare-env-manual.html#pcfaws-om-mysqlsecgrp) in _Preparing to Deploy <%= vars.ops_manager %> on AWS_.
 
 ## <a id='ops-manager-ami'></a> <%= vars.ops_manager %> AMI
 
-You must locate the public <%= vars.ops_manager %> AMI using the AMI ID provided by the PDF downloaded when clicking **<%= vars.ops_manager %> for AWS** on VMware Tanzu Network.
+1. On VMware Tanzu Network, click **<%= vars.ops_manager %> for AWS**.
+
+1. In the PDF that is downloaded, find the AMI ID.
+
+1. Using the AMI ID, locate the <%= vars.ops_manager %> AMI.
 
 See [Step 1: Launch a <%= vars.ops_manager %> AMI](deploy-manual.html#pcfaws-om-ami) in _Deploying <%= vars.ops_manager %> on AWS_.
+
 
 ## <a id='elbs'></a> ELBs
 
@@ -353,7 +364,9 @@ The following sections describe the ELBs you must create from the EC2 Dashboard.
 
 ### Web ELB
 
-You must create a web ELB with the following configuration:
+You must create a web ELB with the following configuration.
+
+See [Step 2: Create Web Load Balancer](deploy-manual.html#pcfaws-web-lb) in _Deploying <%= vars.ops_manager %> on AWS_.
 
 * **Name**: `pcf-web-elb`
 * **LB Inside**: `pcf-vpc`
@@ -361,9 +374,9 @@ You must create a web ELB with the following configuration:
 * **Security Group**: `pcf-elb-security-group`
 * **Health Check**: TCP Port 8080, Path: `/health`
 
-See [Step 2: Create Web Load Balancer](deploy-manual.html#pcfaws-web-lb) in _Deploying <%= vars.ops_manager %> on AWS_.
-
 ### SSH ELB
+
+See [Step 3: Create SSH Load Balancer](deploy-manual.html#pcfaws-ssh-lb) in _Deploying <%= vars.ops_manager %> on AWS_.
 
 * **Name**: `pcf-ssh-elb`
 * **LB Inside**: `pcf-vpc`
@@ -371,17 +384,15 @@ See [Step 2: Create Web Load Balancer](deploy-manual.html#pcfaws-web-lb) in _Dep
 * **Security Group**: `pcf-ssh-security-group`
 * **Health Check**: TCP Port 2222
 
-See [Step 3: Create SSH Load Balancer](deploy-manual.html#pcfaws-ssh-lb) in _Deploying <%= vars.ops_manager %> on AWS_.
-
 ### TCP ELB
+
+See [Step 4: Create TCP Load Balancer](deploy-manual.html#pcfaws-tcp-lb) in _Deploying <%= vars.ops_manager %> on AWS_.
 
 * **Name**: `pcf-tcp-elb`
 * **LB Inside**: `pcf-vpc`
 * **Selected Subnet**: `pcf-public-subnet-az0`, `pcf-public-subnet-az1`, `pcf-public-subnet-az2`
 * **Security Group**: `pcf-tcp-security-group`
 * **Health Check**: TCP Port 80
-
-See [Step 4: Create TCP Load Balancer](deploy-manual.html#pcfaws-tcp-lb) in _Deploying <%= vars.ops_manager %> on AWS_.
 
 ## <a id='dns-config'></a> DNS configuration
 
