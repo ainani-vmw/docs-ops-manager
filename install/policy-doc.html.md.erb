@@ -10,10 +10,10 @@ _Preparing to Deploy <%= vars.ops_manager %> on AWS_.
 
 <p> For the S3 Bucket policy sections, make sure to update the generic bucket naming with your custom/unique bucket names.</p>
 
-From the AWS Management Console, copy and paste the following text in the **Policy Document** text box.
+From the AWS Management Console, copy and paste the following text into the **Policy Document** text box.
 
-You might want to consider adding more policies to enable additional features.
-For more information, see [Add additional AWS policies](#add-policies).
+You can add more policies to enable additional features.
+For more information, see [Add more AWS policies](#add-policies).
 
 <pre class="terminal">
 
@@ -149,12 +149,14 @@ For more information, see [Add additional AWS policies](#add-policies).
 </pre>
 
 
-## <a id='add-policies'></a> Add additional AWS policies
+## <a id='add-policies'></a> Add more AWS policies
 
-To perform specific tasks, you might need to add additional policies to your **Policy Document** text box in the AWS Management Console.
+To perform specific tasks, you might need to add more policies to your **Policy Document** text box in the AWS Management Console.
 
-Consult the following table to determine what additional policies you might want to include. Then paste the
+Refer to the following table to determine what additional policies you might want to include. Then paste the
 code from the corresponding row. Enter the code in your existing policy after any `},`.
+
+For more information about AWS policies, see [Example policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_examples.html) in the AWS documentation.
 
 <table class=“table”>
 <thead>
@@ -286,5 +288,3 @@ code from the corresponding row. Enter the code in your existing policy after an
         </td>
     </tr>
 </table>
-
-For more information about AWS policies, see [Example policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_examples.html) in the AWS documentation.
