@@ -5,9 +5,8 @@ owner: Ops Manager
 
 You can deploy <%= vars.ops_manager_first %> on Amazon Web Services (AWS).
 
-Before you deploy <%= vars.ops_manager %>, see the preparation steps in [Preparing to Deploy <%= vars.ops_manager %> on AWS](prepare-env-manual.html).
+Before you deploy <%= vars.ops_manager %> using the procedure in this topic, complete the preparation steps in [Preparing to Deploy <%= vars.ops_manager %> on AWS](prepare-env-manual.html).
 
-After you complete this procedure, follow the instructions in [Configuring BOSH Director on AWS](config-manual.html).
 
 ## <a id='pcfaws-om-ami'></a> Step 1: Launch a <%= vars.ops_manager %> AMI
 
@@ -30,7 +29,7 @@ To launch an Amazon Machine Image (AMI) for <%= vars.ops_manager %>:
 1. Paste the AMI ID for your region into the search bar and press enter.
 
     There is a different AMI for each region. If you cannot locate the AMI for your region, verify that you have set your AWS Management Console to your desired region.
-    Additionally, AWS automatically deprecates public AMIs 2 years after they are published, including the AMIs for <%= vars.ops_manager %> and stemcells. These <%= vars.ops_manager %> AMIs do not appear in AMI searches, but can still be launched using the `aws` CLI or Platform Automation. Deploying a deprecated light stemcell using AWS CPI v100 or below will result in an error.
+    Additionally, AWS automatically deprecates public AMIs 2 years after they are published, including the AMIs for <%= vars.ops_manager %> and stemcells. These <%= vars.ops_manager %> AMIs do not appear in AMI searches, but can still be launched using the `aws` CLI or Platform Automation. Deploying a deprecated light stemcell using AWS CPI v100 or below results in an error.
 
 2. (Optional) If you want to encrypt the VM that runs <%= vars.ops_manager %> with AWS Key Management Service (KMS), perform the following additional steps:
 
@@ -145,14 +144,16 @@ A message appears to confirm that AWS has successfully created the load balancer
         * For **Scheme**, click **internet-facing** to allow traffic from public IP addresses, or **internal** to allow traffic only from private IP addresses.
         * For **IP address type**, click the type of IP addresses that you want to allow.
 
-  2. Under **Listeners**, edit the existing listener. For **Load Balancer Protocol**, click **TCP**, for **Load Balancer Port**, enter `2222`.
+  2. Under **Listeners**, edit the existing listener. For **Load Balancer Protocol**, click **TCP**, and for **Load Balancer Port**, enter `2222`.
   3. Under **Availability Zones**, click your VPC.
   4. Check all availability zones. For each availability zone, click `pcf-public-subnet-az0` to allow traffic from public IP addresses, or `pcf-management-subnet-az0` to allow traffic only from private IP addresses.
   5. Click **Next: Configure Security Settings**.
 
-2. On the **Configure Security Settings** page, ignore the **Improve your load balancer's security** error message and click **Next: Configure Routing**.
+2. On the **Configure Security Settings** page, ignore the **Improve your load balancer's security** error message.
 
-3. For **Step 3: Configure Routing**, do the following:
+3. Click **Next: Configure Routing**.
+
+4. For **Step 3: Configure Routing**, do the following:
     1. Under **Target Group**, enter the following values:
 
         * **Name**: Enter `pcf-ssh-elb-target-group`.
@@ -170,9 +171,9 @@ A message appears to confirm that AWS has successfully created the load balancer
 
     4. Click **Next: Register Targets**.
 
-4. For **Step 4: Register Targets**, accept the default values and click **Next: Review**.
+5. For **Step 4: Register Targets**, accept the default values and click **Next: Review**.
 
-5. For **Step 5: Review**, review the load balancer details and then click **Create**. A message appears to confirm that AWS has successfully created the load balancer.
+6. For **Step 5: Review**, review the load balancer details and then click **Create**. A message appears to confirm that AWS has successfully created the load balancer.
 
 
 ## <a id='pcfaws-tcp-lb'></a> Step 4: Create TCP load balancer
@@ -193,10 +194,10 @@ A message appears to confirm that AWS has successfully created the load balancer
     <table class=“table”>
     <thead>
     <tr>
-      <th><strong>Load Balancer Protocol</strong></th>
-      <th><strong>Load Balancer Port</strong></th>
-      <th><strong>Instance Protocol</strong></th>
-      <th><strong>Instance Port</strong></th>
+      <th>Load balancer protocol</th>
+      <th>Load balancer port</th>
+      <th>Instance protocol</th>
+      <th>Instance port</th>
     </tr>
     </thead>
     <tr>
@@ -235,11 +236,13 @@ A message appears to confirm that AWS has successfully created the load balancer
 
 2. Under **Select Subnets**, click either the public or private subnets you configured in [Create a VPC](prepare-env-manual.html#pcfaws-vpc) in _Preparing to Deploy <%= vars.ops_manager %> on AWS_, and click **Next: Assign Security Groups**.
 
-3. On the **Assign Security Groups** page, click the security group `pcf-tcp-elb-security-group` you configured in [Configure a Security Group for the TCP ELB](prepare-env-manual.html#pcfaws-om-tcpelbsecgrp) in _Preparing to Deploy <%= vars.ops_manager %> on AWS_, and click **Next: Configure Security Settings**.
+3. On the **Assign Security Groups** page, click the security group `pcf-tcp-elb-security-group` that you configured in [Configure a Security Group for the TCP ELB](prepare-env-manual.html#pcfaws-om-tcpelbsecgrp) in _Preparing to Deploy <%= vars.ops_manager %> on AWS_, and click **Next: Configure Security Settings**.
 
-4. On the **Configure Security Settings** page, ignore the **Improve your load balancer's security** error message and click **Next: Configure Health Check**.
+4. On the **Configure Security Settings** page, ignore the **Improve your load balancer's security** error message.
 
-5. On the **Configure Health Check** page, enter the following values:
+5. Click **Next: Configure Health Check**.
+
+6. On the **Configure Health Check** page, enter the following values:
     * **Ping Protocol**: Click `TCP`.
     * **Ping Port**: Set to `80`.
     * **Response Timeout**: Set to `3` seconds.
@@ -249,9 +252,9 @@ A message appears to confirm that AWS has successfully created the load balancer
 
 7. Click **Next: Add EC2 Instances**.
 
-8. Accept the defaults on the **Add EC2 Instances** page and click **Next: Add Tags**.
+8. Accept the defaults on the **Add EC2 Instances** page, and click **Next: Add Tags**.
 
-9. Accept the defaults on the **Add Tags** page and click **Review and Create**.
+9.  Accept the defaults on the **Add Tags** page, and click **Review and Create**.
 
 10. Review and confirm the load balancer details, and click **Create**.
 
@@ -264,13 +267,13 @@ A message appears to confirm that AWS has successfully created the load balancer
 
 1. Click **Instances** on the navigational menu to view your EC2 instances.
 
-1. Click the `pcf-ops-manager` instance created in Step 1: Launch an Tanzu Operations Manager AMI.
+1. Click the `pcf-ops-manager` instance created in [Step 1: Launch an Tanzu Operations Manager AMI](#pcfaws-om-ami).
 
 1. On the **Description** tab, record the value for **IPv4 Public IP**.
 
-1. Go to your DNS provider and create the following CNAME and A records:
+1. Go to your DNS provider and create the following `CNAME` and `A` records:
 
-    * CNAME: `*.apps.DOMAIN.com` and `*.system.DOMAIN.com` points to the DNS name of the `pcf-web-elb` load balancer.
+    * CNAME: `*.apps.DOMAIN.com` and `*.system.DOMAIN.com` point to the DNS name of the `pcf-web-elb` load balancer.
     * CNAME: `ssh.system.DOMAIN.com` points to the DNS name of the `pcf-ssh-elb` load balancer.
     * CNAME: `tcp.system.DOMAIN.com` points to the DNS name of the `pcf-tcp-elb` load balancer.
     * A: `pcf.DOMAIN.com` points to the public IP address of the `pcf-ops-manager` EC2 instance.
@@ -281,21 +284,24 @@ A message appears to confirm that AWS has successfully created the load balancer
 
 ## <a id='pcfaws-rds-subnet-group'></a> Step 6: Create RDS subnet group
 
+Perform the following steps to create a RDS Subnet Group for the two RDS subnets.
+
 1. Go to the RDS Dashboard.
 
-1. Complete the following steps to create a RDS Subnet Group for the two RDS subnets:
-    1. Click **Subnet Groups>Create DB Subnet Group**.
-    1. Enter the following values:
+2. Click **Subnet Groups**, then **Create DB Subnet Group**.
 
-        * **Name**: Enter `pcf-rds-subnet-group`.
-        * **Description**: Enter a description to identify this subnet group.
-        * **VPC ID**: Click `pcf-vpc`.
-        * **Availability Zone** and **Subnet ID**: Choose the AZ and subnet for `pcf-rds-subnet-az0` and click **Add**.
+3. Enter the following values:
 
-    2. Repeat the preceding steps to add `pcf-rds-subnet-az1` and `pcf-rds-subnet-az2` to the group.
-    3. Click **Create**.
+    * **Name**: Enter `pcf-rds-subnet-group`.
+    * **Description**: Enter a description to identify this subnet group.
+    * **VPC ID**: Click `pcf-vpc`.
+    * **Availability Zone** and **Subnet ID**: Choose the AZ and subnet for `pcf-rds-subnet-az0` and click **Add**.
 
-        <p> On the Subnet Group page, you might need to refresh the page to view the new group.</p>
+4. Repeat the preceding steps to add `pcf-rds-subnet-az1` and `pcf-rds-subnet-az2` to the group.
+
+5. Click **Create**.
+
+    On the **Subnet Group** page, you might need to refresh the page to view the new group.
 
 
 ## <a id='pcfaws-mysql-rds'></a> Step 7: Create a MySQL database using AWS RDS

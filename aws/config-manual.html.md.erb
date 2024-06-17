@@ -13,9 +13,9 @@ Before you begin this procedure, ensure that you have followed all of the steps 
 
 1. In a web browser, go to the fully qualified domain that you created in the [Configure DNS Records](deploy-manual.html#pcfaws-dns) step of _Deploying <%= vars.ops_manager %> on AWS_.
 
-1. Log in to <%= vars.ops_manager %>. To log in, see [Log In to <%= vars.ops_manager %> For the First Time](../login.html#login-first-time).
+1. Log in to <%= vars.ops_manager %>. To log in, see [Log In to <%= vars.ops_manager %> for the First Time](../login.html#login-first-time).
 
-## <a id='pcfaws-om-awsconfig'></a> Step 2: AWS Config page
+## <a id='pcfaws-om-awsconfig'></a> Step 2: Configure AWS
 
 1. Click the **BOSH Director** tile.
 
@@ -31,28 +31,29 @@ Before you begin this procedure, ensure that you have followed all of the steps 
     * **Security Group ID**: Enter the **Group ID** of the `pcf-vms-security-group` you created for your <%= vars.ops_manager %> VMs in the [Step 6: Configure a Security Group for <%= vars.ops_manager %> VMs](prepare-env-manual.html#pcfaws-om-ersecgrp) in _Preparing to Deploy <%= vars.ops_manager %> on AWS_. Locate the Group ID in the **Security Groups** tab of your EC2 Dashboard.
     * **Key Pair Name**: Enter `pcf-ops-manager-key`.
     * **SSH Private Key**: Open the AWS key pair `pcf-ops-manager-keys.pem` file you generated in [Step 3: Create an IAM User for <%= vars.ops_manager %>](prepare-env-manual.html#create-iam) in _Preparing to Deploy <%= vars.ops_manager %> on AWS_. Copy the contents of the `.pem` file and paste it into the **SSH Private Key** text box.
-    * **Region**: Click the region where you deployed <%= vars.ops_manager %>.
+    * **Region**: Click the region in which you deployed <%= vars.ops_manager %>.
     * **VM Type Catalog** Click the VM catalog that you want to use for your BOSH-deployed VMs.
     * **AWS EBS disk type**: Click the type of EBS volume for BOSH deployed VMs to use.
 
     <p class="note caution">
       <span class="note__title">Caution</span>
-      If you change this value, BOSH recreates all VMs when you apply changes.</p>
+      If you change this value, BOSH recreates all VMs when you Apply Changes.</p>
 
     * **Encrypt Linux EBS Volumes**: Click this check box to enable full encryption on persistent disks of all BOSH deployed VMs except the <%= vars.ops_manager %> VM and BOSH Director VM.
 
       For more information about using EBS encryption, see [Configuring Amazon EBS Encryption for <%= vars.ops_manager %> on AWS](../install/cloudform-om-ebs-config.html).
 
-        <p class="note important">
-      <span class="note__title">Important</span> Enabling EBS encryption only encrypts Linux VMs. The Windows VMs deployed with <%= vars.windows_runtime_first %> or <%= vars.windows_runtime_abbr %> 2012 R2 are not encrypted.</p>
+      <p class="note important">
+      <span class="note__title">Important</span>
+      Enabling EBS encryption only encrypts Linux VMs. The Windows VMs deployed with <%= vars.windows_runtime_abbr %> or <%= vars.windows_runtime_abbr %> 2012 R2 are not encrypted.</p>
 
 2. Click **Save**.
 
-## <a id='pcfaws-om-dirconfig'></a> Step 3: Director Config page
+## <a id='pcfaws-om-dirconfig'></a> Step 3: Complete the Director Config page
 
 <%= partial "../common/director-config" %>
 
-## <a id='az'></a> Step 4: Create Availability Zones page
+## <a id='az'></a> Step 4: Create Availability Zones
 
 <%= vars.company_name %> recommends at least three availability zones (AZs) for a highly available installation of <%= vars.app_runtime_first %>. The procedures in <a href="prepare-env-manual.html">Preparing to Deploy <%= vars.ops_manager %> on AWS</a> use 3 AZs.
 
@@ -68,7 +69,7 @@ Before you begin this procedure, ensure that you have followed all of the steps 
 2. Click **Save**.
 
 
-## <a id='network'></a> Step 5: Create Networks page
+## <a id='network'></a> Step 5: Create Networks
 
 1. Click **Create Networks**.
 
@@ -367,7 +368,7 @@ see <a href="https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-
 
 <%= vars.expand_network_azs %>
 
-## <a id='assign-azs'></a> Step 6: Assign AZs and Networks page
+## <a id='assign-azs'></a> Step 6: Assign AZs and Networks
 
 1. Click **Assign AZs and Networks**.
 
@@ -380,19 +381,19 @@ see <a href="https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-
 3. Click **Save**.
 
 
-## <a id='security'></a> Step 7: Security page
+## <a id='security'></a> Step 7: Configure Security
 
 <%= partial "../common/security-pane" %>
 
-## <a id='bosh-dns'></a> Step 8: BOSH DNS Config page
+## <a id='bosh-dns'></a> Step 8: Configure DNS for BOSH
 
 <%= partial "../common/bosh-dns-config" %>
 
-## <a id='syslog'></a> Step 9: Syslog page
+## <a id='syslog'></a> Step 9: Configure Syslog
 
 <%= partial "/pcf/ops-manager/syslog_bosh", :locals => { :syslog_context => 'BOSH Director' } %>
 
-## <a id='pcfaws-om-rscestem'></a> Step 10: Resource Config page
+## <a id='pcfaws-om-rscestem'></a> Step 10: Configure Resources for BOSH Director
 
 1. Click **Resource Config**.
 
@@ -429,9 +430,11 @@ Enter your AWS target group name in the **Load Balancers** field for the **BOSH 
 
 1. Return to the <%= vars.ops_manager %> Installation Dashboard.
 
-1. Click **Review Pending Changes**, then **Apply Changes**.
+1. Click **Review Pending Changes**.
 
-2. BOSH Director begins to install. The **Changes Applied** window displays when installation is complete.
+2. Click **Apply Changes**.
+
+3. BOSH Director begins to install. The **Changes Applied** dialog box appears when installation is complete.
 
     ![Changes Applied dialog box, with 2 buttons: Close and Return to Installation Dashboard.](../common/images/aws/vpc-step16.png)
 
