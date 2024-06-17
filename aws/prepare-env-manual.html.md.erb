@@ -92,8 +92,8 @@ Click **IAM** to access the IAM Dashboard.
     2. Enter a username. For example, enter `pcf-user`.
     3. In AWS access type, check the **Access key - Programmatic access** check box.
 
-        <p> If you prefer to create your keys locally and import them into AWS, see
-        the [Amazon documentation](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html).</p>
+        If you prefer to create your keys locally and import them into AWS, see
+        the <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html">Amazon documentation</a>.
 
     4. Click **Next: Permissions**.
     5. Click the **Attach existing policies directly** tab.
@@ -256,15 +256,15 @@ click **Add new subnet** to add the next subnet in the table:
 
 1. Click **Create internet gateway**.
 
-1. In **Name tag**, enter `pcf-internet-gateway`.
+2. In **Name**, enter `pcf-internet-gateway`.
 
-1. Click **Create internet gateway**.
+3. Click **Create internet gateway**.
 
-1. In **Actions**, click **Attach to VPC**.
+4. In **Actions**, click **Attach to VPC**.
 
-1. In **Available VPCs**, click the VPC that includes `pcf-vpc`.
+5. In **Available VPCs**, click the VPC that includes `pcf-vpc`.
 
-1. Click **Attach internet gateway**.
+6. Click **Attach internet gateway**.
 
 
 ## <a id='pcfaws-nat-gateway'></a> Create a NAT gateway
@@ -297,10 +297,11 @@ click **Add new subnet** to add the next subnet in the table:
   1. In the **Routes** section, click **Edit routes**.
   2. Click **Add route**.
   3. In **Destination**, enter `0.0.0.0/0`.
-  4. In **Target**, click **Internet Gateway**, then click the internet gateway that includes `(pcf-internet-gateway)`.\
+  4. In **Target**, click **Internet Gateway**, then click the internet gateway that includes `(pcf-internet-gateway)`.
   5. Click **Save changes**.
 
 2. Click the **Subnet associations** tab.
+  
   1. In the **Explicit subnet associations** section, click **Edit subnet associations**.
   2. Select `pcf-public-subnet-az0`, `pcf-public-subnet-az1`, and `pcf-public-subnet-az2`.
   3. Click **Save associations**.
@@ -406,9 +407,9 @@ click **Add new subnet** to add the next subnet in the table:
 1. In the **Inbound rules** section, add rules for all traffic from your public and private subnets to your private subnet, as shown in the table.
     This rule configuration does the following:
 
-    * Enables BOSH to deploy <%= vars.app_runtime_first %> and other services.
-    * Enables app VMs to communicate through the router.
-    * Allows the load balancer to send traffic to <%= vars.app_runtime_abbr %>.
+    * Enables BOSH to deploy <%= vars.app_runtime_first %> and other services
+    * Enables app VMs to communicate through the router
+    * Allows the load balancer to send traffic to <%= vars.app_runtime_abbr %>
 
     <table class=“table”>
     <thead>
@@ -450,9 +451,9 @@ click **Add new subnet** to add the next subnet in the table:
 
 2. In the **Inbound rules** section, add rules to allow traffic to ports `80`, `443`, and `4443` from `0.0.0.0/0`, as shown in the table.
 
-    <p> Allow traffic to port `4443` only if you are in an AWS cloud region that does not support AWS ALBs. For example, the GovCloud region. For more information about AWS regions and availability zones, see <a href="https://aws.amazon.com/about-aws/global-infrastructure/">AWS Global Infrastructure</a>.</p>
+    Allow traffic to port `4443` only if you are in an AWS cloud region that does not support AWS ALBs. For example, the GovCloud region. For more information about AWS regions and availability zones, see <a href="https://aws.amazon.com/about-aws/global-infrastructure/">AWS Global Infrastructure</a>.
 
-    <p> For finer control over what can reach <%= vars.app_runtime_abbr %>, change <code>0.0.0.0/0</code> to be more restrictive. This security group governs external access to <%= vars.app_runtime_abbr %> from apps such as the cf CLI and app URLs.</p>
+    For finer control over what can reach <%= vars.app_runtime_abbr %>, change <code>0.0.0.0/0</code> to be more restrictive. This security group governs external access to <%= vars.app_runtime_abbr %> from apps such as the cf CLI and app URLs.
 
       <table class=“table”>
       <thead>
@@ -535,7 +536,7 @@ configure a security group that enables the <%= vars.ops_manager %> VM and BOSH 
 
 1. In **VPC**, click the VPC where you want to deploy MySQL.
 
-2. In the **Inbound rules** section, add a rule of type `MySQL` and specify the subnet of your VPC in **Source**, as shown in the table.
+2. In the **Inbound rules** section, add a rule of type **MySQL** and specify the subnet of your VPC in **Source**, as shown in the table.
 
     <table class=“table”>
     <thead>
