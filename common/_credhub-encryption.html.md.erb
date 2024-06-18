@@ -6,12 +6,10 @@ in [Preparing CredHub HSMs for configuration](../install/hsm-config.html).
 
     <p> After you deploy <%= vars.ops_manager %> with an HSM encryption provider, you cannot change BOSH CredHub to store encryption keys internally.</p>
 
-    ![CredHub Encryption Provider page](../common/images/credhub-hsm.png)
-
     * **Internal:** Use this option for internal CredHub key storage. This option is selected by default and requires no additional configuration.
     * **Luna HSM:** Use this option to use a SafeNet Luna HSM as your permanent CredHub encryption provider, and fill in the following fields:
 
-        <p> If you use multiple HSM hosts, you must use the <%= vars.ops_manager %> API to set or update the HSM configuration. For more information, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-aws-manual.html">Updating director and Iaas properties (Experimental)</a> in the <%= vars.ops_manager %> API documentation.</p>
+        <p> If you use multiple HSM hosts, you must use the <%= vars.ops_manager %> API to set or update the HSM configuration. For more information, see <a href="https://developer.broadcom.com/xapis/tanzu-operations-manager-api/latest//api/v0/staged/director/properties/put/">Updating a staged director's properties</a> in the <%= vars.ops_manager %> API documentation.</p>
 
         1. **Encryption Key Name**: Any name to identify the key that the HSM uses to encrypt and decrypt the CredHub data. Changing this key name after you deploy <%= vars.ops_manager %> can cause service downtime.
         2. **Provider Partition**: The partition that stores your encryption key. Changing this partition after you deploy <%= vars.ops_manager %> could cause service downtime.
@@ -23,3 +21,5 @@ in [Preparing CredHub HSMs for configuration](../install/hsm-config.html).
         7. **HSM Host Address**
         8. **HSM Port Address**: If you do not know your port address, enter `1792`.
         9. **HSM Certificate**: The certificate that the HSM presents to CredHub to establish a two-way mTLS connection.
+
+    ![CredHub Encryption Provider page](../common/images/credhub-hsm.png)

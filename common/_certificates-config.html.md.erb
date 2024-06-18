@@ -2,8 +2,6 @@ For **Certificate Duration Overrides**, you can choose whether certificates
 generated within <%= vars.ops_manager %> and CredHub use the default duration specified
 for the certificate or a custom duration value that you specify.
 
-    ![Three fields: the Off-On option for the feature, CA Certificate Duration (days) text field, and Leaf Certificate Duration (days).](../common/images/duration-overrides.png)
-
     * **Off:** Use this option to use default duration for certificates created by all products.
     * **On:** Use this option to set a value to override the duration for certificates created by all products. If a product creates a certificate with a longer duration than the value you set, then the longer duration is used.
 
@@ -12,3 +10,5 @@ for the certificate or a custom duration value that you specify.
 
         <p> After you set a certificate duration override, you must take additional steps to
         apply the setting to all certificates. For more information, see <a href="../security/pcf-infrastructure/configure-certificate-duration-overrides.html">Overriding Duration for Certificates</a>.</p>
+
+    ![Three fields: the Off-On option for the feature, CA Certificate Duration (days) text field, and Leaf Certificate Duration (days).](../common/images/duration-overrides.png)
