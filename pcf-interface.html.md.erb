@@ -224,7 +224,7 @@ The following describes the information listed on the **Certificates** page:
 
 Go to the **Settings** topic by clicking on your user name and click **Settings**. On the screen that appears, click **Change Decryption Passprase**.
 
-![admin drop-down menu options: Settings, My Account, Log Out](images/user_account_menu.png)
+![Admin drop-down menu options: Settings, My Account, Log Out](images/user_account_menu.png)
 
 The following sections describes the configuration topics.
 
@@ -327,7 +327,7 @@ Exports the current installation with all of its assets. When you export an inst
 
 Viewable by administrators only. Configure a custom syslog server for <%= vars.ops_manager %>. When you click **Yes** and fill the following text boxes, <%= vars.ops_manager %> produces and sends all syslog entries from the <%= vars.ops_manager %> VM to the configured syslog endpoint. <%= vars.ops_manager %> also sends BOSH Director access events to the syslog endpoint.
 
-<p> <%= vars.ops_manager %> syslog entries are sent in RFC 3164 format.</p>
+<%= vars.ops_manager %> syslog entries are sent in RFC 3164 format.
 
 To configure a custom syslog endpoint for <%= vars.ops_manager %> logs:
 
@@ -335,24 +335,27 @@ To configure a custom syslog endpoint for <%= vars.ops_manager %> logs:
 
 1. (Optional) Select **Yes** to send <%= vars.ops_manager %> system logs to a remote server.
 
-1. Enter the IP address or DNS name for the remote server in **Address**.
+1. In **Address**, enter the IP address or DNS name for the remote server.
 
-1. Enter the port number that the remote server listens on in **Port**.
+1. In **Port**, enter the port number that the remote server listens on.
 
-1. Select **TCP** or **UDP** from the **Transport Protocol** dropdown. This selection determines which transport protocol is used to send the logs to the remote server.
+1. In the **Transport Protocol** drop-down menu, select **TCP** or **UDP**. This selection determines which transport protocol is used to send the logs to the remote server.
 
-1. (Optional) Select the **Enable TLS** checkbox to send encrypted logs to remote server with TLS. After you select the checkbox:
-	1. Enter either the name or SHA1 fingerprint of the remote peer in **Permitted Peer**.
-	1. Enter the SSL certificate for the remote server in **SSL Certificate**.
-	<p class="note"><strong>Note:</strong> <%= vars.company_name %> strongly recommends that you enable TLS encryption when you are forwarding logs. Logs can contain sensitive information, such as cloud provider credentials.</p>
+1. (Optional) Select the **Enable TLS** check box to send encrypted logs to remote server with TLS. After you select the check box:
+	1. In **Permitted Peer**, enter either the name or SHA1 fingerprint of the remote peer.
+	1. In **SSL Certificate**, enter the SSL certificate for the remote server.
 
-1. (Optional) Enter an integer in **Queue Size**. This value specifies the number of log messages held in the buffer. The default value is 100,000.
+    <p class="note">
+    <span class="note__title">Note</span>
+    <%= vars.company_name %> strongly recommends that you enable TLS encryption when you are forwarding logs. Logs can contain sensitive information, such as cloud provider credentials.</p>
 
-1. (Optional) Select the checkbox to **Forward Debug Logs** to an external source. This option is deselected by default. If you select it, you may generate a large amount of log data.
+2. (Optional) In **Queue Size**, enter an integer. This value specifies the number of log messages held in the buffer. The default value is 100,000.
 
-1. (Optional) Enter configuration details for rsyslog in the **Custom rsyslog Configuration** field. This field requires the rainerscript syntax.
+3. (Optional) Select the   **Forward Debug Logs** check box to forward the logs to an external source. This option is deselected by default. If you select it, you may generate a large amount of log data.
 
-1. Click **Save**.
+4. (Optional) In **Custom rsyslog Configuration**, enter the configuration details for rsyslog. This text box requires the `rainerscript` syntax.
+
+5. Click **Save**.
 
 ### <a id='pruning'></a> Pruning settings
 
