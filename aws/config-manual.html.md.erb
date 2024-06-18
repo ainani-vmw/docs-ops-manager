@@ -59,8 +59,6 @@ Before you begin this procedure, ensure that you have followed all of the steps 
 
 1. Click **Create Availability Zones**.
 
-    ![The Create Availability Zones page in Tanzu Operations Manager. See the following steps for information about each field.](../common/images/cloudform/create-az.png)
-
 1. To add the three AZs you specified in the [Create a VPC](prepare-env-manual.html#pcfaws-vpc) section of _Preparing to Deploy <%= vars.ops_manager %> on AWS_:
     1. Click **Add**.
     2. For **Amazon Availability Zone**, enter the name of the AZ.
@@ -68,6 +66,7 @@ Before you begin this procedure, ensure that you have followed all of the steps 
 
 2. Click **Save**.
 
+    ![The Create Availability Zones page in Tanzu Operations Manager. See the following steps for information about each field.](../common/images/cloudform/create-az.png)
 
 ## <a id='network'></a> Step 5: Create Networks
 
@@ -77,18 +76,16 @@ Before you begin this procedure, ensure that you have followed all of the steps 
 
 1. (Optional) Click **Enable ICMP checks** to enable ICMP on your networks. <%= vars.ops_manager %> uses ICMP checks to confirm that components within your network are reachable.
 
-1. Perform the following steps to add the network configuration that you created for your VPC in the [Create a VPC](prepare-env-manual.html#pcfaws-vpc) in _Preparing to Deploy <%= vars.ops_manager %> on AWS_. Record your VPC CIDR if you set a CIDR other than the recommendation.
+1. Perform the following steps to add the network configuration that you created for your VPC in the [Create a VPC](prepare-env-manual.html#pcfaws-vpc) in _Preparing to Deploy <%= vars.ops_manager %> on AWS_. Record your VPC CIDR if you set a CIDR other than the recommended one.
 
     1. Click **Add Network**.
     1. For **Name**, enter `management`.
     1. Create a subnet for each availability zone by clicking **Add Subnet**. See the following table for the information required to create all three subnets. When entering the **VPC Subnet ID** for each subnet, you must enter the corresponding Subnet ID associated with that subnet in the AWS VPC dashboard:
 
          <table class=“table”>
-         <thead>
           <tr>
-            <th rowspan="7">First<br>Subnet</th>
+            <th rowspan="7"">First<br>Subnet</th>
           </tr>
-         </thead>
           <tr>
             <th>VPC Subnet ID</th>
             <td>Subnet ID for <code>pcf-management-subnet-az0</code></td>
@@ -170,18 +167,19 @@ Before you begin this procedure, ensure that you have followed all of the steps 
         </table>
 
         <p class="note important">
-        <span class="note__title">Important</span> If you set a VPC CIDR other than recommended, enter the second IP in your VPC CIDR. For example, for a <code>10.0.0.0/24</code> VPC CIDR, enter <code>10.0.0.2</code> in each subnet.</p
+        <span class="note__title">Important</span>
+        If you set a VPC CIDR other than
+        recommended, enter the second IP in your VPC CIDR. For example, for
+        a <code>10.0.0.0/24</code> VPC CIDR, enter <code>10.0.0.2</code> in each subnet.</p>
 
     1. Click **Add Network**.
     1. For **Name**, enter the name of your runtime. For example, `tas` or `pks`.
-    1. Create a subnet for each availability zone by clicking **Add Subnet**. See the table below for the information required to create all three subnets:
+    1. Create a subnet for each availability zone by clicking **Add Subnet**. For more information, see the following table for the information required to create all three subnets:
 
           <table class=“table”>
-          <thead>
           <tr>
             <th rowspan="7">First<br>Subnet</th>
           </tr>
-          </thead>
           <tr>
             <th>VPC Subnet ID</th>
             <td>Subnet ID for <code>pcf-tas-subnet-az0</code> or <code>pcf-pks-subnet-az0</code></td>
@@ -262,18 +260,20 @@ Before you begin this procedure, ensure that you have followed all of the steps 
           </tr>
         </table>
 
-        If you set a VPC CIDR other than recommended, enter the second IP in your VPC CIDR. For example, for a <code>10.0.0.0/24</code> VPC CIDR, enter <code>10.0.0.2</code> in each subnet.
+        <p class="note important">
+        <span class="note__title">Important</span>
+        If you set a VPC CIDR other than
+        recommended, enter the second IP in your VPC CIDR. For example, for
+        a <code>10.0.0.0/24</code> VPC CIDR, enter <code>10.0.0.2</code> in each subnet.</p>
 
-    1. Click **Add Network**.
-    1. For **Name**, enter `services`.
-    1. Create a subnet for each availability zone by clicking **Add Subnet**. See the following table for the information required to create all three subnets:
+    5. Click **Add Network**.
+    6. For **Name**, enter `services`.
+    7. Create a subnet for each availability zone by clicking **Add Subnet**. See the following table for the information required to create all three subnets:
 
           <table class=“table”>
-          <thead>
           <tr>
             <th rowspan="7">First<br>Subnet</th>
           </tr>
-          </thead>
           <tr>
             <th>VPC Subnet ID</th>
             <td>Subnet ID for <code>pcf-services-subnet-az0</code></td>
@@ -354,9 +354,13 @@ Before you begin this procedure, ensure that you have followed all of the steps 
           </tr>
         </table>
 
-        If you set a VPC CIDR other than recommended, enter the second IP in your VPC CIDR. For example, for a <code>10.0.0.0/24</code> VPC CIDR, enter <code>10.0.0.2</code> in each subnet.
+        <p class="note important">
+        <span class="note__title">Important</span>
+        If you set a VPC CIDR other than
+        recommended, enter the second IP in your VPC CIDR. For example, for
+        a <code>10.0.0.0/24</code> VPC CIDR, enter <code>10.0.0.2</code> in each subnet.</p>
 
-3. Click **Save**.
+2. Click **Save**.
 
 <p class="note important">
 <span class="note__title">Important</span>
@@ -372,14 +376,13 @@ see <a href="https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-
 
 1. Click **Assign AZs and Networks**.
 
-    ![The Assign AZs and Networks page in Tanzu Operations Manager. For more information, see the following steps for information about each field.](../common/images/assign-az.png)
-
 1. Click a **Singleton Availability Zone** from the drop-down menu. The BOSH Director is deployed into this AZ.
 
 2. Click `management` under **Network**Use from the drop-down menu. The BOSH Director is deployed into this network.
 
 3. Click **Save**.
 
+    ![The Assign AZs and Networks page in Tanzu Operations Manager. For more information, see the following steps for information about each field.](../common/images/assign-az.png)
 
 ## <a id='security'></a> Step 7: Configure Security
 
@@ -399,18 +402,18 @@ see <a href="https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-
 
     ![The Resource Config page in Tanzu Operations Manager. For more information, see the following steps for information about each field.](../common/images/cloudform/resource-config.png)
 
-2. Adjust any values as necessary for your deployment. Under the **Instances**, **VM Type**, and **Persistent Disk Type** fields,
-click **Automatic** from the drop-down menu to allocate the recommended resources for the job. If the **Persistent Disk Type** field reads **None**, the job does not require persistent disk space.
+2. Adjust any values as necessary for your deployment. Under the **Instances**, **VM Type**, and **Persistent Disk Type** fields, and
+select **Automatic** from the drop-down menu to allocate the recommended resources for the job. If the **Persistent Disk Type** field reads **None**, the job does not require persistent disk space.
 
-    For the BOSH Director job, click a VM type with at least 8&nbsp;GB memory.<br>
+    * For the BOSH Director job, click a VM type with at least 8&nbsp;GB memory.
 
-    If you set a field to **Automatic** and the recommended resource allocation changes in a future version, <%= vars.ops_manager %> automatically uses the new recommended allocation.<br>
-
-    If you install <%= vars.windows_runtime_first %>, provision your **Main Compilation Job**
+    * If you set a field to **Automatic** and the recommended resource allocation changes in a future version, <%= vars.ops_manager %> automatically uses the new recommended allocation.
+    
+    * If you install <%= vars.windows_runtime_first %>, provision your **Main Compilation Job**
     with at least 100&nbsp;GB of disk space.
 
 1. (Optional) To configure an Application Load Balancer (ALB) for your BOSH Director, click the icon next to the **BOSH Director** job name to see more fields.
-Enter your AWS target group name in the **Load Balancers** field for the **BOSH Director** job. Prepend the name with `alb:`. For example, enter `alb:target-group-name`.
+In the **Load Balancers** field for the **BOSH Director** job, enter your AWS target group name. Prepend the name with `alb:`. For example, enter `alb:target-group-name`.
 
     To create an ALB and target group, follow the procedures in [Getting Started with Application Load Balancers](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/application-load-balancer-getting-started.html) in the AWS documentation. Then navigate to **Target Groups** in the **EC2 Dashboard** menu to find your target group **Name**.
 
