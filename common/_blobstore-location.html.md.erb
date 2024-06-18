@@ -42,7 +42,7 @@
             <p> AWS ends support for path-style URLs for all S3 buckets created after September 30, 2020. For more information, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/index.html">Support for Virtual-Hosted-Style URLs for AWS S3 Blobstores</a>.</p>
         <% if current_page.data.iaas == "AWS" %>
         1. **Credentials Source:**
-        Input your credentials from the following sources.
+        Type in your credentials from the following sources.
             - **Static Credentials:** In **Access Key** and **Secret Key**, enter the keys you generated when creating your S3 bucket.
             - **IAM Profile:** Use the IAM profile associated with the BOSH Director.<br>
               You must select the **Enable Signed URLs** check box to use IAM Profile credentials to access blobstores.
@@ -59,8 +59,6 @@
             * **Copy into an additional bucket:** This option saves blobstore backups to a separate bucket, which is useful with blobstores that do not support versioning. This option requires you to configure the **Backup Bucket Region** and **Backup Bucket Name** fields.
 
     * **GCS Blobstore:** Use this option for an external Google Cloud Storage (GCS) endpoint.
-
-      ![On the Blobstore Location page, select "GCS Blobstore.](../common/images/gcp/blobstore-gcp.png)
 
       To create a GCS bucket, follow the procedures in [Creating Storage Buckets](https://cloud.google.com/storage/docs/creating-buckets) in the GCS documentation.
       <% if current_page.data.iaas != "GCP" %>
@@ -79,3 +77,5 @@
           5. **GCS Backup Strategy:** To configure whether and how to back up the BOSH Director's GCS blobstore, click one of the following options:
               * **No backups**
               * **Copy into an additional bucket:** This option saves blobstore backups to a bucket separate from the blobstore itself, and requires you to configure the **Backup Bucket Region** and **Backup Bucket Name** text boxes.
+
+        ![On the Blobstore Location page, select "GCS Blobstore.](../common/images/gcp/blobstore-gcp.png)
