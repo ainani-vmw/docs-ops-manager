@@ -28,6 +28,7 @@ Provider?](https://www.cloudfoundry.org/certified-platforms-how-to/) on the Clou
 
 - **[Known Issue]** Usage of `additional_cloud_properties` can unintentionally mutate credentials causing Apply Changes to fail.
 - **[Known Issue]** Configuring NSX-T with Certificate Authentication on vSphere results in CPI error "The URL https://<VCENTER_URL>/sdk/vimService does not have a valid SSL certificate" causing Apply Changes to fail.
+- **[Known Issue]** The Certificates page will return a 500 status error when certain tiles like Tanzu Gemfire are installed. Until a fix is released, customers can continue monitoring certificate expiration through the `/api/v0/deployed/certificates` API endpoint.
 - **[Feature]** Add support for Tiles to access BOSH read-only credentials.
 - **[Feature]** Show a warning when configuring Ops Manager with an export older than 24 hours.
 - **[Bug Fix]** Clean up sockets after Ops Manager crash to prevent Support Bundle from failing to generate.
@@ -54,6 +55,7 @@ Provider?](https://www.cloudfoundry.org/certified-platforms-how-to/) on the Clou
 
 **Release Date:** May 20, 2024
 
+- **[Known Issue]** The Certificates page will return a 500 status error when certain tiles like Tanzu Gemfire are installed. Until a fix is released, customers can continue monitoring certificate expiration through the `/api/v0/deployed/certificates` API endpoint.
 - **[Feature]** The Certificates page has been redesigned to include information about certificate rotation status. For more information, see [Certificates page displays rotation status for each certificate](#certificate-rotation-status).
 - **[Feature]** A new API endpoint (`/api/v1/deployed/certificates`) has been added that includes certificate rotation status.
 - **[Bug Fix]** The correct rotation procedure is now recommended for Antrea certificates in TKGI.
