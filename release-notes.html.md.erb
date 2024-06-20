@@ -26,13 +26,11 @@ Provider?](https://www.cloudfoundry.org/certified-platforms-how-to/) on the Clou
 
 **Release Date:** June 20, 2024
 
-- **[Bug Fix]** Stemcell Library returns error when Product does not have assigned stemcell and only one valid stemcell is available
 - **[Feature]** Customers using SAML with Ops Manager can rotate the internal SAML certificate
-- **[Bug Fix]** `additional_cloud_properties` redaction should not modify the values for secrets
+- **[Known Issue Fix]** `additional_cloud_properties` is no longer unintentionally mutated when redacting secrets
+- **[Known Issue Fix]** NSX-T Certificate Authentication no longer fails during Apply Changes due to the private key being mutated
+- **[Known Issue Fix]** The Certificates page no longer returns a 500 status error when the Tanzu Gemfire tile is installed
 - **[Bug Fix]** Products that are marked as LTS-T in Tanzu Network should now appear in the list of available products when Tanzu Network integration is enabled
-- **[Bug Fix]** Updating CPI configs step should use vars file instead of environment vars so that secrets that are multiline aren't mangled
-- **[Bug Fix]** The Certificates page should not return a 500 status error when the Tanzu Gemfire tile is installed
-- **[Bug Fix]** Generating a certificate and then canceling the change no longer updates the certificate but not the private key
 
 <table border="1" class="nice">
   <thead>
