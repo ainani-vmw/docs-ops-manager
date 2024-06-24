@@ -85,10 +85,10 @@ The most common cause for the rotation not progressing is you still have VMs tha
 
 ### <a id='troubleshooting-failed-apply-changes'></a> Apply Changes action fails with "Failed to run the &lt;STEP NAME&gt; step on '/opsmgr/bosh_dns/tls_ca'" or "Cannot detect next rotation step for certificate '/opsmgr/bosh_dns/tls_ca'"
 
-Apply Changes fails if an error occurs when you run the next step of the certificate rotation, or it cannot determine what the next step of the rotation can be. 
+Apply Changes fails if an error occurs when you run the next step of the certificate rotation, or it cannot determine what the next step of the rotation can be.
 In both cases, the BOSH DNS certificates are likely in an state that is unsafe to proceed with the rotation. 
 If this occurs, deactivate the automatic rotation feature and contact
-[Support](https://tanzu.vmware.com/support) for assistance.
+[Support](https://support.broadcom.com/) for assistance.
 
 ### <a id='troubleshooting-maestro'></a> Running `maestro` CLI commands fail with safety violations about the BOSH DNS certificates
 
@@ -96,4 +96,3 @@ When the automatic rotation feature is active, the BOSH DNS certificates might n
 This can cause safety violations when you manually run `maestro` CLI commands, because `maestro` expects all certificates that it rotates to be in the same rotation step.
 
 If you need to run `maestro` CLI commands manually and you run into safety violations about BOSH DNS certificates, use `--exclude /opsmgr/bosh_dns/tls_ca` to exclude BOSH DNS.
-

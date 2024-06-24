@@ -25,7 +25,7 @@
     * **TLS Certificate:** Enter the client certificate for mutual TLS connections to the database.
     * **TLS Private Key:** Enter the client private key for mutual TLS connections to the database.
 
-    * **Advanced DB Connection Options:** This field accepts a JSON-formatted options string. It can be left blank unless directed by <%= vars.company_name %> Support.
+    * **Advanced DB Connection Options:** This field accepts a JSON-formatted options string. It can be left blank unless directed by <%= vars.new_company_name %> Support.
 <% end %>
 <%# For GCP Manual config topic only: %>
 <% if current_page.data.iaas == "GCP" && current_page.data.install_type == "manual" %>
@@ -51,7 +51,7 @@
     * **TLS CA:** Enter the Certificate Authority for the TLS Certificate.
     * **TLS Certificate:** Enter the client certificate for mutual TLS connections to the database.
     * **TLS Private Key:** Enter the client private key for mutual TLS connections to the database.
-    * **Advanced DB Connection Options:** This field accepts a JSON-formatted options string. It can be left blank unless directed by <%= vars.company_name %> Support.
+    * **Advanced DB Connection Options:** This field accepts a JSON-formatted options string. It can be left blank unless directed by <%= vars.new_company_name %> Support.
 <% end %>
 <%# For AWS Terraform config topic only: %>
 <% if current_page.data.iaas == "AWS" && current_page.data.install_type == "terraform" %>
@@ -78,7 +78,7 @@ For more information about creating a RDS MySQL instance, see [Creating a MySQL 
     * **TLS CA:** Enter the Certificate Authority for the TLS Certificate.
     * **TLS Certificate:** Enter the client certificate for mutual TLS connections to the database.
     * **TLS Private Key:** Enter the client private key for mutual TLS connections to the database.
-    * **Advanced DB Connection Options:** This field accepts a JSON-formatted options string. It can be left blank unless directed by <%= vars.company_name %> Support.
+    * **Advanced DB Connection Options:** This field accepts a JSON-formatted options string. It can be left blank unless directed by <%= vars.new_company_name %> Support.
 <% end %>
 <%# For AWS Manual config topic only: %>
 <% if current_page.data.iaas == "AWS" && current_page.data.install_type == "manual" %>
@@ -125,7 +125,7 @@ For more information about creating a RDS MySQL instance, see [Creating a MySQL 
     * **TLS CA:** Enter the Certificate Authority for the TLS Certificate.
     * **TLS Certificate:** Enter the client certificate for mutual TLS connections to the database.
     * **TLS Private Key:** Enter the client private key for mutual TLS connections to the database.
-    * **Advanced DB Connection Options:** This field accepts a JSON-formatted options string. It can be left blank unless you are directed by <%= vars.company_name %> Support to change it.
+    * **Advanced DB Connection Options:** This field accepts a JSON-formatted options string. It can be left blank unless you are directed by <%= vars.new_company_name %> Support to change it.
 
     ![There are two radio buttons: Internal, and External MySQL Database. There are five text boxes, Host, Port, Username, Password, and Database.](../common/images/director_database.png)
 <% end %>
@@ -151,7 +151,7 @@ For more information about creating a RDS MySQL instance, see [Creating a MySQL 
     * **TLS CA:** Enter the Certificate Authority for the TLS Certificate.
     * **TLS Certificate:** Enter the client certificate for mutual TLS connections to the database.
     * **TLS Private Key:** Enter the client private key for mutual TLS connections to the database.
-    * **Advanced DB Connection Options:** This text box accepts a JSON-formatted options string. It can be left blank unless directed by <%= vars.company_name %> Support.
+    * **Advanced DB Connection Options:** This text box accepts a JSON-formatted options string. It can be left blank unless directed by <%= vars.new_company_name %> Support.
 
     ![There are two radio buttons: Internal, and External MySQL Database. There are five text fields, Host, Port, Username, Password, and Database.](../common/images/director_database.png)
 <% end %>
