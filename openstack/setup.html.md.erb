@@ -178,17 +178,17 @@ You can create the <%= vars.ops_manager %> image in OpenStack using the OpenStac
 
 To create a <%= vars.ops_manager %> image in OpenStack, complete the following steps:
 
-1. Download the **<%= vars.ops_manager %> for OpenStack** image file from [VMware Tanzu Network](https://network.tanzu.vmware.com).
+1. Download the **<%= vars.ops_manager %> for OpenStack** image file from the [Broadcom Support portal](https://support.broadcom.com/group/ecx/downloads).
 
-1. In the navigation menu, of your OpenStack dashboard, click **Project**, then **Compute**, followed by **Images**.
+2. In the navigation menu, of your OpenStack dashboard, click **Project**, then **Compute**, followed by **Images**.
 
-1. Click **Create Image**.
+3. Click **Create Image**.
 
-2. Complete the **Create An Image** page with the following information:
+4. Complete the **Create An Image** page with the following information:
     * **Name**: Enter `<%= vars.ops_manager %>`.
     * **Image Source**: Select **Image File**.
     * **Image File**: Click **Choose File**. Browse to and select the image file
-      that you downloaded from [VMware Tanzu Network](https://tanzu.vmware.com/products).
+      that you downloaded from the [Broadcom Support portal](https://support.broadcom.com/group/ecx/downloads).
     * **Format**: Select **Raw**.
     * **Minimum Disk (GB)**: Enter `80`.
     * **Minimum RAM (MB)**: Enter `8192`.
@@ -197,7 +197,7 @@ To create a <%= vars.ops_manager %> image in OpenStack, complete the following s
 
       ![Create an Image pane](../common/images/openstack/create-image.png)
 
-1. Click **Create Image**.
+5. Click **Create Image**.
 
 
 ## <a id='launch-om-vm'></a> Step 5: Launch <%= vars.ops_manager %> VM

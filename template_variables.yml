@@ -5,13 +5,13 @@ template_variables:
   title: <span class="title-deemph">VMware Tanzu</span> Documentation
   hero_text: "Detailed documentation to help you install, understand, and succeed with VMware Tanzu enterprise-grade software."
   product_dev_local: Pivotal Dev
-  product_link: <div class="header-item"><a href="https://network.tanzu.vmware.com/products/elastic-runtime/">Back to Product Page</a></div>
-  product_url: https://network.tanzu.vmware.com/products/elastic-runtime/
+  product_link: <div class="header-item"><a href="https://support.broadcom.com/group/ecx/productdownloads?subfamily=VMware%20Tanzu%20Application%20Service%20for%20VMs">Back to Product Page</a></div>
+  product_url: https://support.broadcom.com/group/ecx/productdownloads?subfamily=VMware%20Tanzu%20Application%20Service%20for%20VMs
   support_link: <a href="https://tanzu.vmware.com/support" target="_blank">Support</a>
   support_call_to_action: <a href="https://tanzu.vmware.com/support" target="_blank">Need Support?</a>
   support_url: https://tanzu.vmware.com/support
   use_global_header: true
-  global_header_product_href: https://network.tanzu.vmware.com/
+  global_header_product_href: https://support.broadcom.com/group/ecx/downloads
   global_header_product_link_text: Downloads
 
   # Ops Manager version
@@ -31,7 +31,7 @@ template_variables:
 
 # Tanzu product variables - v2.9 and later
   company_name: VMware
-  product_network: VMware Tanzu Network
+  product_network: Broadcom Support
   platform_code: PCF
   ops_manager_first: VMware Tanzu Operations Manager
   ops_manager: Tanzu Operations Manager
@@ -208,7 +208,7 @@ template_variables:
   port_limitations: To support WebSockets, the operator must configure the load balancer correctly. Depending on the configuration, clients may have to use a different port for WebSocket connections, such as port 4443, or a different domain name. For more information, see [Supporting WebSockets](../../adminguide/supporting-websockets.html).
   port_limitations_1: To support WebSockets, the operator must configure the load balancer correctly. Depending on the configuration, clients may have to use a different port for WebSocket connections, such as port 4443, or a different domain name. For more information, see [Supporting WebSockets](../adminguide/supporting-websockets.html).
   private_app_domain: private-domain.example.com
-  product_url: https://network.tanzu.vmware.com/products/elastic-runtime/
+  product_url: https://support.broadcom.com/group/ecx/productdownloads?subfamily=VMware%20Tanzu%20Application%20Service%20for%20VMs
   pws_metrics:
   python_cf245only:
   quota_resource: quota space
@@ -294,7 +294,7 @@ template_variables:
   switchboard_url: <code>http<span>s</span>://BOSH-JOB-INDEX-proxy-p-mysql-ert.YOUR-SYSTEM-DOMAIN</code>
   footnote_asterisk: <sup>*</sup>
   service_mesh_network_link: For information about the communication ports and protocols used by these components, see [Service Mesh](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/6.0/tas-for-vms/networking-routing-network-paths.html#service-mesh) in _Routing Network Communications_.
-  get_auditor_binary: Download the Stack Auditor binary for your OS from [Buildpack extensions](https://network.tanzu.vmware.com/products/buildpack-extensions/) on VMware Tanzu Network.
+  get_auditor_binary: Download the Stack Auditor binary for your OS from [Buildpack extensions](https://support.broadcom.com/group/ecx/downloads) on Broadcom Support.
   droplet_config: <strong>Maximum staged droplets per app</strong> field in the <strong>File Storage</strong> pane of the VMware Tanzu Application Service for VMs (TAS for VMs) tile.
   vm_note: <p class="note"><span class="note__title">Note</span> The images below are based on the VM names in an open-source deployment of Cloud Foundry Application Runtime. In TAS for VMs, the processes interact in the same way, but are on different VMs. Correct VM names for each process are in the components sections of this topic.</p>
   clock_vm: clock_global

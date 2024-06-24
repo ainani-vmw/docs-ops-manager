@@ -451,17 +451,17 @@ To create load balancers:
 
 To boot <%= vars.ops_manager %>:
 
-1. Go to [VMware Tanzu Network](https://network.tanzu.vmware.com/products/ops-manager) and download the latest release of **<%= vars.ops_manager %> for Azure**.
+1. Go to the [Broadcom Support portal](https://support.broadcom.com/group/ecx/productdownloads?subfamily=VMware%20Tanzu%20Operations%20Manager) and download the latest release of **<%= vars.ops_manager %> for Azure**.
 
-1. View the downloaded PDF and locate the <%= vars.ops_manager %> image URL appropriate for your region.
+2. View the downloaded PDF and locate the <%= vars.ops_manager %> image URL appropriate for your region.
 
-1. Export the <%= vars.ops_manager %> image URL as an environment variable.
+3. Export the <%= vars.ops_manager %> image URL as an environment variable.
 
     ```console
     export OPS_MAN_IMAGE_URL="YOUR-OPS-MAN-IMAGE-URL"
     ```
 
-1. Download the <%= vars.ops_manager %> image. For compatibility when upgrading to future versions of <%= vars.ops_manager %>, choose a unique name for the image that includes the <%= vars.ops_manager %> version number. For example, replace `opsman-image-2.6.x` in the following examples with a string containing this release; e.g. `opsman-image-3.0.0`.
+4. Download the <%= vars.ops_manager %> image. For compatibility when upgrading to future versions of <%= vars.ops_manager %>, choose a unique name for the image that includes the <%= vars.ops_manager %> version number. For example, replace `opsman-image-2.6.x` in the following examples with a string containing this release; e.g. `opsman-image-3.0.0`.
 
     * If you use unmanaged disks, perform the following steps:
 
@@ -471,7 +471,7 @@ To boot <%= vars.ops_manager %>:
             wget $OPS_MAN_IMAGE_URL -O opsman-image-2.6.x.vhd
             ```
 
-        1. Upload the image to your storage account using the Azure CLI:
+        2. Upload the image to your storage account using the Azure CLI:
 
             ```console
             az storage blob upload --name opsman-image-2.6.x.vhd \
@@ -492,7 +492,7 @@ To boot <%= vars.ops_manager %>:
             --destination-blob opsman-image-2.6.x.vhd
             ```
 
-        1. Copying the image might take several minutes. Run the following command and examine the output under `"copy"`:
+        2. Copying the image might take several minutes. Run the following command and examine the output under `"copy"`:
 
             ```console
             az storage blob show --name opsman-image-2.6.x.vhd \
@@ -509,9 +509,9 @@ To boot <%= vars.ops_manager %>:
             },
             ```
 
-        2. Wait a few moments and run the preceding command again if `status` is `pending`. When `status` reads `success`, continue to the next step.
+        3. Wait a few moments and run the preceding command again if `status` is `pending`. When `status` reads `success`, continue to the next step.
 
-2. Create a public IP address named `ops-manager-ip`. If you do not want to use a public IP for <%= vars.ops_manager %>, skip this step. <br>Record the `ipAddress` from the preceding output. This is the public IP address of <%= vars.ops_manager %>.
+5. Create a public IP address named `ops-manager-ip`. If you do not want to use a public IP for <%= vars.ops_manager %>, skip this step. <br>Record the `ipAddress` from the preceding output. This is the public IP address of <%= vars.ops_manager %>.
 
     ```console
     az network public-ip create --name ops-manager-ip \
@@ -538,7 +538,7 @@ To boot <%= vars.ops_manager %>:
     }
     ```
 
-3. Create a network interface for <%= vars.ops_manager %>. If you do not want use a public IP address for <%= vars.ops_manager %>, remove the `--public-ip-address ops-manager-ip` flag and value.
+6. Create a network interface for <%= vars.ops_manager %>. If you do not want use a public IP address for <%= vars.ops_manager %>, remove the `--public-ip-address ops-manager-ip` flag and value.
 
     ```console
     az network nic create --vnet-name pcf-virtual-network \
@@ -549,7 +549,7 @@ To boot <%= vars.ops_manager %>:
     --name opsman-nic --location $LOCATION
     ```
 
-4. Create a keypair on your local machine with the username `ubuntu`. For example, enter the following command:
+7. Create a keypair on your local machine with the username `ubuntu`. For example, enter the following command:
 
     ```console
     ssh-keygen -t rsa -f opsman -C ubuntu
@@ -557,7 +557,7 @@ To boot <%= vars.ops_manager %>:
 
     When you are prompted for a passphrase, press the `enter` key to provide an empty passphrase.
 
-5. Create the <%= vars.ops_manager %> VM.
+8. Create the <%= vars.ops_manager %> VM.
 
     * If you are using unmanaged disks, run the following command to create your <%= vars.ops_manager %> VM, replacing `PATH-TO-PUBLIC-KEY` with the path to your public key `.pub` file:
 
@@ -610,7 +610,7 @@ To boot <%= vars.ops_manager %>:
              --ssh-key-value PATH-TO-PUBLIC-KEY
             ```
 
-6. If you plan to install more than one tile in this <%= vars.ops_manager %> installation, you can increase the size of the <%= vars.ops_manager %> VM disk. You can repeat this process and increase the disk again at a later time if necessary.
+9. If you plan to install more than one tile in this <%= vars.ops_manager %> installation, you can increase the size of the <%= vars.ops_manager %> VM disk. You can repeat this process and increase the disk again at a later time if necessary.
 
     1. To stop the VM and detach the disk, run:
 

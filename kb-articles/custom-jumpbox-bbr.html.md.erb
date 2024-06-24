@@ -35,15 +35,15 @@ Consult the following table for more information about the network access permis
 
 Perform the following steps to transfer the bbr binary to your jumpbox:
 
-1. Download the latest BOSH Backup and Restore release from [Tanzu Network](https://network.tanzu.vmware.com/products/p-bosh-backup-and-restore/).
-1. Extract the `bbr` binary file from the BBR release.
-1. On a command line, run the following command to add executable permissions to the bbr binary file:​​​​​
+1. Download the latest BOSH Backup and Restore release from the [Broadcom Support portal](https://support.broadcom.com/group/ecx/productdownloads?subfamily=BOSH%20Backup%20and%20Restore).
+2. Extract the `bbr` binary file from the BBR release.
+3. On a command line, run the following command to add executable permissions to the bbr binary file:​​​​​
 
     ```
     ​​​​​​chmod a+x bbr
     ```
 
-1. To securely copy the BBR binary to your jumpbox, run the following command, replacing the placeholders with the correct values:
+4. To securely copy the BBR binary to your jumpbox, run the following command, replacing the placeholders with the correct values:
 
     ```
     rsync -Pv -e "ssh -i LOCAL-PATH-TO-JUMPBOX-PRIVATE-KEY" LOCAL-PATH-TO-BBR-BINARY JUMPBOX-USER@JUMPBOX-ADDRESS:  
