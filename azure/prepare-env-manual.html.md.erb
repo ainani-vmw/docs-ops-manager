@@ -23,13 +23,13 @@ Microsoft Azure documentation.
     Where `CLOUD-NAME` is one of the following values. Use the value that corresponds to the Azure
     environment on which you are installing <%= vars.ops_manager %>:
 
-    - **Azure**: `AzureCloud`.
-    - **Azure China**: `AzureChinaCloud`. If logging in to `AzureChinaCloud` fails with
-      a `CERT_UNTRUSTED`, use the latest version of node, 4.x or later. For more information about
+    - **For Azure**: `AzureCloud`
+    - **For Azure China**: `AzureChinaCloud`. If log in to `AzureChinaCloud` fails with
+      `CERT_UNTRUSTED`, use the latest version of node, 4.x or later. For more information about
       this error, see
       [Failed to login AzureChinaCloud](https://github.com/Azure/azure-xplat-cli/issues/2725) in
       the Azure/azure-xplat-cli GitHub repository.
-    - **Azure Government Cloud**: `AzureUSGovernment`.
+    - **For Azure Government Cloud**: `AzureUSGovernment`
 
     For example:
 
@@ -43,7 +43,7 @@ Microsoft Azure documentation.
     az login
     ```
 
-1. Authenticate by going to the URL in the output from the command, entering the provided
+1. Authenticate by going to the URL in the output of the command, entering the provided
 code, and clicking your account.
 
 
@@ -100,16 +100,16 @@ the other subscription as the default. To set a new default subscription, run th
     Where `SUBSCRIPTION-ID` is the value of the `id` field of the subscription that you want to set
     as the default.
 
-    <br><br>
+    <br>
 
-    Example: This command sets the default to a subscription that has an `id` with the value of
+    Example: The following command sets the default to a subscription that has an `id` with the value of
     `"87654321-1234-5678-1234-567891234567"`.
 
     <pre class="terminal">
     $ az account set --subscription "87654321-1234-5678-1234-567891234567"
     </pre>
 
-1. Record the value of the `id` of the default subscription. You will use this value in future
+1. Record the value of the `id` of the default subscription. You need this value in future
 configuration steps.
 
 1. Record the value of `tenantID` of the default subscription. This is your `TENANT_ID` for

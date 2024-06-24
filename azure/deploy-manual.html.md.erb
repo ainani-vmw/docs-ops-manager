@@ -8,10 +8,11 @@ owner: Ops Manager
 You can use these instructions to deploy BOSH and <%= vars.ops_manager_first %> on Azure by using
 individual commands to create resources. <%= vars.company_name %> recommends this manual procedure for deploying to Azure China and Azure Government Cloud.
 
-Before you follow the procedures in this topic, you must do the procedures in [Preparing to Deploy <%= vars.ops_manager %> on Azure](prepare-env-manual.html). After you followed
-    the procedures in this topic, follow the instructions in [Configuring BOSH Director on Azure](config-manual.html).
+Before you follow the procedures in this topic, you must complete the procedures in [Preparing to Deploy <%= vars.ops_manager %> on Azure](prepare-env-manual.html).
 
-<p> Sometimes Azure portal displays the names of resources with incorrect capitalization. Always use
+<p class="note important">
+<span class="note__title">Important</span>
+Sometimes Azure portal displays the names of resources with incorrect capitalization. Always use
 the Azure CLI to retrieve the correctly capitalized name of a resource.</p>
 
 ## <a id='network'></a> Step 1: Create network resources
@@ -31,6 +32,10 @@ To create network resources for your deployment:
     ```
 
     If you are on a Microsoft Windows machine, use `set` instead of `export`.
+
+    ```console
+    set RESOURCE_GROUP="YOUR-RESOURCE-GROUP-NAME"
+    ```
 
 4. Export your location. For example, `westus`.
 
@@ -117,7 +122,7 @@ To create network resources for your deployment:
     ```
 
     * To block traffic from the public Internet, append `--source-address-prefixes AzureLoadBalancer` to enable traffic from only the Azure load balancer or `--source-address-prefixes VirtualNetwork` to only enable traffic from the virtual network.
-    * You can enable traffic from both the Azure load balancer and the virtual network, create duplicates of each rule, one specifying `--source-address-prefixes AzureLoadBalancer` and one specifying `--source-address-prefixes VirtualNetwork`.
+    * To enable traffic from both the Azure load balancer and the virtual network, create duplicates of each rule, one specifying `--source-address-prefixes AzureLoadBalancer` and one specifying `--source-address-prefixes VirtualNetwork`.
     * Optionally, if you want to use private IP ranges with <%= vars.ops_manager %> and enable all internal traffic, you can create the Network Security Groups to enable all internal traffic.
 
         ```console
@@ -173,7 +178,7 @@ To create storage accounts for BOSH and your deployment:
     export STORAGE_NAME="YOUR-BOSH-STORAGE-ACCOUNT-NAME"
     ```
 
-1. Create a Standard storage account for BOSH with the following command. This account is used for BOSH bookkeeping and running the <%= vars.ops_manager %> VM itself, but does not have to be used for running any other VMs.
+2. Create a standard storage account for BOSH with the following command. This account is used for BOSH bookkeeping and for running the <%= vars.ops_manager %> VM, but does not have to be used for running any other VMs.
 
     ```console
     az storage account create --name $STORAGE_NAME \
@@ -182,12 +187,15 @@ To create storage accounts for BOSH and your deployment:
     --location $LOCATION
     ```
 
-    <p> <code>Standard_LRS</code> refers to a Standard Azure storage account. The BOSH Director requires
-    table storage to store stemcell information. Azure Premium storage does not support table storage and cannot be used for the BOSH storage account.</p>
     If the command fails, verify that you followed the rules for naming your storage account.
-    Export another new storage account name if it's necessary.</p>
+    Export another new storage account name if necessary.
 
-1. Configure the Azure CLI to use the BOSH storage account as the default setting.
+    <p class="note important">
+    <span class="note__title">Important</span>
+    <code>Standard_LRS</code> refers to a Standard Azure Storage account. The BOSH Director requires
+    table storage to store stemcell information. Azure Premium Storage does not support table storage and cannot be used for the BOSH storage account.</p>
+
+3. Configure the Azure CLI to use the BOSH storage account as the default setting.
 
     1. Retrieve the connection string for the account.
 
@@ -204,15 +212,15 @@ To create storage accounts for BOSH and your deployment:
         }
         </pre>
 
-    1. Record the full value of `connectionString` from the preceding output, starting with and including `DefaultEndpointsProtocol=`.
+    2. Record the full value of `connectionString` from the preceding output, starting with and including `DefaultEndpointsProtocol=`.
 
-    1. Export the value of `connectionString` as the environment variable `$CONNECTION_STRING`.
+    3. Export the value of `connectionString` as the environment variable `$CONNECTION_STRING`.
 
         ```console
         export CONNECTION_STRING="YOUR-ACCOUNT-KEY-STRING"
         ```
 
-1. Create three blob containers in the BOSH storage account, named `opsmanager`, `bosh`, and `stemcell`.
+4. Create three blob containers in the BOSH storage account, named `opsmanager`, `bosh`, and `stemcell`.
 
     ```console
     az storage container create --name opsmanager \
@@ -223,16 +231,16 @@ To create storage accounts for BOSH and your deployment:
     --connection-string $CONNECTION\STRING
     ```
 
-1. Create a table named `stemcells`.
+5. Create a table named `stemcells`.
 
     ```console
     az storage table create --name stemcells \
     --connection-string $CONNECTION_STRING
     ```
 
-1. Choose a set of unique names for five or more deployment storage accounts. As with the preceding BOSH storage account, the names must be unique, alphanumeric, lowercase, and 3-24 characters long. The account names must also be sequential or otherwise identical except for the last character. For example: `xyzdeploystorage1`, `xyzdeploystorage2`, `xyzdeploystorage3`, `xyzdeploystorage4`, and `xyzdeploystorage5`.
+6. Choose a set of unique names for 5 or more deployment storage accounts. As with the preceding BOSH storage account, the names must be unique, alphanumeric, lowercase, and 3-24 characters long. The account names must also be sequential or otherwise identical except for the last character. For example: `xyzdeploystorage1`, `xyzdeploystorage2`, `xyzdeploystorage3`, `xyzdeploystorage4`, and `xyzdeploystorage5`.
 
-1. Decide which type of storage to use and run the following corresponding command.
+7. Decide which type of storage to use and run the following corresponding command.
 
     <p> <%= vars.company_name %> recommends five Premium storage accounts, which provides a reasonable
     amount of initial storage capacity. You can use either Premium or Standard storage accounts, but they
@@ -249,7 +257,7 @@ To create storage accounts for BOSH and your deployment:
         export STORAGE_TYPE="Standard_LRS"
         ```
 
-1. For each deployment storage account you create:
+8. For each deployment storage account you create:
 
     1. Create the storage account with the following command, replacing `MY_DEPLOYMENT_STORAGE_X` with one of your deployment storage account names.
 
@@ -261,7 +269,7 @@ To create storage accounts for BOSH and your deployment:
 
         If the command fails, try a different set of account names.
 
-    1. Retrieve the connection string for the account.
+    2. Retrieve the connection string for the account.
 
         ```console
         az storage account show-connection-string \
@@ -276,9 +284,9 @@ To create storage accounts for BOSH and your deployment:
         }
         </pre>
 
-    1. Record the full value of `connectionString` from the preceding output, starting with and including `DefaultEndpointsProtocol=`.
+    3. Record the full value of `connectionString` from the preceding output, starting with and including `DefaultEndpointsProtocol=`.
 
-    1. Create two blob containers named `bosh` and `stemcell` in the account.
+    4. Create two blob containers named `bosh` and `stemcell` in the account.
 
         ```console
         az storage container create --name bosh \
@@ -385,10 +393,14 @@ To create load balancers:
 
             This back end pool is empty when you create it.
 
-    1.  Go to your DNS provider and create an entry that points `*.YOUR-SUBDOMAIN` to the public IP address of your load balancer. For example, create an entry that points `azure.example.com` to `198.51.100.1`. You can retrieve it by running `az network public-ip show --name pcf-lb-ip --resource-group $RESOURCE_GROUP`.
+    1. Go to your DNS provider and create an entry that points `*.YOUR-SUBDOMAIN` to the public IP address of your load balancer. For example, create an entry that points `azure.example.com` to `198.51.100.1`. You can retrieve it by running:
+
+        ```
+        az network public-ip show --name pcf-lb-ip --resource-group $RESOURCE_GROUP
+        ```
 
 2. **Optional:** Diego SSH Load Balancer
-    1. Create a load balancer named `pcf-ssh-lb`.
+    1. Create a load balancer named `pcf-ssh-lb`. If the Standard SKU is not available in Azure China, you can use the Basic SKU. This back end pool is empty when you create it.
 
         ```console
         az network lb create --name pcf-ssh-lb \
@@ -398,11 +410,7 @@ To create load balancers:
         --sku Standard
         ```
 
-        <p> If the Standard SKU is not available in Azure China, you can use the Basic SKU.</p>
-
-        This back end pool is empty when you create it.
-
-    2. (Optional) For private IPs, create a load balancer named `pcf-ssh-lb`.
+    2. (Optional) For private IPs, create a load balancer named `pcf-ssh-lb`. If the Standard SKU is not available in Azure China, you can use the Basic SKU. This back end pool is empty when you create it.
 
         ```console
         az network lb create --name pcf-ssh-lb \
@@ -413,10 +421,6 @@ To create load balancers:
         --vnet-name pcf-virtual-network \
         --subnet pcf-pas-subnet
         ```
-
-        <p> If the Standard SKU is not available in Azure China, you can use the Basic SKU.</p>
-
-        This back end pool is empty when you create it.
 
     3. Add a probe to the load balancer.
 
@@ -437,8 +441,11 @@ To create load balancers:
         --probe-name tcp2222
         ```
 
-    5.  Go to your DNS provider, and create an entry that points `ssh.sys.YOUR-SUBDOMAIN` to the public IP address of your load balancer. For example, create an entry that points `azure.example.com` to `198.51.100.1`. You can retrieve it by running `az network public-ip show --name pcf-ssh-lb-ip --resource-group $RESOURCE_GROUP`.
-
+    5.  Go to your DNS provider, and create an entry that points `ssh.sys.YOUR-SUBDOMAIN` to the public IP address of your load balancer. For example, create an entry that points `azure.example.com` to `198.51.100.1`. You can retrieve it by running:
+   
+    ```
+    az network public-ip show --name pcf-ssh-lb-ip --resource-group $RESOURCE_GROUP
+    ```
 
 ## <a id='boot'></a> Step 4: Boot <%= vars.ops_manager %>
 
@@ -454,7 +461,7 @@ To boot <%= vars.ops_manager %>:
     export OPS_MAN_IMAGE_URL="YOUR-OPS-MAN-IMAGE-URL"
     ```
 
-1. Download the <%= vars.ops_manager %> image. For compatibility when upgrading to future versions of <%= vars.ops_manager %>, choose a unique name for the image that includes the <%= vars.ops_manager %> version number. For example, replace `opsman-image-2.6.x` in the following examples with `opsman-image-2.6.1`.
+1. Download the <%= vars.ops_manager %> image. For compatibility when upgrading to future versions of <%= vars.ops_manager %>, choose a unique name for the image that includes the <%= vars.ops_manager %> version number. For example, replace `opsman-image-2.6.x` in the following examples with a string containing this release; e.g. `opsman-image-3.0.0`.
 
     * If you use unmanaged disks, perform the following steps:
 
@@ -502,9 +509,9 @@ To boot <%= vars.ops_manager %>:
             },
             ```
 
-        1. Wait a few moments and run the preceding command again if `status` is `pending`. When `status` reads `success`, continue to the next step.
+        2. Wait a few moments and run the preceding command again if `status` is `pending`. When `status` reads `success`, continue to the next step.
 
-1. Create a public IP address named `ops-manager-ip`.
+2. Create a public IP address named `ops-manager-ip`. If you do not want to use a public IP for <%= vars.ops_manager %>, skip this step. <br>Record the `ipAddress` from the preceding output. This is the public IP address of <%= vars.ops_manager %>.
 
     ```console
     az network public-ip create --name ops-manager-ip \
@@ -531,11 +538,7 @@ To boot <%= vars.ops_manager %>:
     }
     ```
 
-    If you do not want to use a public IP for <%= vars.ops_manager %>, skip this step.
-
-1. Record the `ipAddress` from the preceding output. This is the public IP address of <%= vars.ops_manager %>.
-
-1. Create a network interface for <%= vars.ops_manager %>.
+3. Create a network interface for <%= vars.ops_manager %>. If you do not want use a public IP address for <%= vars.ops_manager %>, remove the `--public-ip-address ops-manager-ip` flag and value.
 
     ```console
     az network nic create --vnet-name pcf-virtual-network \
@@ -546,19 +549,17 @@ To boot <%= vars.ops_manager %>:
     --name opsman-nic --location $LOCATION
     ```
 
-    If you do not want use a public IP address for <%= vars.ops_manager %>, remove the `--public-ip-address ops-manager-ip` flag and value.
-
-1. Create a keypair on your local machine with the username `ubuntu`. For example, enter the following command:
+4. Create a keypair on your local machine with the username `ubuntu`. For example, enter the following command:
 
     ```console
     ssh-keygen -t rsa -f opsman -C ubuntu
     ```
 
-    When prompted for a passphrase, press the `enter` key to provide an empty passphrase.
+    When you are prompted for a passphrase, press the `enter` key to provide an empty passphrase.
 
-1. Create the <%= vars.ops_manager %> VM.
+5. Create the <%= vars.ops_manager %> VM.
 
-    * If you are using unmanaged disks, run the following command to create your <%= vars.ops_manager %> VM, replacing `PATH-TO-PUBLIC-KEY` with the path to your public key .pub file:
+    * If you are using unmanaged disks, run the following command to create your <%= vars.ops_manager %> VM, replacing `PATH-TO-PUBLIC-KEY` with the path to your public key `.pub` file:
 
         ```console
         az vm create --name opsman-2.6.x --resource-group $RESOURCE_GROUP \
@@ -594,7 +595,7 @@ To boot <%= vars.ops_manager %>:
             * For Azure China, use `blob.core.chinacloudapi.cn`. For more information, see the [Azure documentation](https://docs.microsoft.com/en-us/azure/china/china-get-started-developer-guide) for more information.
             * For Azure Government Cloud, use `blob.core.usgovcloudapi.net`. For more information, see the [Azure documentation](https://docs.microsoft.com/en-us/azure/azure-government/documentation-government-services-storage) for more information.
 
-        1. Create your <%= vars.ops_manager %> VM, replacing `PATH-TO-PUBLIC-KEY` with the path to your public key `.pub` file.
+        2. Create your <%= vars.ops_manager %> VM, replacing `PATH-TO-PUBLIC-KEY` with the path to your public key `.pub` file.
 
             ```console
             az vm create --name opsman-2.6.x --resource-group $RESOURCE_GROUP \
@@ -609,23 +610,23 @@ To boot <%= vars.ops_manager %>:
              --ssh-key-value PATH-TO-PUBLIC-KEY
             ```
 
-1. If you plan to install more than one tile in this <%= vars.ops_manager %> installation, do the following to increase the size of the <%= vars.ops_manager %> VM disk. You can repeat this process and increase the disk again at a later time if necessary.
+6. If you plan to install more than one tile in this <%= vars.ops_manager %> installation, you can increase the size of the <%= vars.ops_manager %> VM disk. You can repeat this process and increase the disk again at a later time if necessary.
 
-    1. Run the following command to stop the VM and detach the disk:
+    1. To stop the VM and detach the disk, run:
 
         ```console
         az vm deallocate --name opsman-2.6.x \
         --resource-group $RESOURCE_GROUP
         ```
 
-    1. Run the following command to resize the disk to 128&nbsp;GB:
+    2. To resize the disk to 128&nbsp;GB, run:
 
         ```console
         az disk update --size-gb 128 --name opsman-2.6.x-osdisk \
         --resource-group $RESOURCE_GROUP
         ```
 
-    1. Run the following command to start the VM:
+    3. To start the VM, run:
 
         ```console
         az vm start --name opsman-2.6.x --resource-group $RESOURCE_GROUP
