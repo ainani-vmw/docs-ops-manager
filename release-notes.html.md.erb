@@ -29,8 +29,7 @@ Provider?](https://www.cloudfoundry.org/certified-platforms-how-to/) on the Clou
 - **[Feature]** Customers using SAML with Ops Manager can rotate the internal SAML certificate
 - **[Known Issue Fix]** `additional_cloud_properties` is no longer unintentionally mutated when redacting secrets
 - **[Known Issue Fix]** NSX-T Certificate Authentication no longer fails during Apply Changes due to the private key being mutated
-- **[Known Issue Fix]** The Certificates page no longer returns a 500 status error when the Tanzu Gemfire tile is installed
-- **[Bug Fix]** Products that are marked as LTS-T in Tanzu Network should now appear in the list of available products when Tanzu Network integration is enabled
+- **[Bug Fix]** Products that are marked as LTS-T in Broadcom Support should now appear in the list of available products when Broadcom Support integration is enabled
 
 <table border="1" class="nice">
   <thead>
@@ -140,7 +139,7 @@ This release includes a new version of System Metrics, which will cause all VMs 
 
 
 - **[Feature]** Upgrade to Ruby 3.3 and Rails 7.1
-- **[Bug Fix]** The dashboard page provides notice of newer Jammy stemcells when integration with Tanzu Network is enabled
+- **[Bug Fix]** The dashboard page provides notice of newer Jammy stemcells when integration with BRoadcom Support is enabled
 - **[Bug Fix]** The background worker functions correctly when it starts during an upgrade of <%= vars.ops_manager %>
 - **[Bug Fix]** Correctly configure UAA with proxy configuration
 
@@ -364,7 +363,7 @@ This release includes new versions of BOSH DNS, System Metrics, which will cause
 
 <p class="note caution">
 <span class="note__title">Caution</span>
-This release has been removed from VMware Tanzu Network because it included an issue in the BOSH Director that causes the Healthwatch tile to fail to deploy with errors like "undefined method `present?'".
+This release has been removed from the Broadcom Support portal because it included an issue in the BOSH Director that causes the Healthwatch tile to fail to deploy with errors like "undefined method `present?'".
 </p>
 
 <p class="note caution">
@@ -1094,7 +1093,7 @@ warning banner might appear if any of these certificates are close to their expi
 
 **Release Date:** April 09, 2022
 
-<p> This release has been removed from VMware Tanzu Network because it included an unpublished stemcell. This
+<p> This release has been removed from the Broadcom Support portal because it included an unpublished stemcell. This
   stemcell is testing new security enhancements, and <%= vars.company_name %> has received reports of Diego Cell VMs in <%= vars.app_runtime_abbr %>
   deployments becoming unresponsive. If you are experiencing problems caused by the 621.230 stemcell, upgrade to <%= vars.ops_manager %>
   <%= vars.v_major_version %>.39.</p>
@@ -1634,7 +1633,7 @@ To upgrade to <%= vars.ops_manager %> <%= vars.v_major_version %>, see [Upgradin
 Over the lifecycle of <%= vars.ops_manager %> <%= vars.v_major_version %>, VMware releases security patches that occasionally include feature improvements
 and maintenance updates.
 
-Versions and filenames for <%= vars.ops_manager %> <%= vars.v_major_version %> releases on VMware Tanzu Network include a `+LTS-T` suffix to indicate its LTS
+Versions and filenames for <%= vars.ops_manager %> <%= vars.v_major_version %> releases on the Broadcom Support portal include a `+LTS-T` suffix to indicate its LTS
 status. If you use automation scripts to deploy <%= vars.ops_manager %>, you might need to update them to include this suffix in your version and filename
 patterns. For example, the filename for the Azure version of <%= vars.ops_manager %> <%= vars.v_major_version %>.4 is `ops-manager-azure-3.0.4-build.227.yml`,
 while the filename for the Azure version of <%= vars.ops_manager %> <%= vars.v_major_version %>.5+LTS-T is `ops-manager-azure-3.0.5+LTS-T.yml`.
