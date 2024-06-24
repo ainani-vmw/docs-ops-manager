@@ -77,18 +77,18 @@ For information about using host groups in vSphere, see [Host groups in vSphere]
 
 <%= vars.ops_manager %> for vSphere is provided as an OVA file. An OVA file is a template for a VM. To deploy <%= vars.ops_manager %> on vSphere, you import the OVA file into your vSphere environment.
 
-1. Download the [<%= vars.ops_manager %> for vSphere](https://network.tanzu.vmware.com/products/ops-manager) OVA file from [VMware Tanzu Network](https://network.tanzu.vmware.com/products/). Use the **Releases** drop-down menu to
+1. Download the [<%= vars.ops_manager %> for vSphere](https://support.broadcom.com/group/ecx/productdownloads?subfamily=VMware%20Tanzu%20Operations%20Manager) OVA file from the [Broadcom Support portal](https://support.broadcom.com/group/ecx/downloads). Use the **Releases** drop-down menu to
 select a <%= vars.ops_manager %> release.
 
 1. Right-click the management resource pool that you created and select **Deploy OVF Template**. Alternatively, from the vCenter menu, select **Actions**, then **Deploy OVF Template**.
 
-1. On the **Select an OVF template** pane, click **Browse**.
+2. On the **Select an OVF template** pane, click **Browse**.
 
-1. Click the <%= vars.ops_manager %> OVA file that you downloaded and click **Open**.
+3. Click the <%= vars.ops_manager %> OVA file that you downloaded and click **Open**.
 
-1. Review the template selection and click **Next**.
+4. Review the template selection and click **Next**.
 
-1. On the **Select a name and folder** pane:
+5. On the **Select a name and folder** pane:
     * Enter a name for the <%= vars.ops_manager %> virtual machine, or use the default name.
     * Select the object labeled **Datacenter**.
     * Click **Next**.
@@ -102,9 +102,9 @@ select a <%= vars.ops_manager %> release.
     Hardware virtualization must be turned off if your
     vSphere host does not support VT-X/EPT. Refer to <a href="../install/vsphere.html#vsphere-reqs">vSphere Requirements</a> in <em><%= vars.ops_manager %> on vSphere Requirements</em> for more information.
 
-1. On the **Review Details** pane, confirm the configuration up to this point, and click **Next**.
+7. On the **Review Details** pane, confirm the configuration up to this point, and click **Next**.
 
-1. At the **Select Storage** pane, select the virtual disk format.
+8. At the **Select Storage** pane, select the virtual disk format.
 
     1. Choose a Datastore.
         * If you use vSAN, select the vSAN datastore and apply the default storage policy.

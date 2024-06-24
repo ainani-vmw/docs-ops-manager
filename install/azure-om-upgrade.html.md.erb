@@ -106,11 +106,11 @@ Copy the <%= vars.ops_manager %> image into your storage account. You use the <%
 
 To copy the <%= vars.ops_manager %> image into your storage account:
 
-1. Go to the [<%= vars.ops_manager %>](https://network.tanzu.vmware.com/products/ops-manager) page on VMware Tanzu Network and download the release of **<%= vars.ops_manager %> for Azure** to which you want to upgrade.
+1. Go to the [<%= vars.ops_manager %>](https://support.broadcom.com/group/ecx/productdownloads?subfamily=VMware%20Tanzu%20Operations%20Manager) page on the Broadcom Support portal and download the release of **<%= vars.ops_manager %> for Azure** to which you want to upgrade.
 
-1. View the downloaded PDF and locate the <%= vars.ops_manager %> image URL appropriate for your region.
+2. View the downloaded PDF and locate the <%= vars.ops_manager %> image URL appropriate for your region.
 
-1. Export the <%= vars.ops_manager %> image URL as an environment variable by running:
+3. Export the <%= vars.ops_manager %> image URL as an environment variable by running:
 
     ```
     export OPS_MAN_IMAGE_URL="OPS-MANAGER-IMAGE-URL"
@@ -120,7 +120,7 @@ To copy the <%= vars.ops_manager %> image into your storage account:
     <br>
     This command overrides the old <%= vars.ops_manager %> image URL with the new <%= vars.ops_manager %> image URL.
 
-1. Copy the <%= vars.ops_manager %> image into your storage account. For compatibility when upgrading to future versions of <%= vars.ops_manager %>, choose a unique name for the image that includes the <%= vars.ops_manager %> version number. For example, replace `opsman-image-version` in the following examples with `opsman-image-2.0.1`. Run:
+4. Copy the <%= vars.ops_manager %> image into your storage account. For compatibility when upgrading to future versions of <%= vars.ops_manager %>, choose a unique name for the image that includes the <%= vars.ops_manager %> version number. For example, replace `opsman-image-version` in the following examples with `opsman-image-2.0.1`. Run:
 
     ```
     az storage blob copy start --source-uri $OPS_MAN_IMAGE_URL \
@@ -129,7 +129,7 @@ To copy the <%= vars.ops_manager %> image into your storage account:
     --destination-blob opsman-image-version.vhd
     ```
 
-1. Copying the image may take several minutes. Run:
+5. Copying the image may take several minutes. Run:
 
     ```
     az storage blob show --name opsman-image-version.vhd \

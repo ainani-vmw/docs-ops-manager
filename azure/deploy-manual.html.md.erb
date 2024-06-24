@@ -446,17 +446,17 @@ To create load balancers:
 
 To boot <%= vars.ops_manager %>:
 
-1. Go to [VMware Tanzu Network](https://network.tanzu.vmware.com/products/ops-manager) and download the latest release of **<%= vars.ops_manager %> for Azure**.
+1. Go to the [Broadcom Support portal](https://support.broadcom.com/group/ecx/productdownloads?subfamily=VMware%20Tanzu%20Operations%20Manager) and download the latest release of **<%= vars.ops_manager %> for Azure**.
 
-1. View the downloaded PDF and locate the <%= vars.ops_manager %> image URL appropriate for your region.
+2. View the downloaded PDF and locate the <%= vars.ops_manager %> image URL appropriate for your region.
 
-1. Export the <%= vars.ops_manager %> image URL as an environment variable.
+3. Export the <%= vars.ops_manager %> image URL as an environment variable.
 
     ```console
     export OPS_MAN_IMAGE_URL="YOUR-OPS-MAN-IMAGE-URL"
     ```
 
-1. Download the <%= vars.ops_manager %> image. For compatibility when upgrading to future versions of <%= vars.ops_manager %>, choose a unique name for the image that includes the <%= vars.ops_manager %> version number. For example, replace `opsman-image-2.6.x` in the following examples with `opsman-image-2.6.1`.
+1. Download the <%= vars.ops_manager %> image. For compatibility when upgrading to future versions of <%= vars.ops_manager %>, choose a unique name for the image that includes the <%= vars.ops_manager %> version number. For example, replace `opsman-image-2.6.x` in the following examples with a string containing this release; e.g. `opsman-image-2.10.0`.
 
     * If you use unmanaged disks, perform the following steps:
 
@@ -489,7 +489,7 @@ To boot <%= vars.ops_manager %>:
             --destination-blob opsman-image-2.6.x.vhd
             ```
 
-        1. Copying the image may take several minutes. Run the following command and examine the output under `"copy"`:
+        2. Copying the image may take several minutes. Run the following command and examine the output under `"copy"`:
 
             ```console
             az storage blob show --name opsman-image-2.6.x.vhd \
@@ -506,7 +506,7 @@ To boot <%= vars.ops_manager %>:
             },
             ```
 
-        1. Wait a few moments and re-run the command above if `status` is `pending`. When `status` reads `success`, continue to the next step.
+        3. Wait a few moments and run the preceding command again if `status` is `pending`. When `status` reads `success`, continue to the next step.
 
 1. Create a public IP address named `ops-manager-ip`.
 

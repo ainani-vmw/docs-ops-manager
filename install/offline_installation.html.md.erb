@@ -8,7 +8,7 @@ This topic provides an overview of the components and resources you need to inst
 ## <a id='offline-components'></a> Offline components
 
 To run offline, you must obtain resources from the internet and move them into offline components that store and use them.
-The method you use to move a resource from VMware Tanzu Network or GitHub
+The method you use to move a resource from VMware Tanzu on Broadcom Support portal or GitHub
 into an offline environment can vary from setting up a designated proxy to burning a DVD.
 
 The following image displays types of resources, and the components you must move them to, in your offline
@@ -38,7 +38,7 @@ The following table provides more detail about resources and the component you m
   </tr>
 </thead>
   <tr>
-    <td>VMware Tanzu Network products such as tiles, stemcells, BOSH releases, and <%= vars.ops_manager %></td>
+    <td>VMware Tanzu products such as tiles, stemcells, BOSH releases, and <%= vars.ops_manager %></td>
     <td>S3 and artifact store</td>
   </tr>
   <tr>
@@ -98,7 +98,7 @@ The following table provides an example of how you might handle resources in thi
 </thead>
   <tr>
     <td>VMware Tanzu products such as tiles, stemcells, BOSH releases, and <%= vars.ops_manager %></td>
-    <td>This architectural pattern presents the challenge of getting VMware Tanzu Network resources from the Internet into the artifact store. For example, Artifactory and Nexus cannot interact directly with VMware Tanzu Network. You could place VMware Tanzu Network resources in an artifact store through a remote Concourse worker with access to the internet, or by downloading them from the internet and placing them in the artifact store manually, for example.</td>
+    <td>This architectural pattern presents the challenge of getting VMware Tanzu resources from the Internet into the artifact store. For example, Artifactory and Nexus cannot interact directly with Broadcom Support portal. You could place VMware Tanzu resources in an artifact store through a remote Concourse worker with access to the internet, or by downloading them from the internet and placing them in the artifact store manually, for example.</td>
   </tr>
   <tr>
     <td>Pipelines and scripts</td>

@@ -12,26 +12,26 @@ Before you deploy <%= vars.ops_manager %> using the procedure in this topic, com
 
 To launch an Amazon Machine Image (AMI) for <%= vars.ops_manager %>:
 
-1. Go to the **<%= vars.ops_manager %>** section of [VMware Tanzu Network](https://network.tanzu.vmware.com/products/ops-manager).
+1. Go to the **<%= vars.ops_manager %>** section of the [Broadcom Support portal](https://support.broadcom.com/group/ecx/productdownloads?subfamily=VMware%20Tanzu%20Operations%20Manager).
 
-1. Click the version of <%= vars.ops_manager %> you want to install from the **Releases** drop-down menu.
+2. Click the version of <%= vars.ops_manager %> you want to install from the **Releases** drop-down menu.
 
-1. In the **Release Download Files**, click the file named **<%= vars.ops_manager %> for AWS** to download a PDF.
+3. In the **Release Download Files**, click the file named **<%= vars.ops_manager %> for AWS** to download a PDF.
 
-1. Open the PDF and identify the AMI ID for your region.
+4. Open the PDF and identify the AMI ID for your region.
 
-1. Return to the EC2 Dashboard.
+5. Return to the EC2 Dashboard.
 
-1. Click **AMIs** from the **Images** menu.
+6. Click **AMIs** from the **Images** menu.
 
-1. Using the **Owned by me** drop-down filter, click **Public images** .
+7. Using the **Owned by me** drop-down filter, click **Public images** .
 
-1. Paste the AMI ID for your region into the search bar and press enter.
+8. Paste the AMI ID for your region into the search bar and press enter.
 
     There is a different AMI for each region. If you cannot locate the AMI for your region, verify that you have set your AWS Management Console to your desired region.
     Additionally, AWS automatically deprecates public AMIs 2 years after they are published, including the AMIs for <%= vars.ops_manager %> and stemcells. These <%= vars.ops_manager %> AMIs do not appear in AMI searches, but can still be launched using the `aws` CLI or Platform Automation. Deploying a deprecated light stemcell using AWS CPI v100 or below results in an error.
 
-2. (Optional) If you want to encrypt the VM that runs <%= vars.ops_manager %> with AWS Key Management Service (KMS), perform the following additional steps:
+9. (Optional) If you want to encrypt the VM that runs <%= vars.ops_manager %> with AWS Key Management Service (KMS), perform the following additional steps:
 
     1. Right-click the row that lists your AMI and click **Copy AMI**.
     2. Click your **Destination region**.
@@ -39,22 +39,22 @@ To launch an Amazon Machine Image (AMI) for <%= vars.ops_manager %>:
     4. Click your **KMS Key**. To create a new custom key, see [Creating Keys](https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html) in the AWS documentation.
     5. Click **Copy AMI**. You can use the new AMI you copied for the following steps.
 
-3. Click the row that lists your <%= vars.ops_manager %> AMI and click **Launch instance from AMI**.
+10. Click the row that lists your <%= vars.ops_manager %> AMI and click **Launch instance from AMI**.
 
-4. On the **Launch an instance** page, for **Name**, enter a name for the <%= vars.ops_manager %> VM. For example, enter `pcf-ops-manager`.
+11. On the **Launch an instance** page, for **Name**, enter a name for the <%= vars.ops_manager %> VM. For example, enter `pcf-ops-manager`.
 
-5. Click **m5.large** for your instance type.
+12. Click **m5.large** for your instance type.
 
-6. Click the `pcf-ops-manager-key` key pair, and confirm that you have access to the private key file. You use this key pair to access the <%= vars.ops_manager %> VM.
+13. Click the `pcf-ops-manager-key` key pair, and confirm that you have access to the private key file. You use this key pair to access the <%= vars.ops_manager %> VM.
 
-7. In the **Network settings** section, click **Edit** and configure the following for your instance:
+14. In the **Network settings** section, click **Edit** and configure the following for your instance:
     * **Network**: Click the VPC that you created.
     * **Subnet**: Click `pcf-public-subnet-az0` to allow traffic from public IP addresses, or `pcf-management-subnet-az0` to allow traffic only from private IP addresses.
     * **Auto-assign for Public IP**: Click **Enable** to allow traffic from public IP addresses, or **Disable** to allow traffic only from private IP addresses.
     * **Firewall (security groups)**: Click **Select an existing security group** and click the `pcf-ops-manager-security-group` that you created in [Configure a Security Group for <%= vars.ops_manager %>](prepare-env-manual.html#pcfaws-om-secgrp) in _Preparing to Deploy <%= vars.ops_manager %> on AWS_.
     * For all other fields, accept the default values.
 
-8. In the **Configure storage** section, adjust the **Size (GiB)** value.
+15. In the **Configure storage** section, adjust the **Size (GiB)** value.
 The default persistent disk value is 8&nbsp;GB. <%= vars.company_name %> recommends increasing this value to a minimum of 100&nbsp;GB.
 
 1. (Optional) If you are using IAM roles, perform the following additional steps:
