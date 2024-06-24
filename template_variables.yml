@@ -7,9 +7,9 @@ template_variables:
   product_dev_local: Pivotal Dev
   product_link: <div class="header-item"><a href="https://support.broadcom.com/group/ecx/productdownloads?subfamily=VMware%20Tanzu%20Application%20Service%20for%20VMs">Back to Product Page</a></div>
   product_url: https://support.broadcom.com/group/ecx/productdownloads?subfamily=VMware%20Tanzu%20Application%20Service%20for%20VMs
-  support_link: <a href="https://tanzu.vmware.com/support" target="_blank">Support</a>
-  support_call_to_action: <a href="https://tanzu.vmware.com/support" target="_blank">Need Support?</a>
-  support_url: https://tanzu.vmware.com/support
+  support_link: <a href="https://support.broadcom.com/" target="_blank">Broadcom Support</a>
+  support_call_to_action: <a href="https://support.broadcom.com/" target="_blank">Need Support?</a>
+  support_url: https://support.broadcom.com/
   use_global_header: true
   global_header_product_href: https://support.broadcom.com/group/ecx/downloads
   global_header_product_link_text: Downloads
@@ -31,6 +31,7 @@ template_variables:
 
 # Tanzu product variables - v2.9 and later
   company_name: VMware
+  new_company_name: Broadcom
   product_network: Broadcom Support
   platform_code: PCF
   ops_manager_first: VMware Tanzu Operations Manager
@@ -148,7 +149,7 @@ template_variables:
   console_links: For more information, see [Getting started with Apps Manager](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/4.0/tas-for-vms/dev-console.html) and [Managing User Accounts and Permissions Using Apps Manager](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/4.0/tas-for-vms/console-roles.html).
   console_org: images/pcf/console-org.png
   console_pcf_pws: <a href="https://docs.vmware.com/en/VMware-Tanzu-Application-Service/4.0/tas-for-vms/console-login.html">Logging In to Apps Manager</a>
-  contact_support: Contact [Support](https://tanzu.vmware.com/support) if you need assistance.
+  contact_support: Contact [Support](https://support.broadcom.com/) if you need assistance.
   container_network_link: For information about administering container-to-container network policies, see [Administering Container-to-Container Networking](../devguide/deploy-apps/cf-networking.html).
   cookies_shared_domain_1:
   cookies_shared_domain_2: For an app using a shared domain such as `example.com`, a cookie set to use the highest domain has a `Domain` attribute of `.example.com` in its HTTP response header.
