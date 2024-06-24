@@ -302,7 +302,7 @@ template_variables:
   tcp_iaas: To configure your IP addresses for your TAS for VMs deployment, see the procedure for enabling TCP routing in the [Configure Networking](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/4.0/tas-for-vms/configure-pas.html#networking) section of the _Configuring TAS for VMs_ topic.
   tcp_mod_port_change: "../adminguide/tcp_empty_file"
   tcp_port: "/pcf/core/2-10/tcp_port_review"
-  tiledev_link: To develop service brokers and service tiles for Tanzu Operations Manager, see the <a href="https://docs.vmware.com/en/Tile-Developer-Guide/2.10/tile-dev-guide/index.html">Tanzu Operations Manager Tile Developer Guide</a>.
+  tiledev_link: To develop service brokers and service tiles for Tanzu Operations Manager, see the <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/tile-dev-guide/index.html">Tanzu Operations Manager Tile Developer Guide</a>.
   uaa: <a href="../adminguide/notifications.html">UAA</a>
   uaa_cli: For more information, see [Creating and managing users with the UAA CLI (UAAC)](../../uaa/uaa-user-management.html) and [Orgs, Spaces, Roles, and Permissions](../../concepts/roles.html).
   uaa_cred: see the **Credentials** tab in the TAS for VMs tile
