@@ -55,7 +55,7 @@ The specific version of NSX-T required for your deployment depends on which runt
 
 * For <%= vars.k8s_runtime_first %> deployments, see the [VMware product interoperability matrices](https://www.vmware.com/resources/compatibility/sim/interop_matrix.php#interop&549=&175=).
 
-* For <%= vars.app_runtime_abbr %> deployments, see the [Support matrix: <%= vars.app_runtime_abbr %>, VMware NSX-T Container Plug-in](https://tanzu.vmware.com/products).
+* For <%= vars.app_runtime_abbr %> deployments, see the [Support matrix: <%= vars.app_runtime_abbr %>, VMware NSX-T Container Plug-in](https://support.broadcom.com/group/ecx/downloads).
 
 ## <a id='tiles-addons'></a> Update tiles and add-ons
 
@@ -83,7 +83,7 @@ tile to a compatible version before you upgrade <%= vars.ops_manager %>. You do 
 Some partner service tiles may be incompatible with <%= vars.ops_manager %> <%= vars.v_major_version %>.
 For information about partner service tile compatibility,
 review the **Depends On** section on your partner tile download page, see the tile release documentation in
-the [VMware Tanzu documentation](https://network.tanzu.vmware.com/products/), or contact the partner organization that produces the service tile.
+the [VMware Tanzu documentation](https://support.broadcom.com/group/ecx/downloads), or contact the partner organization that produces the service tile.
 
 #### <a id='env'></a> Environment details
 
@@ -91,16 +91,16 @@ You can use the following empty table as a template for recording and tracking t
 
 |        |        | **Sandbox** | **Non-Prod** | **Prod** | **Other...** |
 | ------ | ------ | ----------- | ------------ | -------- | ------------ |
-| **<%= vars.ops_manager %>** | [<%= vars.ops_manager %>](https://network.tanzu.vmware.com/products/ops-manager) |        |        |        |        |
-|        | [<%= vars.app_runtime_full %>](https://network.tanzu.vmware.com/products/elastic-runtime) |        |        |        |        |
-| **<%= vars.ops_manager %> Services** | [VMware Tanzu SQL &#91;MySQL for VMs&#93;](https://network.tanzu.vmware.com/products/pivotal-mysql) |        |        |        |        |
-|        | [Redis](https://network.tanzu.vmware.com/products/p-redis) |        |        |        |        |
-|        | [RabbitMQ for VMware Tanzu &#91;VMs&#93;](https://network.tanzu.vmware.com/products/p-rabbitmq) |        |        |        |        |
-|        | [Single Sign-On for VMware Tanzu](https://network.tanzu.vmware.com/products/p-identity) (SSO) |        |        |        |        |
-|        | [Spring Cloud Services for VMware Tanzu](https://network.tanzu.vmware.com/products/p-spring-cloud-services) |        |        |          |        |
-|        | [Concourse](https://network.tanzu.vmware.com/products/p-concourse) |        |        |        |        |
+| **<%= vars.ops_manager %>** | [<%= vars.ops_manager %>](https://support.broadcom.com/group/ecx/productdownloads?subfamily=VMware%20Tanzu%20Operations%20Manager) |        |        |        |        |
+|        | [<%= vars.app_runtime_full %>](https://support.broadcom.com/group/ecx/productdownloads?subfamily=VMware%20Tanzu%20Application%20Service%20for%20VMs) |        |        |        |        |
+| **<%= vars.ops_manager %> Services** | [VMware Tanzu SQL &#91;MySQL for VMs&#93;](https://support.broadcom.com/group/ecx/productdownloads?subfamily=VMware%20SQL%20with%20MySQL%20for%20Tanzu%20Application%20Service%E2%84%A2) |        |        |        |        |
+|        | [Redis](https://support.broadcom.com/group/ecx/productdownloads?subfamily=Redis%20for%20VMware%20Tanzu%20Application%20Service) |        |        |        |        |
+|        | [RabbitMQ for VMware Tanzu &#91;VMs&#93;](https://support.broadcom.com/group/ecx/productdownloads?subfamily=VMware%20Tanzu%20RabbitMQ%C2%AE%20for%20Tanzu%C2%AE%20Application%20Service%E2%84%A2) |        |        |        |        |
+|        | [Single Sign-On for VMware Tanzu](https://support.broadcom.com/group/ecx/productdownloads?subfamily=Single%20Sign-On%20for%20VMware%20Tanzu%20Application%20Service) (SSO) |        |        |        |        |
+|        | [Spring Cloud Services for VMware Tanzu](https://support.broadcom.com/group/ecx/productdownloads?subfamily=Spring%20Cloud%20Services%20for%20VMware%20Tanzu) |        |        |          |        |
+|        | [Concourse](https://support.broadcom.com/group/ecx/productdownloads?subfamily=Concourse%20for%20VMware%20Tanzu) |        |        |        |        |
 |        | ... |        |        |        |        |
-| **<%= vars.ops_manager %> Partner Services** | [New Relic](https://network.tanzu.vmware.com/products/p-new-relic) |        |        |        |        |
+| **<%= vars.ops_manager %> Partner Services** | [New Relic](https://support.broadcom.com/group/ecx/productdownloads?subfamily=New%20Relic%20Service%20Broker%20for%20VMware%20Tanzu) |        |        |        |        |
 |        | ... |        |        |        |        |
 
 ### <a id='upgrade-service-tiles'></a> Upgrade services tiles

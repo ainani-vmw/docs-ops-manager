@@ -48,7 +48,7 @@ before starting. For all available product release notes, see:
 
 To upgrade <%= vars.app_runtime_abbr %> without upgrading <%= vars.ops_manager %>:
 
-1. Download the product file from [<%= vars.product_network %>](https://www.vmware.com/products.html).
+1. Download the product file from [<%= vars.product_network %>](https://support.broadcom.com/group/ecx/downloads).
 
 1. Import the product file to your <%= vars.ops_manager %> Installation Dashboard.
 
@@ -77,17 +77,17 @@ Ensure you review the individual product upgrade procedure for each tile.
 
 To upgrade your products:
 
-1. Browse to [<%= vars.product_network %>](https://www.vmware.com/products.html) and sign in.
+1. Browse to [<%= vars.product_network %>](https://support.broadcom.com/group/ecx/downloads) and sign in.
 
-1. Download the latest release for the product or products that you want to upgrade. Every
+2. Download the latest release for the product or products that you want to upgrade. Every
 product is tied to exactly one stemcell. Download the stemcell that matches your product and
 version.
 
 1. Go to the <%= vars.ops_manager %> Installation Dashboard.
 
-1. Click **Import a Product**.
+2. Click **Import a Product**.
 
-1. Select the `.pivotal` file that you downloaded from <%= vars.product_network %> or received
+3. Select the `.pivotal` file that you downloaded from <%= vars.product_network %> or received
 from your software distributor, then click **Open**. If the product is successfully added,
 it appears in your product list. If the product that you selected is not the latest version,
 the most up-to-date version appears in your product list.
@@ -97,18 +97,18 @@ the most up-to-date version appears in your product list.
 
 1. Repeat the import, upload, and upgrade steps for each product you downloaded.
 
-1. If you are upgrading a product that uses a self-signed certificate from v1.1 to v1.2, you
+2. If you are upgrading a product that uses a self-signed certificate from v1.1 to v1.2, you
 must configure the product to trust the self-signed certificate. To configure a product to
 trust the self-signed certificate:
     1. Click the product tile.
-    1. In the left-hand column, select the setting page containing the SSL certificate configuration.
+    1. Select the Setting page containing the SSL certificate configuration.
     For example, for <%= vars.app_runtime_abbr %>, select the **HAProxy** pane.
-    1. Check the **Trust Self-Signed Certificates** box.
-    1. Click **Save**.
+    3. Check the **Trust Self-Signed Certificates** box.
+    4. Click **Save**.
 
 1. Click **Review Pending Changes**.
 
-1. Click **Apply Changes**.
+2. Click **Apply Changes**.
 
 
 ## <a id='replica-tiles'></a> Upgrading replicated tiles
