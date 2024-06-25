@@ -43,6 +43,72 @@ When deploying <%= vars.ops_manager %> on GCP, <%= vars.company_name %> recommen
 
 **For a shared-VPC installation**: Complete the following steps twice, to create a host account and service account for <%= vars.ops_manager %>.
 
+1. From the GCP console, click **IAM & Admin**, then **Roles**.
+
+1. Click **Create New Role**:
+
+    * **Title:** Enter a title. For example, "BOSH Director"
+    * **ID:** Enter a unique id. For example, "bosh.director"
+
+    * Click **Add Permissions**. Check each of the following permissions, then click **Add**
+
+        * `compute.addresses.get`
+        * `compute.addresses.list`
+        * `compute.backendServices.get`
+        * `compute.backendServices.list`
+        * `compute.diskTypes.get`
+        * `compute.disks.delete`
+        * `compute.disks.list`
+        * `compute.disks.get`
+        * `compute.disks.createSnapshot`
+        * `compute.snapshots.create`
+        * `compute.disks.create`
+        * `compute.images.useReadOnly`
+        * `compute.globalOperations.get`
+        * `compute.images.delete`
+        * `compute.images.get`
+        * `compute.images.create`
+        * `compute.instanceGroups.get`
+        * `compute.instanceGroups.list`
+        * `compute.instanceGroups.update`
+        * `compute.instances.setMetadata`
+        * `compute.instances.setLabels`
+        * `compute.instances.setTags`
+        * `compute.instances.reset`
+        * `compute.instances.start`
+        * `compute.instances.list`
+        * `compute.instances.get`
+        * `compute.instances.delete`
+        * `compute.instances.create`
+        * `compute.subnetworks.use`
+        * `compute.subnetworks.useExternalIp`
+        * `compute.instances.detachDisk`
+        * `compute.instances.attachDisk`
+        * `compute.disks.use`
+        * `compute.instances.deleteAccessConfig`
+        * `compute.instances.addAccessConfig`
+        * `compute.addresses.use`
+        * `compute.machineTypes.get`
+        * `compute.regionOperations.get`
+        * `compute.zoneOperations.get`
+        * `compute.networks.get`
+        * `compute.subnetworks.get`
+        * `compute.snapshots.delete`
+        * `compute.snapshots.get`
+        * `compute.targetPools.list`
+        * `compute.targetPools.get`
+        * `compute.targetPools.addInstance`
+        * `compute.targetPools.removeInstance`
+        * `compute.instances.use`
+        * `storage.buckets.create`
+        * `storage.objects.create`
+        * `compute.zones.list`
+        * `resourcemanager.projects.get`
+        * `compute.subnetworks.list`
+        * `compute.networks.list`
+
+    * Click **Create**
+
 1. From the GCP console, click **IAM & Admin**, then **Service accounts**.
 
 1. Click **Create Service Account**:
@@ -51,10 +117,7 @@ When deploying <%= vars.ops_manager %> on GCP, <%= vars.company_name %> recommen
     * **Role**: Use the drop-down menu, select the following roles:
       * **Service Accounts**, then **Service Account User**
       * **Service Accounts**, then **Service Account Token Creator**
-      * **Compute Engine**, then **Compute Instance Admin (v1)**
-      * **Compute Engine**, then **Compute Network Admin**
-      * **Compute Engine**, then **Compute Storage Admin**
-      * **Storage**, then **Storage Admin**
+      * **Custom**, then the name of the role you previously created. For example, **BOSH Director**
 
           You must scroll down in the pop-up windows to select all required roles.
 
