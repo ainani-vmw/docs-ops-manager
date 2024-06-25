@@ -110,7 +110,6 @@ This release includes a new version of System Metrics, which causes all VMs to r
 
 - **[Bug Fix]** BlobstoreVerifier on vSphere no longer fails with SocketError due to <%= vars.ops_manager %> loading before network configuration is applied
 - **[Bug Fix]** AZs and networks can be assigned to previously installed tiles without entering Advanced Mode if the tile is adding Jobs for the first time
-- **[Bug Fix]** The Director properties API no longer returns a `short_lived_nats_bootstrap_credentials_enabled` property. This feature is only available on Ops Manager 3.0 and above.
 
 <table border="1" class="nice">
   <thead>
@@ -1627,22 +1626,6 @@ To upgrade to <%= vars.ops_manager %> <%= vars.v_major_version %>, see [Upgradin
 
 <%= vars.ops_manager %> <%= vars.v_major_version %> includes the following major features:
 
-### <a id='lts'></a> Long-term support for <%= vars.ops_manager %> <%= vars.v_major_version %>
-
-<%= vars.ops_manager %> <%= vars.v_major_version %> is a long-term support (LTS) version of <%= vars.ops_manager %>. <%= vars.ops_manager %>
-<%= vars.v_major_version %> is to be supported through March 2025.
-
-Over the lifecycle of <%= vars.ops_manager %> <%= vars.v_major_version %>, VMware releases security patches that occasionally include feature improvements
-and maintenance updates.
-
-Versions and filenames for <%= vars.ops_manager %> <%= vars.v_major_version %> releases on the Broadcom Support portal include a `+LTS-T` suffix to indicate its LTS
-status. If you use automation scripts to deploy <%= vars.ops_manager %>, you might need to update them to include this suffix in your version and filename
-patterns. For example, the filename for the Azure version of <%= vars.ops_manager %> <%= vars.v_major_version %>.4 is `ops-manager-azure-3.0.4-build.227.yml`,
-while the filename for the Azure version of <%= vars.ops_manager %> <%= vars.v_major_version %>.5+LTS-T is `ops-manager-azure-3.0.5+LTS-T.yml`.
-
-You can jump upgrade directly from previous versions of <%= vars.ops_manager %> to <%= vars.ops_manager %> <%= vars.v_major_version %>. For more information,
-see [Jump Upgrading to <%= vars.ops_manager %> <%= vars.v_major_version %>](jump-upgrades.html).
-
 ### <a id='ubuntu-jammy'></a> Jammy Jellyfish stemcell support
 
 <%= vars.ops_manager %> <%= vars.v_major_version %> uses Jammy Jellyfish, a Jammy stemcell based on Ubuntu 22.04.
@@ -1729,23 +1712,6 @@ If you do not specify a machine type as a custom VM type, the BOSH Director cont
 For more information about custom VM type catalogs for GCP deployments, see the [<%= vars.ops_manager %> API
 documentation](./install/ops-man-api.html).
 
-### <a id='short-lived-nats-creds'></a> Short-lived NATS bootstrap credentials
-
-In <%= vars.ops_manager %> <%= vars.v_major_version %>, the **Director Config** pane includes the **Enable Short Lived NATS Bootstrap Credentials** check box.
-Selecting this check box configures your VMs to use short-lived NATS credentials during the bootstrap process. This increases the security of your
-<%= vars.ops_manager %> deployment by rotating the TLS certificate that the BOSH Agents in your VMs use to communicate with the BOSH Director through BOSH NATS. The certificate used during the bootstrap process is not used again.
-
-For more information about short-lived NATS bootstrap credentials, see [Using Short-Lived NATS Bootstrap Credentials](security/pcf-infrastructure/rotate-bootstrap-nats-certificates.html).
-
-<p class="note caution">
-<span class="note__title">Caution</span>
-Before configuring your VMs to use short-lived NATS bootstrap credentials, you must ensure that all VMs in
-your <%= vars.ops_manager %> deployment are using stemcells that support this, including VMs deployed by service tiles. VMs that do not use stemcells that
-support short-lived NATS bootstrap credentials might become unresponsive. For more information, see
-<a href="security/pcf-infrastructure/rotate-bootstrap-nats-certificates.html#stemcells">Stemcell Compatibility</a> in <em>Using Short-Lived NATS Bootstrap
-Credentials</em>.
-</p>
-
 ### <a id='rotate-certs-redeploy'></a> Rotate non-configurable leaf certificates during redeployment
 
 In <%= vars.ops_manager %> <%= vars.v_major_version %>, the **Review Pending Changes** page in the <%= vars.ops_manager %> Installation Dashboard includes the
@@ -1754,17 +1720,6 @@ redeploy your tiles through the <%= vars.ops_manager %> Installation Dashboard, 
 
 For more information about rotating non-configurable leaf certificates through the <%= vars.ops_manager %> Installation Dashboard, see [Review Pending Changes
 Page](install/review-pending-changes.html#review-pending-changes) in _Reviewing Pending Product Changes_.
-
-### <a id='auto-rotate-bosh-dns'></a> Automatic rotation of the BOSH DNS certificates (experimental)
-
-In <%= vars.ops_manager %> 3.0.17+LTS-T, the **Director Config** pane includes the **Enable automatic rotation of the BOSH DNS CA certificate (experimental)** check box.
-Selecting this check box will cause <%= vars.ops_manager %> to automatically rotate the BOSH DNS CA certificate and associated leaf certificates during Apply Changes.
-The rotated BOSH DNS certificates will only be deployed to VMs during Apply Changes when new stemcells are also being deployed to those VMs. This allows the BOSH DNS
-certificates to be rotated gradually over time without user intervention, and without encountering unexpected long Apply Changes times. You can force the rotated
-BOSH DNS certificates to be deployed without updating a stemcell using the **Force latest BOSH DNS certificates to be used without requiring a stemcell update** check
-box on the Review Pending Changes page.
-
-For more information, see [Automatic rotation of BOSH DNS certificates](security/pcf-infrastructure/automatic-rotation-bosh-dns.html).
 
 ### <a id='certificate-rotation-status'></a> Certificates page displays rotation status for each certificate
 
