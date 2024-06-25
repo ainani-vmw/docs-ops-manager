@@ -1,0 +1,20 @@
+---
+title: Rotating identity provider SAML certificates for Tanzu Operations Manager
+owner: Ops Manager
+---
+
+You can rotate SAML service provider (SP) credentials for your <%= vars.ops_manager_first %>.
+
+SAML SP credentials are one example of configurable certificates in <%= vars.ops_manager %>.
+When <%= vars.ops_manager %> is configured to use SAML as an IDP, it uses a configurable certificate
+authority (CA) certificate to authenticate to an external SAML server. This CA has a
+two-year expiration period.
+
+Follow this procedure:
+
+1. Go to **Settings**, then **SAML Settings**.
+1. Under the **SAML service provider certificate and private key** text box, click **Change**.
+1. You can provide your own certificate and private key or you can click **Generate RSA Key**.
+    1. In the **Generate RSA Key** dialog box, use the FQDN of <%= vars.ops_manager %> as your domain name.
+1. Click **Save**.
+1. Apply the changes by deploying the BOSH Director.
