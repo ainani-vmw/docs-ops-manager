@@ -6,6 +6,16 @@ owner: Ops Manager
 You can use the following procedures if you encounter issues while deploying products
 with <%= vars.ops_manager_first %>.
 
+## <a id='token-timeout'></a> UAA token expires during product upload
+
+During a product upload, the UAA tokens may expire if the upload last longer than the token expiry time.
+
+As a workaround, update the token expiry time to be longer than the product upload. 
+
+To see or update the token expiry time, make a request to the `/api/v0/uaa/tokens_expiration` API endpoint.
+
+Use this [guide](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/<%= vars.dot_major_tas_version %>/vmware-tanzu-ops-manager/install-ops-man-api.html) on how to interact with the Ops Manager API.
+
 ## <a id='retry'></a> Retrying the deployment
 
 An installation or update can fail for many reasons, but the system is self healing, and can often
