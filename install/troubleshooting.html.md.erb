@@ -8,9 +8,9 @@ with <%= vars.ops_manager_first %>.
 
 ## <a id='token-timeout'></a> UAA token expires during product upload
 
-During a product upload, the UAA tokens may expire if the upload last longer than the token expiry time.
+During a product upload, the UAA tokens may expire if the upload takes longer than the token expiry time.
 
-As a workaround, update the token expiry time to be longer than the product upload. 
+As a workaround, update the token expiry time to be longer than the product upload time.
 
 To see or update the token expiry time, make a request to the `/api/v0/uaa/tokens_expiration` API endpoint.
 
