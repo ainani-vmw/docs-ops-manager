@@ -139,7 +139,7 @@ For more information about creating a RDS MySQL instance, see [Creating a MySQL 
 
     <p class="note">
     <span class="note__title">Note</span>
-    Use of an External MySQL Database only applies to the BOSH Director. UAA and CredHub do not use these settings and continue to use the Postgres database colocated with the BOSH Director.</p>
+    Use of an External MySQL Database  applies only to the BOSH Director. UAA and CredHub do not use these settings and continue to use the Postgres database co-located with the BOSH Director.</p>
 
     <p> After you deploy the BOSH Director, you cannot change the <b>Database Location</b> from an <b>External MySQL Database</b> to an <b>Internal</b> database or from an <b>Internal</b> database to an <b>External MySQL Database</b>.</p>
 
@@ -147,7 +147,7 @@ For more information about creating a RDS MySQL instance, see [Creating a MySQL 
 
     In addition, if you selected the **Enable TLS for Director Database** check box, you can complete the following optional fields:
 
-    * **Enable TLS:** Select this check box enables TLS communication between the BOSH Director and the database.
+    * **Enable TLS:** Select this check box to enable TLS communication between the BOSH Director and the database.
     * **TLS CA:** Enter the Certificate Authority for the TLS Certificate.
     * **TLS Certificate:** Enter the client certificate for mutual TLS connections to the database.
     * **TLS Private Key:** Enter the client private key for mutual TLS connections to the database.

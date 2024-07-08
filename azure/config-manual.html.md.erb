@@ -33,11 +33,11 @@ deployment to use Azure Generation 1 VM types.
 The following table shows the mapping between Generation 1 and Generation 2 Azure VM types:
 
 | Generation 1 VM Type | Generation 2 VM Type |
-| --- | --- |
-| Standard_DS1_v2 |	Standard_B2s |
-| Standard_DS2_v2 |	Standard_D2s_v3 |
-| Standard_DS3_v2 |	Standard_D4s_v3 |
-| Standard_DS4_v2 |	Standard_D8s_v3 |
+| --------------- | ---------------- |
+| Standard_DS1_v2 |	Standard_B2s     |
+| Standard_DS2_v2 |	Standard_D2s_v3  |
+| Standard_DS3_v2 |	Standard_D4s_v3  |
+| Standard_DS4_v2 |	Standard_D8s_v3  |
 | Standard_DS5_v2 |	Standard_D16s_v3 |
 | |	Standard_D32s_v3 |
 | |	Standard_D48s_v3 |
@@ -63,7 +63,7 @@ The following table shows the mapping between Generation 1 and Generation 2 Azur
 
 1. In a web browser, navigate to the fully qualified domain name (FQDN) of <%= vars.ops_manager %> that you created in [Deploying <%= vars.ops_manager %> on Azure](deploy-manual.html).
 
-1. Log in to <%= vars.ops_manager %>. To log in, see [Log In to <%= vars.ops_manager %> for the first time](../login.html#login-first-time).
+1. Log in to <%= vars.ops_manager %>. See [Log In to <%= vars.ops_manager %> for the First Time](../login.html#login-first-time).
 
 ## <a id='azure-config'></a> Step 2: Azure Config page
 
@@ -87,18 +87,18 @@ The following table shows the mapping between Generation 1 and Generation 2 Azur
 	* For HDD-based storage, click **Standard_LRS**.
 	* For SSD-based storage, click **Premium_LRS**.
 
-5. If you want to all BOSH-created disks to use the same storage tier for the root and OS disks, activate the **Use same Storage Tier for root / OS disk** check box. This overrides the default behavior,
+5. If you want all BOSH-created disks to use the same storage tier for the root and OS disks, select the **Use same Storage Tier for root / OS disks** check box. This overrides the default behavior,
 which is to use a storage tier based on the instance size. For more information, see the [Azure documentation](https://docs.microsoft.com/en-us/azure/virtual-machines/sizes).
 
     ![Storage Tier ephemeral/persistent disks drop-down menu.](../common/images/azure/azure-storage-tier.png)
 
-1. For **Cloud Storage Type**, click one of the following options based on your Azure VM storage settings.
+1. For **Cloud Storage Type**, select one of the following options based on your Azure VM storage settings.
 
-    * **Use Managed Disks**: Click this option if you use Azure Managed Disks. For more information, see [Azure managed disks overview](https://docs.microsoft.com/en-us/azure/storage/storage-managed-disks-overview) in the Microsoft documentation for more information.
+    * **Use Managed Disks**: Select this option if you use Azure Managed Disks. For more information, see [Azure Managed Disks Overview](https://docs.microsoft.com/en-us/azure/storage/storage-managed-disks-overview) in the Microsoft documentation.
 
         ![Cloud Storage Types: Select either "Use Managed Disks" or "Use Storage Accounts.](../common/images/azure/azure-managed-disk.png)
 
-    * **Use Storage Accounts**: Click this option if you use storage accounts to store your Azure VMs. Enter the base storage name that you used to create your deployment
+    * **Use Storage Accounts**: Select this option if you use storage accounts to store your Azure VMs. Enter the base storage name you used to create your deployment
     storage accounts, prepended and appended with the wildcard character `*`. For example, if you created accounts named  `xyzdeploymentstorage1`, `xyzdeploymentstorage2`, and `xyzdeploymentstorage3`, enter `*deploymentstorage*`. <%= vars.ops_manager %> requires that you specify an asterisk at both the beginning and the end of the base storage account name.
 
       <p class="note caution">
@@ -107,7 +107,7 @@ which is to use a storage tier based on the instance size. For more information,
       storage accounts to using managed disks. However, after you click <strong>Use Managed Disks</strong> and
       deploy <%= vars.ops_manager %>, you cannot change your deployment back to use storage accounts.</p>
 
-2. (Optional) Enter your **Default Security Group**. For more information about Network Security Groups, see [Filter network traffic with network security groups](https://docs.microsoft.com/en-us/azure/virtual-network/virtual-networks-nsg) in Microsoft Azure's documentation.<br>
+2. (Optional) Enter your **Default Security Group**. For more information about Network Security Groups, see [Filter network traffic with network security groups](https://docs.microsoft.com/en-us/azure/virtual-network/virtual-networks-nsg) in the Microsoft Azure documentation.<br>
 The Azure portal sometimes displays the names of resources with incorrect capitalization. Always use the Azure CLI to retrieve the correctly capitalized name of a resource.
 
 3. For **SSH Public Key**, copy and paste the contents of your public key in the `opsman.pub` file. You created this file in [Deploying <%= vars.ops_manager %> on Azure](deploy-manual.html).
@@ -116,18 +116,17 @@ The Azure portal sometimes displays the names of resources with incorrect capita
 
 5.  For **VM Type Catalog**, click the VM Catalog that you want to use for your BOSH Managed VMs.
 
-6.  For **Availability Mode**, choose whether to use **Availability Sets** or **Availability Zones**. You can further configure this option in the **Assign AZs and Networks** pane. For more information, see [Assign AZs and Networks](#assign-networks).
+6.  For **Availability Mode**, choose whether to use **Availability Sets** or **Availability Zones**. You can further configure this option in the **Assign AZs and Networks** pane. For more information, see [Assign AZs and Networks](#assign-networks). **Availability Zones** is selected by default, but you can choose **Availability Sets**.
 
-   * **For new installations of <%= vars.ops_manager %>**: **Availability Zones** are selected by default, but you can choose **Availability Sets**.
-   * **If you are upgrading from v2.4**: You must use **Availability Sets**.
-
-You can only choose between Availability Zones and Availability Sets in a staged BOSH Director tile
-that has not yet deployed. After you click <strong>Apply Changes</strong> and the BOSH Director deploys successfully, you cannot switch between Availability Zones and Availability Sets.
+    <p class="note important">
+    <span class="note__title">Important</span>
+    You can choose between Availability Zones and Availability Sets only in a staged BOSH Director tile
+    that has not yet been deployed. After you click <strong>Apply Changes</strong> and the BOSH Director deploys successfully, you cannot switch between Availability Zones and Availability Sets.</p>
 
 <%= partial "../common/azure-environment" %>
 
-To deploy <%= vars.ops_manager %> on Azure using Active Directory Federation Services (ADFS)
-see <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/release-notes.html">IaaS-Specific Global CPI Properties Are Configurable From the API</a>.
+  To deploy <%= vars.ops_manager %> on Azure using Active Directory Federation Services (ADFS)
+  see [../opsguide/adfs-sso-configuration.html](../opsguide/adfs-sso-configuration.html).
 
 1.  (Optional) If you clicked `Azure Stack` for your **Azure Environment**, complete the following Azure Stack-only fields:
   1.  For **Domain**, enter the domain for your Azure Stack deployment. For example, `local.azurestack.external`.
@@ -151,7 +150,9 @@ Create the following three networks:
 * [Runtime Network](#runtime-network)
 * [Services Network](#services-network)
 
-<p> The Azure portal sometimes displays the names of resources with incorrect capitalization. Always use the Azure CLI to retrieve the correctly capitalized name of a resource.</p>
+<p class="note important">
+<span class="note__title">Important</span>
+The Azure portal sometimes displays the names of resources with incorrect capitalization. Always use the Azure CLI to retrieve the correctly capitalized name of a resource.</p>
 
 ### <a id='infrastructure-network'></a> Infrastructure network
 
@@ -159,7 +160,7 @@ To create the infrastructure network:
 
 1. Click **Create Networks**.
 
-1. (Optional) Click **Enable ICMP checks** if you want to enable ICMP on your networks. <%= vars.ops_manager %> uses ICMP checks to confirm that components within your network are reachable.
+1. (Optional) Click **Enable ICMP checks** if you want to enable ICMP on your networks. <%= vars.ops_manager %> uses ICMP checks to confirm that components in your network are reachable.
 
 1. Click **Add Network**. For name, enter `infrastructure`.
 
@@ -169,12 +170,12 @@ To create the infrastructure network:
     <thead>
       <tr>
         <th>Name</th>
-        <td><code>infrastructure</code></td>
+        <th>infrastructure</th>
       </tr>
     </thead>
       <tr>
         <th>Azure Network Name</th>
-        <td>Enter <code>pcf-virtual-network/pcf-infrastructure-subnet</code>. You can use either
+        <td>Enter <code>pcf-virtual-network/pcf-infrastructure-subnet</code>. <br>You can use either
         the <code>NETWORK-NAME/SUBNET-NAME</code> format or the
         <code>RESOURCE-GROUP/NETWORK-NAME/SUBNET-NAME</code> format. If you specify a resource
         group, it must exist under the same subscription ID that you provided in the
@@ -201,6 +202,8 @@ To create the infrastructure network:
 
     ![Create Networks pane](../common/images/azure/create-networks-management.png)
 
+2. Click **Save**.
+
 2. Click **Save**.<%= vars.expand_network_azs %>
 
 ### <a id='runtime-network'></a> Runtime network
@@ -215,13 +218,13 @@ To create the runtime network:
     <thead>
       <tr>
         <th>Name</th>
-        <td><code>pas</code> or <code>pks</code></td>
+        <th>pas or pks</th>
       </tr>
     </thead>
       <tr>
         <th>Azure Network Name</th>
         <td>Enter <code>pcf-virtual-network/pcf-pas-subnet</code> or
-        <code>pcf-virtual-network/pcf-pks-subnet</code>, depending on your runtime. You can use
+        <code>pcf-virtual-network/pcf-pks-subnet</code>, depending on your runtime. <br>You can use
         either the <code>NETWORK-NAME/SUBNET-NAME</code> format or the
         <code>RESOURCE-GROUP/NETWORK-NAME/SUBNET-NAME</code> format. If you specify a resource
         group, it must exist under the same subscription ID that you provided in the
@@ -262,12 +265,12 @@ To create the services network:
     <thead>
       <tr>
         <th>Name</th>
-        <td><code>services</code></td>
+        <th>services</th>
       </tr>
     </thead>
       <tr>
         <th>Azure Network Name</th>
-        <td>Enter <code>pcf-virtual-network/pcf-services-subnet</code>. You can use
+        <td>Enter <code>pcf-virtual-network/pcf-services-subnet</code>. <br>You can use
         either the <code>NETWORK-NAME/SUBNET-NAME</code> format or the
         <code>RESOURCE-GROUP/NETWORK-NAME/SUBNET-NAME</code> format. If you specify a resource
         group, it must exist under the same subscription ID that you provided in the
@@ -296,8 +299,10 @@ To create the services network:
 
 2. Click **Save**.
 
-3. You might see red warnings.
-   Ignore them only if **Enable ICMP checks** is not selected.
+<p class="note important">
+<span class="note__title">Important</span>
+You might see red warnings.
+You can ignore them <em>only if</em> <b>Enable ICMP checks</b> is not selected.</p>
 
 
 ## <a id='assign-networks'></a> Step 5: Assign AZs and Networks
@@ -331,7 +336,7 @@ To create the services network:
 
 1. Click **Resource Config**.
 
-2. Under the **Instances**, **VM Type**, and **Persistent Disk Type** fields, click **Automatic** from the drop-down menu to allocate the recommended resources for the job. If the **Persistent Disk Type** field reads **None**, the job does not require persistent disk space.
+2. Under the **Instances**, **VM Type**, and **Persistent Disk Type** fields, click **Automatic** from the drop-down menu to allocate the recommended resources for the job. If the **Persistent Disk Type** field displays **None**, the job does not require persistent disk space.
     For the BOSH Director job, click a VM type with at least 8&nbsp;GB memory.
     If you set a field to **Automatic** and the recommended resource allocation changes in a future version, <%= vars.ops_manager %> automatically uses the updated recommended allocation.
     If you install <%= vars.windows_runtime_first %>,
@@ -355,7 +360,7 @@ This feature is not recommended for production use. The Azure load balancer does
 1. Click **Review Pending Changes**, and then **Apply Changes**. If a red ICMP error message appears and you have deactivated ICMP, click **Ignore errors and start the install**.
 
 1. BOSH Director installation begins. This might take a few moments. When the installation process
-successfully completes, the **Changes Applied** window appears.
+completes successfully, the **Changes Applied** window appears.
 
 1. Click the <%= vars.ops_manager %> Installation Dashboard link to return to the Installation Dashboard.
 
