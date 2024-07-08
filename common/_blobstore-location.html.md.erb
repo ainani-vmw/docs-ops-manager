@@ -32,7 +32,7 @@
         1. **Enable signed URLs:** Select this check box to configure BOSH VMs to generate short lived, pre-signed URLs for communication between the BOSH Agent and blobstore. If you enable this feature, BOSH Agents do not use credentials to communicate with the blobstore, and VM disks do not store blobstore credentials.
             This feature is available only for BOSH VMs that use Xenial stemcell line 621 or later.
         1. Select **V2 Signature** or **V4 Signature**. If you select **V4 Signature**, enter your **Region**.
-            AWS recommends using Signature Version 4. For more information about AWS S3 Signatures, see <a href="http://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html">Authenticating Requests</a> in the AWS documentation.
+            AWS recommends using Signature Version 4 (V4). For more information about AWS S3 Signatures, see <a href="http://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html">Authenticating Requests</a> in the AWS documentation.
         1. **S3 Backup Strategy:** To configure whether and how to back up the BOSH Director's S3 blobstore, select one of the following options:
             * **No backups**
             * **Use a versioned bucket:** This option uses blobstore bucket versioning to save backups. It requires an S3 blobstore that supports versioning.

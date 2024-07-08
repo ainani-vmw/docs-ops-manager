@@ -50,7 +50,7 @@ For more information, see [Time sync for Linux VMs in Azure](https://docs.micros
 
     If you intend to install <%= vars.k8s_runtime_first %>, you must enable post-deploy scripts.
 
-1. To configure your VMs to use short lived NATS credentials during the bootstrap process, select the **Enable Short Lived NATS Bootstrap Credentials**
+1. To configure your VMs to use short-lived NATS credentials during the bootstrap process, select the **Enable Short Lived NATS Bootstrap Credentials**
 check box. This increases the security of your <%= vars.ops_manager %> deployment by rotating the TLS certificate that the BOSH Agents in your VMs use to
 communicate with the BOSH Director through BOSH NATS.
 
@@ -59,7 +59,7 @@ communicate with the BOSH Director through BOSH NATS.
 
     <p class="note important">
     <span class="note__title">Important</span>
-    Configuring your VMs to use short-lived NATS bootstrap credentials restarts the BOSH Agent in all VMs as they are being created. As a result, VMs
+    Configuring your VMs to use short-lived NATS bootstrap credentials restarts the BOSH Agent in all VMs as they are being created, so VMs
     are created somewhat more slowly.
 
     This configuration affects all new deployments of <%= vars.ops_manager %>. If you want to
@@ -98,7 +98,7 @@ see [How to set up a Load Balancer in front of Tanzu Operations Manager Director
 
 3. <%= partial "../common/certificates-config" %>
 
-4. Select **HM Pager Duty Plugin** to enable Health Monitor integration with PagerDuty.<br>
+4. Select **HM Pager Duty Plugin** to enable Health Monitor integration with PagerDuty.
 
     * **Service Key**: Enter your API service key from PagerDuty.
     * **HTTP Proxy**: Enter an HTTP proxy for use with PagerDuty.
@@ -107,12 +107,12 @@ see [How to set up a Load Balancer in front of Tanzu Operations Manager Director
 
 5. Select **HM Email Plugin** to enable Health Monitor integration with email.
 
-    * **Host**: Enter your email hostname.
+    * **Host**: Enter your email host name.
     * **Port**: Enter your email port number.
     * **Domain**: Enter your domain.
     * **From**: Enter the address for the sender.
-    * **Recipients**: Enter comma-separated addresses of intended recipients.
-    * **Username**: Enter the username for your email server.
+    * **Recipients**: Enter a comma-separated list of addresses of intended recipients.
+    * **Username**: Enter the user name for your email server.
     * **Password**: Enter the password for your email server.
     * **Enable TLS**: Select this check box to enable Transport Layer Security to the email host.
 
