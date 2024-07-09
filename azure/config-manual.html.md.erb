@@ -339,9 +339,7 @@ You can ignore them <em>only if</em> <b>Enable ICMP checks</b> is not selected.<
 3. (Optional) To add a load balancer to the BOSH Director:
   1. Click the icon next to the **BOSH Director** job name to see the **Load Balancers** field and **Internet Connected** check box.
   2. Ensure that the **Internet Connected** check box is not selected.
-  3. For **Load Balancers**, enter your Azure application gateway name for each associated job. To create an application gateway, follow the procedures in [Configure an application gateway for SSL offload by using Azure Resource Manager](https://docs.microsoft.com/en-us/azure/application-gateway/application-gateway-ssl-arm) from the Azure documentation. When you create the application gateway, associate the gateway's IP address with your system domain.
-
-    This feature is not recommended for production use. The Azure load balancer does not support an override port in the healthcheck configuration.
+  3. For **Load Balancers**, enter your Azure application gateway name for each associated job. To create an application gateway, follow the procedures in [Configure an application gateway for SSL offload by using Azure Resource Manager](https://docs.microsoft.com/en-us/azure/application-gateway/application-gateway-ssl-arm) from the Azure documentation. When you create the application gateway, associate the gateway's IP address with your system domain. <br><br>This feature is not recommended for production use. The Azure load balancer does not support an override port in the healthcheck configuration.
 
 3. Click **Save**.
 
