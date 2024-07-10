@@ -1,9 +1,12 @@
                 <p class="note important">
                 <span class="note__title">Important</span>
                 To backup and restore with BBR, if you are using <b>S3 Compatible Blobstore</b> and you have set up an <code>iam_instance_policy</code>, additional steps are needed:
-                    <ol>
-                        <li>Attach the <code>iam_instance_policy</code> to the <code>backup_restore</code> job using the Operations Manager API. <br>See <a href="../install/custom-vm-extensions.html#create-or-update-a-vm-extension">Custom VM Extensions</a>.</li>
-                        <li>In addition to creating backup buckets, update the <%= vars.app_runtime_abbr %> tile (<b>Settings</b> > <b>File Storage</b>) to use S3-compatible storage. <br>See <a href="https://docs.vmware.com/en/VMware-Tanzu-Application-Service/<%= vars.dot_major_tas_version %>/tas-for-vms/config-file-storage.html">External S3-Compatible filestore.</a></li>
-                        <li>Ensure that your IAM Instance Policy is set up to access the backup bucket. <br>For more information about the IAM Instance Policy, see the <a href="../install/policy-doc.html">Tanzu Operations Manager for AWS policy document</a>.</li>
-                    </ol>
+                        <ol>
+                            <li>Attach the <code>iam_instance_policy</code> to the <code>backup_restore</code> job using the Operations Manager API. See <a href="../install/custom-vm-extensions.html#create-or-update-a-vm-extension">Custom VM Extensions</a>.
+                            </li>
+                            <li>In addition to creating backup buckets, update the <%= vars.app_runtime_abbr %> tile (<b>Settings</b> > <b>File Storage</b>) to use S3-compatible storage. See <a href="https://docs.vmware.com/en/VMware-Tanzu-Application-Service/<%= vars.dot_major_tas_version %>/tas-for-vms/config-file-storage.html">External S3-Compatible filestore.</a>
+                            </li>
+                            <li>Ensure that your IAM Instance Policy is set up to access the backup bucket. For more information about the IAM Instance Policy, see the <a href="../install/policy-doc.html">Tanzu Operations Manager for AWS policy document</a>.
+                            </li>
+                        </ol>
                 </p>
