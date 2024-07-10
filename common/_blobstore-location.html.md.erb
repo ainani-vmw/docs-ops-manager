@@ -38,6 +38,8 @@
             * **Use a versioned bucket:** This option uses blobstore bucket versioning to save backups. It requires an S3 blobstore that supports versioning.
             * **Copy into an additional bucket:** This option saves blobstore backups to a separate bucket, which is useful with blobstores that do not support versioning. This option requires you to configure the **Backup Bucket Region** and **Backup Bucket Name** fields.
 
+                <%= partial "../common/bbr-aws-s3" %>
+
     * **GCS Blobstore:** Use this option for an external Google Cloud Storage (GCS) endpoint.
 
       To create a GCS bucket, follow the procedures in [Creating Storage Buckets](https://cloud.google.com/storage/docs/creating-buckets) in the GCS documentation.
