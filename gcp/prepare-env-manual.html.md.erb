@@ -63,6 +63,7 @@ When deploying <%= vars.ops_manager %> on GCP, <%= vars.company_name %> recommen
         * `compute.disks.createSnapshot`
         * `compute.snapshots.create`
         * `compute.disks.create`
+        * `compute.disks.resize`
         * `compute.images.useReadOnly`
         * `compute.globalOperations.get`
         * `compute.images.delete`
@@ -88,6 +89,7 @@ When deploying <%= vars.ops_manager %> on GCP, <%= vars.company_name %> recommen
         * `compute.instances.deleteAccessConfig`
         * `compute.instances.addAccessConfig`
         * `compute.addresses.use`
+        * `compute.addresses.useInternal`
         * `compute.machineTypes.get`
         * `compute.regionOperations.get`
         * `compute.zoneOperations.get`
@@ -106,6 +108,11 @@ When deploying <%= vars.ops_manager %> on GCP, <%= vars.company_name %> recommen
         * `resourcemanager.projects.get`
         * `compute.subnetworks.list`
         * `compute.networks.list`
+
+    * If you intend to use the *Tanzu Ops Manager VM Service Account* option for authentication instead of *AuthJSON*, then the following permissions are also required:
+
+        * `compute.instances.setServiceAccount`
+        * Add each permission associated with the `Service Account User` role
 
     * Click **Create**
 
