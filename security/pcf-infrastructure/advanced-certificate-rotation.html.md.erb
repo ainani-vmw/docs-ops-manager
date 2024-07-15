@@ -268,6 +268,8 @@ To rotate the Services TLS CA and its leaf certificates:
 1. Check the [CredHub Maestro tile compatibility](maestro-tile-compatibility.html) document to ensure that all service tile versions currently deployed are compatible with Maestro.
     <p> If you have any service tiles that are not compatible with CredHub Maestro, follow their rotation procedure. Do not follow this procedure. If you do, you might experience extended downtime or data loss.</p>
 
+1. For deployment that use Tanzu GemFire for VMs with multiple foundations (WAN setups).
+   Follow [these instructions](https://docs.vmware.com/en/VMware-GemFire-for-Tanzu-Application-Service/2.0/gf-tas/content-rotating-ca.html#collect-existing-ca) to collect the existing certificates before proceeding to regenerate certificates.
 1. Regenerate the Services TLS CA and mark the latest version of the CA as transitional. This creates a new version of the Services TLS CA and indicates that the latest version is inactive, so that all leaf certificates trust the new CA.
     1. On the Services TLS CA, see if your Services TLS CA was CredHub-set.
     Run:
@@ -282,6 +284,8 @@ To rotate the Services TLS CA and its leaf certificates:
         maestro regenerate ca --name "/services/tls_ca" --force
         ```
     1. For deployments that use MySQL for VMware Tanzu, follow [these instructions](https://docs.vmware.com/en/VMware-SQL-with-MySQL-for-Tanzu-Application-Service/3.2/mysql-for-tas/prepare-tls.html#add-ca-cert) to add the new Services TLS CA to the **Trusted Certificates** of the **BOSH Director**.
+    2. For deployment that use Tanzu GemFire for VMs with multiple foundations (WAN setups).
+       Follow [these instructions](https://docs.vmware.com/en/VMware-GemFire-for-Tanzu-Application-Service/2.0/gf-tas/content-rotating-ca.html#collect-new-ca) to collect the newly generated certificates.
 
 1. Re-deploy:
     1. Return to the <%= vars.ops_manager %> Installation Dashboard.
@@ -347,6 +351,9 @@ Run:
 1. Rebind and restage the following apps:
     * For Tanzu GemFire for VMs apps, rebind and restage the apps.
     * For deployments that use MySQL for VMware Tanzu, rebind and restage all non Java MySQL apps that rely on `VCAP_SERVICES` for TLS.
+
+1. For deployment that use Tanzu GemFire for VMs with multiple foundations (WAN setups).
+       Follow [these instructions](https://docs.vmware.com/en/VMware-GemFire-for-Tanzu-Application-Service/2.0/gf-tas/content-rotating-ca.html#wan-remove-old) to remove old certiificates from Ops Manager.
 
 ### <a id='set-certificate-rotation'></a> Rotate CredHub-set CAs
 
