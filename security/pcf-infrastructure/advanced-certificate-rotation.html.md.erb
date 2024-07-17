@@ -285,8 +285,8 @@ To rotate the Services TLS CA and its leaf certificates:
         ```
     1. For deployments that use MySQL for VMware Tanzu, follow [these instructions](https://docs.vmware.com/en/VMware-SQL-with-MySQL-for-Tanzu-Application-Service/3.2/mysql-for-tas/prepare-tls.html#add-ca-cert) to add the new Services TLS CA to the **Trusted Certificates** of the **BOSH Director**.
     2. For deployment that use Tanzu GemFire for VMs with multiple foundations (WAN setups):
-       1. Follow [these instructions](https://docs.vmware.com/en/VMware-GemFire-for-Tanzu-Application-Service/2.0/gf-tas/content-rotating-ca.html#collect-new-ca) to collect the newly generated certificates.
-       2. Follow [these instructions](https://docs.vmware.com/en/VMware-GemFire-for-Tanzu-Application-Service/2.0/gf-tas/content-rotating-ca.html#wan-add-certsAandB) to add existing and new certificates to tile.
+       1. Follow [these instructions](https://docs.vmware.com/en/VMware-GemFire-for-Tanzu-Application-Service/2.1/gf-tas/content-rotating-ca.html#collect-new-ca) to collect the newly generated certificates.
+       2. Follow [these instructions](https://docs.vmware.com/en/VMware-GemFire-for-Tanzu-Application-Service/2.1/gf-tas/content-rotating-ca.html#wan-add-certsAandB) to add existing and new certificates to tile.
 
 1. Re-deploy:
     1. Return to the <%= vars.ops_manager %> Installation Dashboard.
@@ -354,7 +354,7 @@ Run:
     * For deployments that use MySQL for VMware Tanzu, rebind and restage all non Java MySQL apps that rely on `VCAP_SERVICES` for TLS.
 
 1. For deployment that use Tanzu GemFire for VMs with multiple foundations (WAN setups).
-   Follow [these instructions](https://docs.vmware.com/en/VMware-GemFire-for-Tanzu-Application-Service/2.0/gf-tas/content-rotating-ca.html#wan-remove-old) to remove old certificates from Ops Manager.
+   Follow [these instructions](https://docs.vmware.com/en/VMware-GemFire-for-Tanzu-Application-Service/2.1/gf-tas/content-rotating-ca.html#wan-remove-old) to remove old certificates from Ops Manager.
 
 ### <a id='set-certificate-rotation'></a> Rotate CredHub-set CAs
 
