@@ -1,0 +1,170 @@
+---
+title: Additional Steps for Rotating Certificates (Gemfire-for-TAS WAN Setups only)
+---
+
+<p class="note important"><strong>Important Note</strong>: This is not the complete procedure to rotate the certificates.
+This page only specifies the _additional steps_ to be followed along with certificate rotation procedure in
+<a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/security-pcf-infrastructure-advanced-certificate-rotation.html#services-rotation">Rotate the Services TLS CA and Its Leaf Certificates</a> for WAN setups
+</p>
+
+- If you are running Ops Manager 2.10, follow the procedure in
+[Rotate the Services TLS CA and Its Leaf Certificates](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/security-pcf-infrastructure-advanced-certificate-rotation.html#services-rotation) in _Advanced Certificate Rotation with CredHub Maestro_ in the VMware Tanzu Ops Manager 2.10 documentation.
+    <p class="note warning"><strong>Warning</strong>: For apps that connect to the <%=vars.gemfire_product_name_short%> cluster using TLS, at each step in the procedure that rebinds and restages apps, recreate the truststore following the directions in <a href="./accessing-instance.html#truststore">Create a Truststore</a>) in <em>Accessing a Service Instance</em>prior to rebinding. Spring Boot Data Geode (SBDG) apps that set <%=vars.gemfire_product_name_short%> properties <code>ssl-use-default-context=true</code> and <code>ssl-endpoint-identification-enabled=false</code> do not need to recreate a truststore.
+    </p>
+
+### <a id="cert-rot-wan"></a> WAN-Connected Service Instances
+
+The procedure assumes two foundations with service instances: foundation A and foundation B.
+However, it can be applied to installations with more than two foundations.
+To expand the procedure for additional foundations, wherever foundation A and foundation B are mentioned,
+also apply the instructions to a third foundation (foundation C), a fourth foundation (foundation D), and so on.
+
+### <a id="collect-existing-ca"></a> Collect Existing TLS CA certificate
+Follow these steps for both foundations (A & B)
+
+1. Log in to CredHub.
+
+2. For Foundation A, Get the _current_ Services TLS CA certificate by capturing the certificate in the output of:
+    ```
+    credhub get --name=/services/tls_ca -k ca > /tmp/old_ca_foundation_A.txt
+    ```
+3. For Foundation B, Get the _current_ Services TLS CA certificate by capturing the certificate in the output of:
+    ```
+    credhub get --name=/services/tls_ca -k ca > /tmp/old_ca_foundation_B.txt
+    ```
+4. Navigate back to [Rotate the Services TLS CA and Its Leaf Certificates](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/security-pcf-infrastructure-advanced-certificate-rotation.html#services-rotation) to regenerate certificates
+   [TODO]: We need to navigate user to previous step from where user came.
+
+### <a id="collect-new-ca"></a> Collect Newly Generated TLS CA certificate
+Follow these steps for both foundations (A & B)
+
+1. Before following these steps, ensure that certificates had been regenerated and the previous section [Collect Existing TLS CA certificate](#collect-existing-ca) had been completed.
+
+2. For Foundation A, Get the _new_ Services TLS CA certificate by capturing the certificate in the output of:
+   ```
+   NEW_CA_ID="$(credhub curl -p api/v1/certificates | jq -r '.certificates[] | select(.name == "/services/tls_ca") | .versions[] | select(.transitional == true) | .id')"
+   credhub get --id "$NEW_CA_ID" -k ca > /tmp/new_ca_foundation_A.txt
+   ```
+
+3. For Foundation B, Get the _new_ Services TLS CA certificate by capturing the certificate in the output of:
+   ```
+   NEW_CA_ID="$(credhub curl -p api/v1/certificates | jq -r '.certificates[] | select(.name == "/services/tls_ca") | .versions[] | select(.transitional == true) | .id')"
+   credhub get --id "$NEW_CA_ID" -k ca > /tmp/new_ca_foundation_B.txt
+   ```
+4. Navigate back to [Rotate the Services TLS CA and Its Leaf Certificates](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/security-pcf-infrastructure-advanced-certificate-rotation.html#services-rotation)
+       [TODO]: We need to navigate user to previous step from where user came.
+
+### <a id="wan-add-certsAandB"></a> Add All the Certificates to the Tiles
+
+This part adds all the certificates (current and new) to the tiles.
+For a distributed system with two foundations, the four certificates are:
+
+- The current TLS CA certificate for foundation A (under `/tmp/old_ca_foundation_A.txt`)
+- The current TLS CA certificate for foundation B (under `/tmp/new_ca_foundation_A.txt`)
+- The new TLS CA certificate for foundation A (under `/tmp/old_ca_foundation_B.txt`)
+- The new TLS CA certificate for foundation B (under `/tmp/new_ca_foundation_B.txt`)
+
+1. On foundation A, paste all certificates
+(ordering of the certificates does not matter)
+into the **BOSH Director > Security > Trusted Certificates** field.
+Click **Save**.
+
+2. On foundation A, paste all certificates
+(ordering of the certificates does not matter)
+into two fields of the VMware Tanzu Application Service tile:
+**Networking > Certificate Authorities trusted by the Gorouter**
+and
+**Networking > Certificate Authorities trusted by the HAProxy**.
+Click **Save**.
+
+3. On foundation A, paste all certificates
+(ordering of the certificates does not matter)
+into two fields of the Isolation Segment tile,
+if the environment has this optional tile:
+**Networking > Certificate Authorities trusted by the Gorouter**
+and
+**Networking > Certificate Authorities trusted by the HAProxy**.
+Click **Save**.
+
+4. On foundation B, paste all certificates
+(ordering of the certificates does not matter)
+into the **BOSH Director > Security > Trusted Certificates** field.
+Click **Save**.
+
+5. On foundation B, paste all certificates
+(ordering of the certificates does not matter)
+into two fields of the VMware Tanzu Application Service tile:
+**Networking > Certificate Authorities trusted by the Gorouter**
+and
+**Networking > Certificate Authorities trusted by the HAProxy**.
+Click **Save**.
+
+6. On foundation B, paste all certificates
+(ordering of the certificates does not matter)
+into two fields of the Isolation Segment tile,
+if the environment has this optional tile:
+**Networking > Certificate Authorities trusted by the Gorouter**
+and
+**Networking > Certificate Authorities trusted by the HAProxy**.
+Click **Save**.
+
+Note: Navigate back to [Rotate the Services TLS CA and Its Leaf Certificates](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/security-pcf-infrastructure-advanced-certificate-rotation.html#services-rotation)
+           [TODO]: We need to navigate user to previous step from where user came.
+
+### <a id="wan-remove-old"></a> Remove the Old Services TLS CA Certificates from Ops Manager
+
+After your apps have reconnected to service instances with the certificates
+generated by the new CA, both of the old CA certificates may be removed.
+There will be one old CA certificate for foundation A
+and one old certificate for foundation B.
+
+Follow these steps twice, once for foundation A,
+and once for foundation B.
+
+1. Delete the two old CA certificates from
+the BOSH Director tile **Security > Trusted Certificates** field.
+You will remove one old CA certificate for foundation A
+and one old certificate for foundation B.
+Click **Save**.
+
+1. Delete the two old CA certificates from the two fields of
+the VMware Tanzu Application Service tile:
+**Networking > Certificate Authorities trusted by the Gorouter** and
+**Networking > Certificate Authorities trusted by the HAProxy**.
+You will remove one old CA certificate for foundation A
+and one old certificate for foundation B.
+Click **Save**.
+
+1. Delete the two old CA certificates from the two fields
+of the Isolation Segment tile, if the environment has this optional tile:
+**Networking > Certificate Authorities trusted by the Gorouter**
+and **Networking > Certificate Authorities trusted by the HAProxy**.
+You will remove one old CA certificate for foundation A
+and one old certificate for foundation B.
+Click **Save**.
+
+As a security best practice, you should remove outdated certificates as soon as possible from your deployment.
+You can schedule this step to a convenient time,
+because for most deployments you will not lose any deployment functionality if you do not perform this step immediately.
+
+For some deployments,
+you may encounter an error if you create a service instance in a deployment
+that contains an expired Services TLS CA certificate.
+For more information, see [Cloud Controller fails to create service instance when there is a expired cert installed on the system](https://community.pivotal.io/s/article/Cloud-Controller-fails-to-create-service-instance-when-there-is-an-old-expired-cert-installed-on-the-system) in the Tanzu Support Knowledge Base.
+
+<p class="note warning"><strong>Warning</strong>: This procedure involves redeploying all of the VMs
+in your Tanzu Operations Manager deployment to removed old certificates. The operation can take a long time to complete.
+<br><br>You may apply the changes to both foundation A and foundation B at the same time.</p>
+
+1. Navigate back to the **Installation Dashboard**.
+2. Click **Review Pending Changes**.
+3. Ensure that all product tiles, including <%=vars.tas_product_name%>, <%=vars.tas_product_name_short%> [Windows], Isolation Segment, and partner tiles,
+are selected.
+4. Select only the on-demand services tiles that use TLS,
+such as MySQL for VMware Tanzu, <%=vars.product_name_short%>, Redis for VMware Tanzu, and RabbitMQ for VMware Tanzu [VMs].
+5. For each on-demand service tile that uses TLS:
+    1. Expand the errands.
+    2. Enable the errand to upgrade all service instances.
+        <p class="note"><strong>Note:</strong> The name of the upgrade all service instances errand may differ slightly between services.</p>
+6. Click **Apply Changes**.
+
